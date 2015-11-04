@@ -8,4 +8,4 @@ fs.readdirSync(__dirname + '/gulp').forEach(function(module) {
 
 // Main tasks
 var end = function(){ console.log('Gulp process has completed.'); process.exit(0); };
-gulp.task('dev', ['copy:js', 'copy:html', 'copy:fonts', 'copy:img', 'copy:misc', 'templates', 'scripts:vendor:dev', 'scripts:app:dev', 'scripts:login:dev', 'scripts:angular:dev', 'css:app:dev'], end);
+gulp.task('dev', ['copy:js', 'copy:html', 'copy:fonts', 'copy:img', 'copy:misc', 'templates', 'scripts:vendor:dev', 'scripts:app:dev', 'scripts:angular:dev', 'css:sass:dev'], end);

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Rathe001/jiph#readme",
   "devDependencies": {
+    "babel-preset-stage-0": "^6.0.15",
     "connect": "^3.4.0",
     "del": "^2.0.2",
     "gulp": "^3.9.0",
