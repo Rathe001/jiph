@@ -1,12 +1,19 @@
 (function() {
-    let vm = {};
+    var app = angular.module('app', [
+        'modCommon'
+    ]);
 
-    vm.test = test;
+    app.config(['$locationProvider', '$httpProvider', function($locationProvider, $httpProvider) {
+        $locationProvider.html5Mode(true).hashPrefix('!');
+        $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-    vm.test();
+        // IE AJAX caching fix
+        if (!$httpProvider.defaults.headers.get) {
+            $httpProvider.defaults.headers.get = {};
+        }
 
-    function test() {
-        console.log("Script loaded");
-    }
-
+        // Disable IE ajax request caching
+        $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    }]);
 }());

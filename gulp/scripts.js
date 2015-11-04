@@ -22,6 +22,7 @@ var angularDevScripts = [
 
 var angularAppScripts = [
     'src/js/app/app.js',
+    'src/js/app/common/common.js',
     '!src/js/app/**/*.spec.js',
     'src/js/app/**/*.js'
 ];
