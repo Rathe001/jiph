@@ -11,6 +11,7 @@ angular.module('modCommon').factory('User', [
 
         service.setLogin = setLogin;
         service.setUserInfo = setUserInfo;
+        service.clearUserInfo = clearUserInfo;
 
         return service;
 
@@ -31,6 +32,14 @@ angular.module('modCommon').factory('User', [
                 if(userInfo.name) service.name = userInfo.name;
                 if(userInfo.picture && userInfo.picture.data && userInfo.picture.data.url) service.picture = userInfo.picture.data.url;
             }
+        }
+
+        function clearUserInfo() {
+            service.accessToken = "";
+            service.userID = "";
+            service.name = "";
+            service.picture = "";
+            service.authenticated = false;
         }
     }]
 );

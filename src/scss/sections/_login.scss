@@ -8,9 +8,24 @@
 
   .wrap {
     position: relative;
-    width: 200px;
+    width: 300px;
     margin:0 auto;
+    text-align: center;
     top:30%;
+
+    .btn-login {
+      float:left;
+      width:300px;
+      height: 68px;
+      background: url("/img/login.png") 0 0 no-repeat;
+      overflow: hidden;
+      text-align:left;
+      text-indent: -200%;
+
+      &:hover {
+        background-position: -300px 0;
+      }
+    }
   }
 
   /* Animations */

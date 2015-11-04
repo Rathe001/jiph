@@ -12,11 +12,7 @@
 
     <link rel="shortcut icon" href="/favicon.png" />
 
-    <style>
-        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-            display: none !important;
-        }
-    </style>
+    <style>[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }</style>
 
     <base href="/">
 </head>
@@ -25,10 +21,12 @@
         <div id="content" ng-if="main.user.authenticated" ng-cloak>
             <p><img ng-src="{{main.user.picture}}" ng-alt="{{main.user.name}}" />Welcome, {{main.user.name}}!</p>
             <p><a href="" ng-click="main.logout()">Log out</a></p>
+            {{main.user}}
         </div>
         <div id="login" ng-if="!main.user.authenticated" ng-cloak>
             <div class="wrap">
                 <img src="/img/logo-large.png" alt="Jiph" />
+                <a href="" class="btn-login" ng-click="main.login()">Login with Facebook</a>
             </div>
         </div>
     </div>
