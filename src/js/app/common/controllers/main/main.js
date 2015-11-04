@@ -29,6 +29,9 @@
                     Facebook.getUserInfo().then(userInfo => {
                         User.setUserInfo(loginInfo.authResponse, userInfo);
                     });
+                    Facebook.getUserAccounts(loginInfo.authResponse.userID).then(accounts => {
+                        console.log(accounts);
+                    });
                 });
             }
         }]);

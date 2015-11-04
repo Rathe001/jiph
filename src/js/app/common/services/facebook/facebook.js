@@ -5,6 +5,7 @@ angular.module('modCommon').factory('Facebook', ['$q',
         service.login = login;
         service.logout = logout;
         service.getUserInfo = getUserInfo;
+        service.getUserAccounts = getUserAccounts;
         service.getLoginStatus = getLoginStatus;
 
         return service;
@@ -37,7 +38,19 @@ angular.module('modCommon').factory('Facebook', ['$q',
             var deferred = $q.defer();
             FB.api('/me', {
                 fields: 'id,name,picture'
-            }, function(response) {
+            }, response => {
+                if (!response || response.error) {
+                    deferred.reject('Error occured');
+                } else {
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function getUserAccounts(userId) {
+            var deferred = $q.defer();
+            FB.api('/' + userId + '/accounts', response => {
                 if (!response || response.error) {
                     deferred.reject('Error occured');
                 } else {

@@ -37,6 +37,9 @@
                         Facebook.getUserInfo().then(userInfo => {
                             User.setUserInfo(loginInfo.authResponse, userInfo);
                         });
+                        Facebook.getUserAccounts(loginInfo.authResponse.userID).then(accounts => {
+                            console.log(accounts);
+                        });
                     } else if (loginInfo.status === 'not_authorized') {
                         // The person is logged into Facebook, but not your app.
 
