@@ -3,12 +3,13 @@
 
     var modCommon = angular.module('modCommon');
 
-    modCommon.controller('ctrlMain', ['$window', 'User', 'Facebook', 'Accounts',
-        function($window, User, Facebook, Accounts) {
+    modCommon.controller('ctrlMain', ['$window', 'User', 'Facebook', 'Accounts', 'Navigation',
+        function($window, User, Facebook, Accounts, Navigation) {
             let vm = this;
 
             vm.user = {};
             vm.accounts = {};
+            vm.navigation = {};
 
             vm.logout = logout;
             vm.login = login;
@@ -18,6 +19,7 @@
             function _init() {
                 vm.user = User;
                 vm.accounts = Accounts;
+                vm.navigation = Navigation;
             }
 
             function logout() {

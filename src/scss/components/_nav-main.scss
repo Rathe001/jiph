@@ -1,0 +1,53 @@
+#nav-main {
+  position:absolute;
+  top:0;
+  left:0;
+  width:190px;
+  background: #222;
+
+  ul {
+
+    li {
+      float:left;
+      width: 100%;
+      border-bottom: 1px solid #393939;
+
+      a {
+        position:relative;
+        float:left;
+        width:100%;
+        padding:10px;
+        color:#E9EAED;
+        text-decoration: none;
+
+        .fa-caret-left {
+          position: absolute;
+          top: 7px;
+          right: -1px;
+          font-size: 26px;
+        }
+
+        &.active {
+          background: $color-primary;
+        }
+
+        &:hover {
+          background: #393939;
+        }
+      }
+
+      ul {
+
+        li {
+          border-bottom: none;
+          border-top: 1px solid #393939;
+
+          a {
+            font-size: 12px;
+            padding: 5px 5px 5px 35px;
+          }
+        }
+      }
+    }
+  }
+}

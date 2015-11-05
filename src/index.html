@@ -39,12 +39,40 @@
                             <i class="fa fa-caret-up"></i>
                             <h2>Select an account:</h2>
                             <ul>
-                                <li ng-repeat="a in main.accounts.all" ng-class="{'active': a.id === main.accounts.active}" ng-click="main.accounts.setActive(a.id)">{{a.name}}</li>
+                                <li ng-repeat="a in main.accounts.all" ng-class="{'active': a.id === main.accounts.active}" ng-click="main.accounts.setActive(a.id)">
+                                    {{a.name}}
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </header>
+            <div class="main">
+                <div class="center-width">
+                    <nav id="nav-main">
+                        <ul>
+                            <li ng-repeat="n in main.navigation.all">
+                                <a ng-href="{{n.url}}" ng-class="{'active': n.url === '/'}">
+                                    <i class="fa" ng-class="n.icon"></i>
+                                    {{n.name}}
+                                    <i class="fa fa-caret-left" ng-if="n.url === '/'"></i>
+                                </a>
+                                <ul ng-if="n.children.length > 0">
+                                    <li ng-repeat="c in n.children">
+                                        <a ng-href="{{c.url}}">
+                                            {{c.name}}
+                                            <i class="fa fa-caret-left" ng-if="false"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="main-view">
+                        This is a test.
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="login" ng-if="!main.user.authenticated" ng-cloak>
             <div class="wrap">

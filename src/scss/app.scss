@@ -6,6 +6,8 @@
 @import 'components/reset';
 @import 'components/header';
 @import 'components/drop-menu';
+@import 'components/nav-main';
+@import 'components/main-view';
 
 @import 'sections/login';
 
@@ -24,7 +26,13 @@ body {
   font-family: 'helvetica neue',helvetica,arial,'lucida grande',sans-serif;
 }
 
+.main {
+  float:left;
+  width: 100%;
+}
+
 .center-width {
-  width:80%;
+  position:relative;
+  width:90%;
   margin:0 auto;
 }
