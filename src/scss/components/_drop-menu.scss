@@ -1,0 +1,49 @@
+[drop-menu] {
+
+  .menu {
+    z-index: 100;
+    display:none;
+    position: absolute;
+    top: 100%;
+    right: -10px;
+    width:300px;
+    color: #141823;
+    padding:5px;
+    background: $color-secondary;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    font-size: 12px;
+
+    h2 {
+      font-size: 14px;
+      font-weight: normal;
+      color: $color-primary;
+      background: #F5F5F5;
+      padding:0 0 0 5px;
+    }
+
+    ul {
+
+      li {
+        padding: 0 10px;
+
+        &:hover {
+          background: $color-primary;
+          color: $color-secondary;
+        }
+      }
+    }
+
+    .fa-caret-up {
+      position: absolute;
+      top: -17px;
+      right: 10px;
+      font-size: 24px;
+      color:$color-secondary;
+    }
+  }
+
+  &.open .menu {
+    display: block;
+  }
+}

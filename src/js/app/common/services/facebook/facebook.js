@@ -37,7 +37,7 @@ angular.module('modCommon').factory('Facebook', ['$q',
         function getUserInfo() {
             var deferred = $q.defer();
             FB.api('/me', {
-                fields: 'id,name,picture'
+                fields: 'id,name,first_name,last_name,picture'
             }, response => {
                 if (!response || response.error) {
                     deferred.reject('Error occured');

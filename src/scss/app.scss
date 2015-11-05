@@ -4,5 +4,26 @@
 @import 'helpers/variables';
 
 @import 'components/reset';
+@import 'components/header';
+@import 'components/drop-menu';
 
 @import 'sections/login';
+
+@import 'vendor/font-awesome/font-awesome';
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'helvetica neue',helvetica,arial,'lucida grande',sans-serif;
+}
+
+.center-width {
+  width:80%;
+  margin:0 auto;
+}

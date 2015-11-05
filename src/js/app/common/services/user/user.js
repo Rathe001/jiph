@@ -5,21 +5,16 @@ angular.module('modCommon').factory('User', [
         service.accessToken = "";
         service.userID = "";
         service.name = "";
+        service.firstName = "";
+        service.lastName = "";
+        service.name = "";
         service.picture = "";
         service.authenticated = false;
 
-
-        service.setLogin = setLogin;
         service.setUserInfo = setUserInfo;
         service.clearUserInfo = clearUserInfo;
 
         return service;
-
-        function setLogin(user) {
-            if(user) {
-
-            }
-        }
 
         function setUserInfo(loginInfo, userInfo) {
             service.authenticated = true;
@@ -30,6 +25,8 @@ angular.module('modCommon').factory('User', [
             }
             if(userInfo) {
                 if(userInfo.name) service.name = userInfo.name;
+                if(userInfo.first_name) service.firstName = userInfo.first_name;
+                if(userInfo.last_name) service.lastName = userInfo.last_name;
                 if(userInfo.picture && userInfo.picture.data && userInfo.picture.data.url) service.picture = userInfo.picture.data.url;
             }
         }
@@ -38,6 +35,8 @@ angular.module('modCommon').factory('User', [
             service.accessToken = "";
             service.userID = "";
             service.name = "";
+            service.firstName = "";
+            service.lastName = "";
             service.picture = "";
             service.authenticated = false;
         }

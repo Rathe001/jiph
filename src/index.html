@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Jiph</title>
     <meta content="" name="keywords" />
     <meta content="" name="description" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,9 +19,32 @@
 <body ng-app="app">
     <div id="main" ng-controller="ctrlMain as main">
         <div id="content" ng-if="main.user.authenticated" ng-cloak>
-            <p><img ng-src="{{main.user.picture}}" ng-alt="{{main.user.name}}" />Welcome, {{main.user.name}}!</p>
-            <p><a href="" ng-click="main.logout()">Log out</a></p>
-            {{main.user}}
+            <header id="header">
+                <div class="center-width">
+                    <img src="/img/logo-small.png" alt="Jiph" class="logo" />
+                    <div class="avatar" drop-menu>
+                        <img ng-src="{{main.user.picture}}" alt="{{main.user.name}}" />{{main.user.firstName}} <i class="fa fa-caret-down"></i>
+                        <div class="menu">
+                            <i class="fa fa-caret-up"></i>
+                            <h2>Select an action:</h2>
+                            <ul>
+                                <li ng-click="main.logout()">Log out</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="vr"></div>
+                    <div class="account" drop-menu>
+                        {{main.accounts.getAccountName(main.accounts.active)}} <i class="fa fa-caret-down"></i>
+                        <div class="menu">
+                            <i class="fa fa-caret-up"></i>
+                            <h2>Select an account:</h2>
+                            <ul>
+                                <li ng-repeat="a in main.accounts.all" ng-class="{'active': a.id === main.accounts.active}" ng-click="main.accounts.setActive(a.id)">{{a.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
         </div>
         <div id="login" ng-if="!main.user.authenticated" ng-cloak>
             <div class="wrap">

@@ -19,13 +19,14 @@
         }
     ]);
 
-    app.run(['$window', 'Facebook', 'User',
-        function($window, Facebook, User) {
+    app.run(['$window', 'Facebook', 'User', 'Accounts',
+        function($window, Facebook, User, Accounts) {
             $window.fbAsyncInit = function() {
                 // Executed when the SDK is loaded
 
                 FB.init({
-                    appId: '444109322439343',
+                    // appId: '444109322439343',
+                    appId: '444116655771943',
                     status: true,
                     cookie: true,
                     xfbml: true,
@@ -37,15 +38,8 @@
                         Facebook.getUserInfo().then(userInfo => {
                             User.setUserInfo(loginInfo.authResponse, userInfo);
                         });
-                        Facebook.getUserAccounts(loginInfo.authResponse.userID).then(accounts => {
-                            console.log(accounts);
-                        });
-                    } else if (loginInfo.status === 'not_authorized') {
-                        // The person is logged into Facebook, but not your app.
 
-                    } else {
-                        // The person is not logged into Facebook, so we're not sure if
-                        // they are logged into this app or not.
+                        Accounts.getAll(loginInfo.authResponse.userID);
                     }
                 });
             };

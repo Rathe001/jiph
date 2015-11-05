@@ -3,11 +3,12 @@
 
     var modCommon = angular.module('modCommon');
 
-    modCommon.controller('ctrlMain', ['$window', 'User', 'Facebook',
-        function($window, User, Facebook) {
+    modCommon.controller('ctrlMain', ['$window', 'User', 'Facebook', 'Accounts',
+        function($window, User, Facebook, Accounts) {
             let vm = this;
 
             vm.user = {};
+            vm.accounts = {};
 
             vm.logout = logout;
             vm.login = login;
@@ -16,6 +17,7 @@
 
             function _init() {
                 vm.user = User;
+                vm.accounts = Accounts;
             }
 
             function logout() {
@@ -29,9 +31,8 @@
                     Facebook.getUserInfo().then(userInfo => {
                         User.setUserInfo(loginInfo.authResponse, userInfo);
                     });
-                    Facebook.getUserAccounts(loginInfo.authResponse.userID).then(accounts => {
-                        console.log(accounts);
-                    });
+
+                    Accounts.getAll(loginInfo.authResponse.userID);
                 });
             }
         }]);
