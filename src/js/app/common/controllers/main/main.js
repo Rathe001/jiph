@@ -28,6 +28,12 @@
 
             function login() {
                 Facebook.login().then(loginInfo => {
+                    let accountId = $window.localStorage.getItem("activeAccountId");
+
+                    if(accountId) {
+                        Accounts.active = accountId;
+                    }
+
                     Facebook.getUserInfo().then(userInfo => {
                         User.setUserInfo(loginInfo.authResponse, userInfo);
                     });

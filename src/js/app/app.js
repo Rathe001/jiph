@@ -35,6 +35,12 @@
 
                 Facebook.getLoginStatus().then(loginInfo => {
                     if (loginInfo.status === 'connected') {
+                        let accountId = $window.localStorage.getItem("activeAccountId");
+
+                        if(accountId) {
+                            Accounts.active = accountId;
+                        }
+
                         Facebook.getUserInfo().then(userInfo => {
                             User.setUserInfo(loginInfo.authResponse, userInfo);
                         });

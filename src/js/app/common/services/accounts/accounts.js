@@ -1,5 +1,5 @@
-angular.module('modCommon').factory('Accounts', ['Facebook',
-    function(Facebook) {
+angular.module('modCommon').factory('Accounts', ['$window', 'Facebook',
+    function($window, Facebook) {
         let service = {};
 
         service.all = [];
@@ -21,6 +21,7 @@ angular.module('modCommon').factory('Accounts', ['Facebook',
         function setActive(accountId) {
             if(accountId) {
                 service.active = accountId;
+                $window.localStorage.setItem("activeAccountId", accountId);
             }
         }
 
