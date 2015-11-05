@@ -3,8 +3,8 @@
 
     var modCommon = angular.module('modCommon');
 
-    modCommon.controller('ctrlMain', ['$window', 'User', 'Facebook', 'Accounts', 'Navigation',
-        function($window, User, Facebook, Accounts, Navigation) {
+    modCommon.controller('ctrlMain', ['$scope', '$location', '$window', 'User', 'Facebook', 'Accounts', 'Navigation',
+        function($scope, $location, $window, User, Facebook, Accounts, Navigation) {
             let vm = this;
 
             vm.user = {};
@@ -13,6 +13,10 @@
 
             vm.logout = logout;
             vm.login = login;
+
+            $scope.$on('$locationChangeStart', function(event) {
+                Navigation.active = $location.path();
+            });
 
             _init();
 

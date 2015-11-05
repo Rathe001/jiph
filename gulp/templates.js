@@ -23,7 +23,7 @@ gulp.task('templates', [], function(){
         .pipe(minifyHtml({empty: true}))
         .pipe(templateCache('templates.min.js', {
                 root: '/',
-                module: 'templates',
+                module: 'modTemplates',
                 standalone: true
             }
         ))

@@ -22,7 +22,14 @@ var angularDevScripts = [
 
 var angularAppScripts = [
     'src/js/app/app.js',
+    'src/js/app/automation/automation.js',
+    'src/js/app/campaigns/campaigns.js',
     'src/js/app/common/common.js',
+    'src/js/app/dashboard/dashboard.js',
+    'src/js/app/help/help.js',
+    'src/js/app/preset-ad-groups/preset-ad-groups.js',
+    'src/js/app/preset-audiences/preset-audiences.js',
+    'src/js/app/tracking/tracking.js',
     '!src/js/app/**/*.spec.js',
     'src/js/app/**/*.js'
 ];

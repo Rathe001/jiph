@@ -52,10 +52,10 @@
                     <nav id="nav-main">
                         <ul>
                             <li ng-repeat="n in main.navigation.all">
-                                <a ng-href="{{n.url}}" ng-class="{'active': n.url === '/'}">
+                                <a ng-href="{{n.url}}" ng-class="{'active': n.url === main.navigation.active}">
                                     <i class="fa" ng-class="n.icon"></i>
                                     {{n.name}}
-                                    <i class="fa fa-caret-left" ng-if="n.url === '/'"></i>
+                                    <i class="fa fa-caret-left" ng-if="n.url === main.navigation.active"></i>
                                 </a>
                                 <ul ng-if="n.children.length > 0">
                                     <li ng-repeat="c in n.children">
@@ -69,7 +69,9 @@
                         </ul>
                     </nav>
                     <div class="main-view">
-                        This is a test.
+
+                        <div ng-view></div>
+
                     </div>
                 </div>
             </div>
@@ -85,7 +87,7 @@
     <script src="//js.stripe.com/v2/stripe.js"></script>
     <script src="/js/angular.min.js"></script>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <!--<script>document.write("<script type='text/javascript' src='/js/templates.min.js?v=" + Date.now() + "'><\/script>");</script>-->
+    <script>document.write("<script type='text/javascript' src='/js/templates.min.js?v=" + Date.now() + "'><\/script>");</script>
     <!--<script>document.write("<script type='text/javascript' src='/js/vendor.min.js?v=" + Date.now() + "'><\/script>");</script>-->
     <script>document.write("<script type='text/javascript' src='/js/app.min.js?v=" + Date.now() + "'><\/script>");</script>
 </body>

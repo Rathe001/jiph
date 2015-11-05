@@ -1,10 +1,52 @@
 (function() {
     var app = angular.module('app', [
-        'modCommon'
+        'modTemplates',
+        'modAutomation',
+        'modCampaigns',
+        'modCommon',
+        'modDashboard',
+        'modHelp',
+        'modPresetAdGroups',
+        'modPresetAudiences',
+        'modTracking'
     ]);
 
-    app.config(['$locationProvider', '$httpProvider',
-        function($locationProvider, $httpProvider) {
+    app.config(['$routeProvider', '$locationProvider', '$httpProvider',
+        function($routeProvider, $locationProvider, $httpProvider) {
+
+            $routeProvider.
+            when('/', {
+                templateUrl: '/js/app/dashboard/controllers/dashboard/dashboard.html',
+                controller: 'ctrlDashboard'
+            }).
+            when('/automation', {
+                templateUrl: '/js/app/automation/controllers/automation/automation.html',
+                controller: 'ctrlAutomation'
+            }).
+            when('/campaigns', {
+                templateUrl: '/js/app/campaigns/controllers/campaigns/campaigns.html',
+                controller: 'ctrlCampaigns'
+            }).
+            when('/help', {
+                templateUrl: '/js/app/help/controllers/help/help.html',
+                controller: 'ctrlHelp'
+            }).
+            when('/preset-ad-groups', {
+                templateUrl: '/js/app/preset-ad-groups/controllers/preset-ad-groups/preset-ad-groups.html',
+                controller: 'ctrlPresetAdGroups'
+            }).
+            when('/preset-audiences', {
+                templateUrl: '/js/app/preset-audiences/controllers/preset-audiences/preset-audiences.html',
+                controller: 'ctrlPresetAudiences'
+            }).
+            when('/tracking', {
+                templateUrl: '/js/app/tracking/controllers/tracking/tracking.html',
+                controller: 'ctrlTracking'
+            }).
+            otherwise({
+                redirectTo: '/'
+            });
+
             $locationProvider.html5Mode(true).hashPrefix('!');
             $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

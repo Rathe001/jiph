@@ -29,6 +29,10 @@
 
         &.active {
           background: $color-primary;
+
+          &:hover {
+            background: $color-primary;
+          }
         }
 
         &:hover {
