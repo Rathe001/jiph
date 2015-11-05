@@ -11,9 +11,9 @@ fs.readdirSync(__dirname + '/gulp').forEach(function(module) {
 
 // Watcher tasks
 gulp.task('watch', function () {
-    var scssWatcher = watch('src/css/**/*.scss', {root: 'src/css'})
+    var scssWatcher = watch('src/scss/**/*.scss', {root: 'src/css'})
         .on('change', function(){
-            gulp.run('css:app:dev');
+            gulp.run('css:sass:dev');
         });
     var appWatcher = watch('src/js/app/**/*.js', {root: 'src/js/app'}, ['scripts:app:dev']);
 

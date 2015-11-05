@@ -8,6 +8,7 @@
 @import 'components/drop-menu';
 @import 'components/nav-main';
 @import 'components/main-view';
+@import 'components/module';
 
 @import 'sections/login';
 
@@ -23,9 +24,14 @@ html {
 
 body {
   background:#E9EAED;
-  font-family: 'helvetica neue',helvetica,arial,'lucida grande',sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
 }
-
+p {
+  margin: 0 0 20px 0;
+}
 .main {
   float:left;
   width: 100%;
