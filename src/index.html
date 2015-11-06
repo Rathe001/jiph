@@ -35,7 +35,7 @@
                     </div>
                     <div class="vr"></div>
                     <div class="account" drop-menu>
-                        {{main.accounts.getAccountName(main.accounts.active)}} <small>{{main.accounts.active}}</small> <i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user"></i> {{main.accounts.getAccountName(main.accounts.active)}} <small>{{main.accounts.active}}</small> <i class="fa fa-caret-down"></i>
                         <div class="menu">
                             <i class="fa fa-caret-up"></i>
                             <h2>Select an account:</h2>
@@ -97,10 +97,11 @@
         </div>
     </div>
 
-    <script src="//js.stripe.com/v2/stripe.js"></script>
     <script src="/js/angular.min.js"></script>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//js.stripe.com/v2/stripe.js"></script>
     <script src="//momentjs.com/downloads/moment.min.js"></script>
+    <script src="//code.highcharts.com/highcharts.js"></script>
     <script>document.write("<script type='text/javascript' src='/js/templates.min.js?v=" + Date.now() + "'><\/script>");</script>
     <!--<script>document.write("<script type='text/javascript' src='/js/vendor.min.js?v=" + Date.now() + "'><\/script>");</script>-->
     <script>document.write("<script type='text/javascript' src='/js/app.min.js?v=" + Date.now() + "'><\/script>");</script>
