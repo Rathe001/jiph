@@ -4,9 +4,14 @@
 
     var modDashboard = angular.module('modDashboard');
 
-    modDashboard.controller('ctrlDashboard', ['$timeout', 'Dashboard', 'EstimateTimeToCompletion', 'Accounts', 'Loading',
-        function($timeout, Dashboard, EstimateTimeToCompletion, Accounts, Loading) {
+    modDashboard.controller('ctrlDashboard', ['$q', '$timeout', 'Dashboard', 'EstimateTimeToCompletion', 'Accounts', 'Loading',
+        function($q, $timeout, Dashboard, EstimateTimeToCompletion, Accounts, Loading) {
             let vm = this;
+
+            const defaultReport = {
+                data: [],
+                summary: {}
+            };
 
             vm.accounts = [];
             vm.startDate = moment().subtract(7, 'days').startOf('day').format('YYYY-MM-DD');
@@ -22,24 +27,26 @@
                 Accounts.getAll().then(accounts => {
                     if(accounts && accounts.length > 0) {
                         vm.accounts = accounts;
-
-                        for(let i=0; i< accounts.length; i++) {
-                            _getAccountInsights(accounts[i].id);
-                        }
+                        _getAccountInsights();
                     }
                 });
 
             }
 
-            function _getAccountInsights(accountId) {
+            function _getAccountInsights() {
                 let startTime = Date.now() / 1000 | 0;
-                Dashboard.generateReport(accountId, vm.startDate, vm.endDate).then(report => {
-                    if(report.report_run_id) {
-                        _checkReportStatus(report.report_run_id);
-                    }
-                });
 
-                function _checkReportStatus(asyncReportId, delay) {
+                for(let i=0; i<vm.accounts.length; i++) {
+                    Dashboard.generateReport(vm.accounts[i].id, vm.startDate, vm.endDate).then(report => {
+                        if (report.report_run_id) {
+                            _checkReportStatus(report.report_run_id, vm.accounts[i].id);
+                        }
+                    }, error => {
+                        Object.assign(vm.accounts[i], _processInsights(defaultReport));
+                    });
+                }
+
+                function _checkReportStatus(asyncReportId, accountId, delay) {
                     Loading.set(true, 'asyncstatus');
                     let currentTime = Date.now() / 1000 | 0;
                     if(!delay) delay = 2000;
@@ -47,11 +54,11 @@
                         Dashboard.checkReportStatus(asyncReportId).then(status => {
                             if(status.async_status === "Job Completed") {
                                 Loading.set(false, 'asyncstatus');
-                                _fetchAsyncReport(asyncReportId);
+                                _fetchAsyncReport(asyncReportId, accountId);
                             } else {
                                 delay = EstimateTimeToCompletion.get(startTime, currentTime, status.async_percent_completion);
                                 Loading.set(false, 'asyncstatus');
-                                _checkReportStatus(asyncReportId, delay);
+                                _checkReportStatus(asyncReportId, accountId, delay);
                             }
                         }, error => {
                             Loading.set(false, 'asyncstatus');
@@ -60,12 +67,14 @@
 
                 }
 
-                function _fetchAsyncReport(asyncReportId) {
+                function _fetchAsyncReport(asyncReportId, accountId) {
                     Dashboard.fetchAsyncReport(asyncReportId).then(report => {
                         if(report && report.summary && report.summary.account_id) {
-                            Object.assign(vm.accounts.find(account => account.id === "act_" + report.summary.account_id), _processInsights(report));
+                            Object.assign(vm.accounts.find(account => account.id === accountId), _processInsights(report));
+                        } else {
+                            Object.assign(vm.accounts.find(account => account.id === accountId), _processInsights(defaultReport));
                         }
-                    })
+                    });
                 }
             }
 

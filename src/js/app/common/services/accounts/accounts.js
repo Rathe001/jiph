@@ -14,7 +14,6 @@ angular.module('modCommon').factory('Accounts', ['$window', 'Facebook',
         function getAll() {
             return Facebook.get('/me/adaccounts', {fields: 'name,id,owner_business'}).then(results => {
                 service.all = results.data;
-                console.log(results);
                 return results.data;
             });
         }

@@ -1,7 +1,55 @@
 .dashboard {
   .account {
+    position:relative;
     float:left;
-    width:50%;
-    border:1px solid #333;
+    width:49%;
+    height:100px;
+    margin:0 1% 1% 0;
+    border:1px solid #A0A0A0;
+    background: #fff;
+
+    .content {
+
+      h3 {
+        position: relative;
+        float:left;
+        width:100%;
+        background:#FBFBFB;
+        padding:5px;
+        border-bottom:1px solid #cfcfcf;
+
+        em {
+          float: right;
+          color: #b4bcc2;
+          padding: 6px 0 0;
+          font-style: normal;
+          font-size: 11px;
+        }
+      }
+
+      .spent {
+        float:left;
+        width:25%;
+      }
+
+      .reach {
+        float:left;
+        width:25%;
+      }
+
+      .impressions {
+        float:left;
+        width:25%;
+      }
+    }
+
+    .hide-loading-content {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: #fff;
+    }
   }
 }
