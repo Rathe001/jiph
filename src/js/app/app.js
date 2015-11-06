@@ -17,31 +17,38 @@
             $routeProvider.
             when('/', {
                 templateUrl: '/js/app/dashboard/controllers/dashboard/dashboard.html',
-                controller: 'ctrlDashboard'
+                controller: 'ctrlDashboard',
+                controllerAs: 'vm'
             }).
             when('/automation', {
                 templateUrl: '/js/app/automation/controllers/automation/automation.html',
-                controller: 'ctrlAutomation'
+                controller: 'ctrlAutomation',
+                controllerAs: 'vm'
             }).
             when('/campaigns', {
                 templateUrl: '/js/app/campaigns/controllers/campaigns/campaigns.html',
-                controller: 'ctrlCampaigns'
+                controller: 'ctrlCampaigns',
+                controllerAs: 'vm'
             }).
             when('/help', {
                 templateUrl: '/js/app/help/controllers/help/help.html',
-                controller: 'ctrlHelp'
+                controller: 'ctrlHelp',
+                controllerAs: 'vm'
             }).
             when('/preset-ad-groups', {
                 templateUrl: '/js/app/preset-ad-groups/controllers/preset-ad-groups/preset-ad-groups.html',
-                controller: 'ctrlPresetAdGroups'
+                controller: 'ctrlPresetAdGroups',
+                controllerAs: 'vm'
             }).
             when('/preset-audiences', {
                 templateUrl: '/js/app/preset-audiences/controllers/preset-audiences/preset-audiences.html',
-                controller: 'ctrlPresetAudiences'
+                controller: 'ctrlPresetAudiences',
+                controllerAs: 'vm'
             }).
             when('/tracking', {
                 templateUrl: '/js/app/tracking/controllers/tracking/tracking.html',
-                controller: 'ctrlTracking'
+                controller: 'ctrlTracking',
+                controllerAs: 'vm'
             }).
             otherwise({
                 redirectTo: '/'
@@ -83,7 +90,9 @@
                             Accounts.active = accountId;
                         }
 
-                        Facebook.getUserInfo().then(userInfo => {
+                        Facebook.get('/me', {
+                            fields: 'id,name,first_name,last_name,picture'
+                        }).then(userInfo => {
                             User.setUserInfo(loginInfo.authResponse, userInfo);
                         });
 

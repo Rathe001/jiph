@@ -3,26 +3,43 @@
 
     var modDashboard = angular.module('modDashboard');
 
-    modDashboard.factory('Dashboard', ['$q', function($q) {
+    modDashboard.factory('Dashboard', ['$q', 'Loading', function($q, Loading) {
         let service = {};
 
-        service.getInsights = getInsights;
-        service.getAccount = getAccount;
+        service.generateReport = generateReport;
+        service.checkReportStatus = checkReportStatus;
+        service.fetchAsyncReport = fetchAsyncReport;
 
         return service;
 
-        function getInsights(facebookAdAccountId, since, until) {
+        function generateReport(facebookAdAccountId, since, until) {
             let deferred = $q.defer();
-            FB.api('/' + facebookAdAccountId + '/insights', {
-                fields: 'spend,reach,impressions',
+            Loading.set(true, 'facebookrequest');
+            FB.api('/' + facebookAdAccountId + '/insights', 'post', {
                 time_increment: 1,
-                level: "account",
+                level: 'campaign',
                 time_range: {
                     since: since,
                     until: until
                 },
+                fields: 'spend,impressions,reach',
                 default_summary: true
             }, response => {
+                if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.reject('Error occured');
+                } else {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function checkReportStatus(asyncReportId) {
+            // Loading is handled in controller due to timeout delay
+            let deferred = $q.defer();
+            FB.api('/' + asyncReportId, response => {
                 if (!response || response.error) {
                     deferred.reject('Error occured');
                 } else {
@@ -32,14 +49,15 @@
             return deferred.promise;
         }
 
-        function getAccount(facebookAdAccountId) {
+        function fetchAsyncReport(asyncReportId) {
+            Loading.set(true, 'facebookrequest');
             let deferred = $q.defer();
-            FB.api('/' + facebookAdAccountId, {
-                fields: "name,id,owner_business,last_used_time,vertical_name,spend_cap"
-            }, response => {
+            FB.api('/' + asyncReportId + '/insights', response => {
                 if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
                     deferred.reject('Error occured');
                 } else {
+                    Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
                 }
             });

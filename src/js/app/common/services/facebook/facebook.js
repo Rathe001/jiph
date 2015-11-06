@@ -1,63 +1,55 @@
-angular.module('modCommon').factory('Facebook', ['$q',
-    function($q) {
+angular.module('modCommon').factory('Facebook', ['$q', 'Loading',
+    function($q, Loading) {
         let service = {};
 
+        service.get = get;
         service.login = login;
         service.logout = logout;
-        service.getUserInfo = getUserInfo;
-        service.getUserAccounts = getUserAccounts;
         service.getLoginStatus = getLoginStatus;
 
         return service;
 
-        function login() {
+        function get(url, params) {
             let deferred = $q.defer();
-            FB.login(response => {
+            Loading.set(true, 'facebookrequest');
+            FB.api(url, params, response => {
                 if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
                     deferred.reject('Error occured');
                 } else {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        }
+
+        function login() {
+            let deferred = $q.defer();
+            Loading.set(true, 'facebookrequest');
+            FB.login(response => {
+                if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.reject('Error occured');
+                } else {
+                    Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
                 }
             }, {
-                auth_type: 'reauth',
-                scope: 'publish_actions,manage_pages,email,public_profile,publish_pages,user_friends,ads_read,ads_management',
-                return_scopes: true
+                scope: 'publish_actions,manage_pages,email,public_profile,publish_pages,user_friends,ads_read,ads_management'
             });
             return deferred.promise;
         }
 
         function logout() {
             let deferred = $q.defer();
+            Loading.set(true, 'facebookrequest');
             FB.logout(response => {
                 if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
                     deferred.reject('Error occured');
                 } else {
-                    deferred.resolve(response);
-                }
-            });
-            return deferred.promise;
-        }
-
-        function getUserInfo() {
-            let deferred = $q.defer();
-            FB.api('/me', {
-                fields: 'id,name,first_name,last_name,picture'
-            }, response => {
-                if (!response || response.error) {
-                    deferred.reject('Error occured');
-                } else {
-                    deferred.resolve(response);
-                }
-            });
-            return deferred.promise;
-        }
-
-        function getUserAccounts(userId) {
-            let deferred = $q.defer();
-            FB.api('/' + userId + '/accounts', response => {
-                if (!response || response.error) {
-                    deferred.reject('Error occured');
-                } else {
+                    Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
                 }
             });
@@ -66,10 +58,13 @@ angular.module('modCommon').factory('Facebook', ['$q',
 
         function getLoginStatus() {
             let deferred = $q.defer();
+            Loading.set(true, 'facebookrequest');
             FB.getLoginStatus(response => {
                 if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
                     deferred.reject('Error occured');
                 } else {
+                    Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
                 }
             });

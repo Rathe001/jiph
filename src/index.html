@@ -47,6 +47,17 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="vr"></div>
+                    <div class="loading" ng-show="main.loading.get('All')">
+                        <div class="spinner">
+                            <div class="rect1"></div>
+                            <div class="rect2"></div>
+                            <div class="rect3"></div>
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+                        </div>
+                        <span class="label">Loading... please wait.</span>
+                    </div>
                 </div>
             </header>
             <div class="main">
@@ -89,6 +100,7 @@
     <script src="//js.stripe.com/v2/stripe.js"></script>
     <script src="/js/angular.min.js"></script>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="//momentjs.com/downloads/moment.min.js"></script>
     <script>document.write("<script type='text/javascript' src='/js/templates.min.js?v=" + Date.now() + "'><\/script>");</script>
     <!--<script>document.write("<script type='text/javascript' src='/js/vendor.min.js?v=" + Date.now() + "'><\/script>");</script>-->
     <script>document.write("<script type='text/javascript' src='/js/app.min.js?v=" + Date.now() + "'><\/script>");</script>
