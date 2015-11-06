@@ -7,6 +7,7 @@
     <meta content="" name="keywords" />
     <meta content="" name="description" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="fb:app_id" content="444109322439343" />
 
     <script>document.write("<link rel='stylesheet' href='/css/app.css?v=" + Date.now() + "'>");</script>
 
@@ -42,6 +43,7 @@
                                 <li ng-repeat="a in main.accounts.all" ng-class="{'active': a.id === main.accounts.active}" ng-click="main.accounts.setActive(a.id)">
                                     {{a.name}}
                                 </li>
+                                <li ng-if="main.accounts.all.length === 0">No accounts available.</li>
                             </ul>
                         </div>
                     </div>

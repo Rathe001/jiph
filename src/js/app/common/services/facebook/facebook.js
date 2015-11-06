@@ -19,6 +19,7 @@ angular.module('modCommon').factory('Facebook', ['$q',
                     deferred.resolve(response);
                 }
             }, {
+                auth_type: 'reauth',
                 scope: 'publish_actions,manage_pages,email,public_profile,publish_pages,user_friends,ads_read,ads_management',
                 return_scopes: true
             });
