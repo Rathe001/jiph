@@ -37,6 +37,8 @@
         float:left;
         width:33%;
         text-align:center;
+        margin: 0;
+        padding:10px 0 0 0;
 
         .num {
           float:left;
@@ -53,7 +55,7 @@
       padding:20px;
       top: 0;
       left: 0;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.9);
 
       .error {
         font-size:10px;
