@@ -34,7 +34,7 @@
                     </div>
                     <div class="vr"></div>
                     <div class="account" drop-menu>
-                        {{main.accounts.getAccountName(main.accounts.active)}} <i class="fa fa-caret-down"></i>
+                        {{main.accounts.getAccountName(main.accounts.active)}} <small>{{main.accounts.active}}</small> <i class="fa fa-caret-down"></i>
                         <div class="menu">
                             <i class="fa fa-caret-up"></i>
                             <h2>Select an account:</h2>
@@ -70,7 +70,7 @@
                     </nav>
                     <div class="main-view">
 
-                        <div ng-view></div>
+                        <div class="content" ng-view></div>
 
                     </div>
                 </div>

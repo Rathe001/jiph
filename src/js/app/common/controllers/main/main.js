@@ -44,7 +44,11 @@
                         User.setUserInfo(loginInfo.authResponse, userInfo);
                     });
 
-                    Accounts.getAll(loginInfo.authResponse.userID);
+                    Accounts.getAll(loginInfo.authResponse.userID).then(() => {
+                        if(!Accounts.all.find(account => account.id === Accounts.active)) {
+                            Accounts.setActive("");
+                        }
+                    });
                 });
             }
         }]);

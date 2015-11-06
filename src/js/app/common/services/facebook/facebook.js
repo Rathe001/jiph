@@ -11,19 +11,22 @@ angular.module('modCommon').factory('Facebook', ['$q',
         return service;
 
         function login() {
-            var deferred = $q.defer();
+            let deferred = $q.defer();
             FB.login(response => {
                 if (!response || response.error) {
                     deferred.reject('Error occured');
                 } else {
                     deferred.resolve(response);
                 }
+            }, {
+                scope: 'publish_actions,manage_pages,email,public_profile,publish_pages,user_friends,ads_read,ads_management',
+                return_scopes: true
             });
             return deferred.promise;
         }
 
         function logout() {
-            var deferred = $q.defer();
+            let deferred = $q.defer();
             FB.logout(response => {
                 if (!response || response.error) {
                     deferred.reject('Error occured');
@@ -35,7 +38,7 @@ angular.module('modCommon').factory('Facebook', ['$q',
         }
 
         function getUserInfo() {
-            var deferred = $q.defer();
+            let deferred = $q.defer();
             FB.api('/me', {
                 fields: 'id,name,first_name,last_name,picture'
             }, response => {
@@ -49,7 +52,7 @@ angular.module('modCommon').factory('Facebook', ['$q',
         }
 
         function getUserAccounts(userId) {
-            var deferred = $q.defer();
+            let deferred = $q.defer();
             FB.api('/' + userId + '/accounts', response => {
                 if (!response || response.error) {
                     deferred.reject('Error occured');
@@ -61,7 +64,7 @@ angular.module('modCommon').factory('Facebook', ['$q',
         }
 
         function getLoginStatus() {
-            var deferred = $q.defer();
+            let deferred = $q.defer();
             FB.getLoginStatus(response => {
                 if (!response || response.error) {
                     deferred.reject('Error occured');

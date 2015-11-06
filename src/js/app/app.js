@@ -67,8 +67,8 @@
                 // Executed when the SDK is loaded
 
                 FB.init({
-                    // appId: '444109322439343',
-                    appId: '444116655771943',
+                    appId: '444109322439343',
+                    //appId: '444116655771943',
                     status: true,
                     cookie: true,
                     xfbml: true,
@@ -87,7 +87,11 @@
                             User.setUserInfo(loginInfo.authResponse, userInfo);
                         });
 
-                        Accounts.getAll(loginInfo.authResponse.userID);
+                        Accounts.getAll(loginInfo.authResponse.userID).then(() => {
+                            if(!Accounts.all.find(account => account.id === Accounts.active)) {
+                                Accounts.setActive("");
+                            }
+                        });
                     }
                 });
             };

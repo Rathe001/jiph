@@ -22,6 +22,9 @@ angular.module('modCommon').factory('Accounts', ['$window', 'Facebook',
             if(accountId) {
                 service.active = accountId;
                 $window.localStorage.setItem("activeAccountId", accountId);
+            } else {
+                service.active = "";
+                $window.localStorage.removeItem("activeAccountId");
             }
         }
 
