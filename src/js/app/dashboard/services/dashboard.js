@@ -27,7 +27,7 @@
             }, response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
-                    deferred.reject('Error occured');
+                    deferred.reject(response.error);
                 } else {
                     Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
@@ -41,7 +41,7 @@
             let deferred = $q.defer();
             FB.api('/' + asyncReportId, response => {
                 if (!response || response.error) {
-                    deferred.reject('Error occured');
+                    deferred.reject(response.error);
                 } else {
                     deferred.resolve(response);
                 }
@@ -55,7 +55,7 @@
             FB.api('/' + asyncReportId + '/insights', response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
-                    deferred.reject('Error occured');
+                    deferred.reject(response.error);
                 } else {
                     Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);

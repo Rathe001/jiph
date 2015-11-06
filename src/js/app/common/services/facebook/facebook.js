@@ -15,7 +15,7 @@ angular.module('modCommon').factory('Facebook', ['$q', 'Loading',
             FB.api(url, params, response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
-                    deferred.reject('Error occured');
+                    deferred.reject(response.error);
                 } else {
                     Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
@@ -30,7 +30,7 @@ angular.module('modCommon').factory('Facebook', ['$q', 'Loading',
             FB.login(response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
-                    deferred.reject('Error occured');
+                    deferred.reject(response.error);
                 } else {
                     Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
@@ -47,7 +47,7 @@ angular.module('modCommon').factory('Facebook', ['$q', 'Loading',
             FB.logout(response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
-                    deferred.reject('Error occured');
+                    deferred.reject(response.error);
                 } else {
                     Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);
@@ -62,7 +62,7 @@ angular.module('modCommon').factory('Facebook', ['$q', 'Loading',
             FB.getLoginStatus(response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
-                    deferred.reject('Error occured');
+                    deferred.reject(response.error);
                 } else {
                     Loading.set(false, 'facebookrequest');
                     deferred.resolve(response);

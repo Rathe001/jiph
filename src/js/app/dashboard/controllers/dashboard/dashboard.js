@@ -43,6 +43,7 @@
                         }
                     }, error => {
                         Object.assign(vm.accounts[i], _processInsights(defaultReport));
+                        vm.accounts[i].error = error.message;
                     });
                 }
 
@@ -128,7 +129,7 @@
 
             function selectAccount(account) {
                 Accounts.setActive(account.id);
-                $location.url('/campaigns/all');
+                //$location.url('/campaigns');
             }
         }
     ]);
