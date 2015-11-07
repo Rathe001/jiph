@@ -27,7 +27,7 @@ gulp.task('watch', function () {
     watch('src/fonts/**/*', {root: 'src/fonts'}, ['copy:fonts']);
     watch('src/img/**/*', {root: 'src/img'}, ['copy:img']);
     watch('src/**/*.html', {root: 'src'}, ['templates', 'copy:html']);
-    watch(['src/.htaccess', 'src/apple-touch-icon-precomposed.png', 'src/crossdomain.xml', 'src/favicon.ico', 'src/humans.txt', 'src/robots.txt', 'src/mocks/**/*'], {root: 'src'}, ['copy:misc']);
+    watch(['src/.htaccess', 'src/version.json', 'src/apple-touch-icon-precomposed.png', 'src/crossdomain.xml', 'src/favicon.ico', 'src/humans.txt', 'src/robots.txt', 'src/mocks/**/*'], {root: 'src'}, ['copy:misc']);
 });
 
 // Main tasks

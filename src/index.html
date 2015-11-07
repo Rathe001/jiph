@@ -22,7 +22,7 @@
         <div id="content" ng-if="main.user.authenticated" ng-cloak>
             <header id="header">
                 <div class="center-width">
-                    <img src="/img/logo-small.png" alt="Jiph" class="logo" />
+                    <img src="/img/logo-small.png" alt="Jiph" class="logo" /><span class="version">v{{main.version}}</span>
                     <div class="avatar" drop-menu>
                         <img ng-src="{{main.user.picture}}" alt="{{main.user.name}}" />{{main.user.firstName}} <i class="fa fa-caret-down"></i>
                         <div class="menu">
@@ -86,6 +86,9 @@
                         <div class="content" ng-view></div>
 
                     </div>
+                    <footer id="footer">
+                        &copy;{{main.year}} Jiph
+                    </footer>
                 </div>
             </div>
         </div>

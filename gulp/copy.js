@@ -34,7 +34,7 @@ gulp.task('copy:login-views', [], function () {
 });
 
 gulp.task('copy:misc', [], function () {
-    return gulp.src(['src/.htaccess', 'src/apple-touch-icon-precomposed.png', 'src/favicon.png', 'src/crossdomain.xml', 'src/favicon.ico', 'src/humans.txt', 'src/robots.txt', 'src/privacy.html', 'src/terms.html'])
+    return gulp.src(['src/.htaccess', 'src/version.json', 'src/apple-touch-icon-precomposed.png', 'src/favicon.png', 'src/crossdomain.xml', 'src/favicon.ico', 'src/humans.txt', 'src/robots.txt', 'src/privacy.html', 'src/terms.html'])
         .pipe(plumber())
         .pipe(gulp.dest("dist/"));
 });

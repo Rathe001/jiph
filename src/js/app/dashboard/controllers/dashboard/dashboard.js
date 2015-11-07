@@ -129,7 +129,6 @@
 
             function selectAccount(account) {
                 Accounts.setActive(account.id);
-                //$location.url('/campaigns');
             }
         }
     ]);

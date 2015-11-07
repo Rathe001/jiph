@@ -3,14 +3,16 @@
 
     var modCommon = angular.module('modCommon');
 
-    modCommon.controller('ctrlMain', ['$scope', '$location', '$window', 'User', 'Facebook', 'Accounts', 'Navigation', 'Loading',
-        function($scope, $location, $window, User, Facebook, Accounts, Navigation, Loading) {
+    modCommon.controller('ctrlMain', ['$scope', '$interval', '$location', '$window', 'User', 'Facebook', 'Accounts', 'Navigation', 'Loading', 'Version',
+        function($scope, $interval, $location, $window, User, Facebook, Accounts, Navigation, Loading, Version) {
             let vm = this;
 
             vm.user = {};
             vm.accounts = {};
             vm.navigation = {};
             vm.loading = {};
+            vm.version = "";
+            vm.year = "";
 
             vm.logout = logout;
             vm.login = login;
@@ -26,6 +28,21 @@
                 vm.accounts = Accounts;
                 vm.navigation = Navigation;
                 vm.loading = Loading;
+
+                vm.year = new Date().getFullYear();
+                Version.get().then(v => vm.version = v.version);
+
+                let versionCheck = $interval(() => {
+                    Version.get().then(v => {
+                        if(vm.version !== v.version) {
+                            if($window.confirm("A newer version of the Jiph application is available. Please click \"OK\" to refresh the application.")) {
+                                console.log("Hit!");
+                                $window.location.href = "/";
+                            }
+                        }
+                    });
+                }, 5000);
+
             }
 
             function logout() {
