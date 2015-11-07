@@ -86,10 +86,12 @@
                         <div class="content" ng-view></div>
 
                     </div>
-                    <footer id="footer">
-                        &copy;{{main.year}} Jiph
-                    </footer>
                 </div>
+                <footer id="footer">
+                    <div class="center-width">
+                        &copy;{{main.year}} Jiph
+                    </div>
+                </footer>
             </div>
         </div>
         <div id="login" ng-if="!main.user.authenticated" ng-cloak>

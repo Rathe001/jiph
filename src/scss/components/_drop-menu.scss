@@ -4,14 +4,13 @@
     z-index: 100;
     display:none;
     position: absolute;
-    top: 100%;
+    top: 37px;
     right: -10px;
     width:300px;
     color: #141823;
     padding:5px;
     background: $color-secondary;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
     font-size: 12px;
 
     h2 {
@@ -37,7 +36,7 @@
     .fa-caret-up {
       position: absolute;
       top: -17px;
-      right: 10px;
+      right: 12px;
       font-size: 24px;
       color:$color-secondary;
     }
