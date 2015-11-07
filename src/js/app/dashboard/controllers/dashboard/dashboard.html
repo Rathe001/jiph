@@ -2,9 +2,9 @@
     <div class="account" ng-repeat="a in vm.accounts | orderBy:['name']" ng-click="vm.selectAccount(a)" ng-class="{'active': a.id === main.accounts.active}">
         <div class="content">
             <h3><em ng-show="a.owner_business.name">Owned By: {{a.owner_business.name}}</em>{{a.name}} <small>{{a.id}}</small></h3>
-            <p class="spent">Total Spent: <span class="num">${{vm.getCurrency(a, 'spend') | number:2}}</span></p>
-            <p class="reach">Total Reach: <span class="num">{{vm.getNumber(a, 'reach') | number:0}}</span></p>
-            <p class="impressions">Total Impressions: <span class="num">{{vm.getNumber(a, 'impressions') | number:0}}</span></p>
+            <p class="spent">7 Day Spend: <span class="num">${{vm.getCurrency(a, 'spend') | number:2}}</span></p>
+            <p class="reach">7 Day Reach: <span class="num">{{vm.getNumber(a, 'reach') | number:0}}</span></p>
+            <p class="impressions">7 Day Impressions: <span class="num">{{vm.getNumber(a, 'impressions') | number:0}}</span></p>
         </div>
         <div class="hide-loading-content" ng-if="!a.data || a.error"><span class="error" ng-if="a.error">{{a.error}}</span></div>
     </div>
