@@ -39,6 +39,14 @@ small {
   font-size:10px;
   opacity: 0.5;
 }
+h1 {
+  font-size:32px;
+
+  span {
+    font-size:18px;
+    color:#AFAFAF;
+  }
+}
 .main {
   float:left;
   width: 100%;
