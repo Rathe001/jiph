@@ -9,7 +9,19 @@
 
     &.active {
       border: 1px solid $color-primary;
-      box-shadow: 0 0 5px $color-primary;
+
+      .content {
+        h3 {
+          background: $color-primary;
+          color: $color-secondary;
+
+          em {
+            color: $color-secondary;
+            font-size: 10px;
+            opacity: .5;
+          }
+        }
+      }
     }
 
     .content {
@@ -26,7 +38,7 @@
         em {
           float: right;
           color: #b4bcc2;
-          padding: 6px 0 0;
+          padding: 10px 0 0;
           font-style: normal;
           font-size: 11px;
         }
