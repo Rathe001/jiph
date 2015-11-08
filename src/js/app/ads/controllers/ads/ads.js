@@ -5,6 +5,7 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts',
         let vm = this;
 
         vm.ads = [];
+        vm.error = "";
 
         $scope.$watch(() => Accounts.active, newVal => {
             if(newVal){
@@ -19,9 +20,18 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts',
         }
 
         function _getAll() {
+            vm.ads = [];
+            vm.error = "";
+
             Ads.getAll(Accounts.active).then(response => {
-                vm.ads = response.data;
-            })
+                if(response.data.length > 0) {
+                    vm.ads = response.data;
+                } else {
+                    vm.error = "No ads found.";
+                }
+            }, error => {
+                vm.error = error.message;
+            });
         }
     }
 ]);

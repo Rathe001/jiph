@@ -1,29 +1,32 @@
 <div class="module">
     <h1>Ads <span ng-if="vm.ads.length > 0">{{vm.ads.length}} total</span></h1>
     <hr />
-    <table>
+    <div ng-if="vm.error">
+        {{vm.error}}
+    </div>
+    <table class="listing" ng-if="!vm.error && vm.ads.length > 0">
         <thead>
             <tr>
-                <td>name</td>
-                <td>id</td>
-                <td>account_id</td>
-                <td>adset</td>
-                <td>campaign</td>
-                <td>adlabels</td>
-                <td>adset_id</td>
-                <td>bid_amount</td>
-                <td>bid_info</td>
-                <td>bid_type</td>
-                <td>configured_status</td>
-                <td>conversion_specs</td>
-                <td>created_time</td>
-                <td>creative</td>
-                <td>effective_status</td>
-                <td>last_updated_by_app_id</td>
-                <td>tracking_specs</td>
-                <td>updated_time</td>
-                <td>campaign_id</td>
-                <td>ad_review_feedback</td>
+                <th>name</th>
+                <th>id</th>
+                <th>account_id</th>
+                <th>adset</th>
+                <th>campaign</th>
+                <th>adlabels</th>
+                <th>adset_id</th>
+                <th>bid_amount</th>
+                <th>bid_info</th>
+                <th>bid_type</th>
+                <th>configured_status</th>
+                <th>conversion_specs</th>
+                <th>created_time</th>
+                <th>creative</th>
+                <th>effective_status</th>
+                <th>last_updated_by_app_id</th>
+                <th>tracking_specs</th>
+                <th>updated_time</th>
+                <th>campaign_id</th>
+                <th>ad_review_feedback</th>
             </tr>
         </thead>
         <tfoot>

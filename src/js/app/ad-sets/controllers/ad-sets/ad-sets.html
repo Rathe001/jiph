@@ -1,42 +1,45 @@
 <div class="module">
     <h1>Ad Sets <span ng-if="vm.adSets.length > 0">{{vm.adSets.length}} total</span></h1>
     <hr />
-    <table>
+    <div ng-if="vm.error">
+        {{vm.error}}
+    </div>
+    <table class="listing" ng-if="!vm.error && vm.adSets.length > 0">
         <thead>
             <tr>
-                <td>name</td>
-                <td>id</td>
-                <td>adlabels</td>
-                <td>adset_schedule</td>
-                <td>account_id</td>
-                <td>bid_amount</td>
-                <td>bid_info</td>
-                <td>billing_event</td>
-                <td>campaign</td>
-                <td>campaign_id</td>
-                <td>configured_status</td>
-                <td>created_time</td>
-                <td>creative_sequence</td>
-                <td>effective_status</td>
-                <td>end_time</td>
-                <td>frequency_cap</td>
-                <td>frequency_cap_reset_period</td>
-                <td>is_autobid</td>
-                <td>lifetime_frequency_cap</td>
-                <td>lifetime_imps</td>
-                <td>optimization_goal</td>
-                <td>product_ad_behavior</td>
-                <td>promoted_object</td>
-                <td>rf_prediction_id</td>
-                <td>rtb_flag</td>
-                <td>start_time</td>
-                <td>targeting</td>
-                <td>updated_time</td>
-                <td>use_new_app_click</td>
-                <td>pacing_type</td>
-                <td>budget_remaining</td>
-                <td>daily_budget</td>
-                <td>lifetime_budget</td>
+                <th>name</th>
+                <th>id</th>
+                <th>adlabels</th>
+                <th>adset_schedule</th>
+                <th>account_id</th>
+                <th>bid_amount</th>
+                <th>bid_info</th>
+                <th>billing_event</th>
+                <th>campaign</th>
+                <th>campaign_id</th>
+                <th>configured_status</th>
+                <th>created_time</th>
+                <th>creative_sequence</th>
+                <th>effective_status</th>
+                <th>end_time</th>
+                <th>frequency_cap</th>
+                <th>frequency_cap_reset_period</th>
+                <th>is_autobid</th>
+                <th>lifetime_frequency_cap</th>
+                <th>lifetime_imps</th>
+                <th>optimization_goal</th>
+                <th>product_ad_behavior</th>
+                <th>promoted_object</th>
+                <th>rf_prediction_id</th>
+                <th>rtb_flag</th>
+                <th>start_time</th>
+                <th>targeting</th>
+                <th>updated_time</th>
+                <th>use_new_app_click</th>
+                <th>pacing_type</th>
+                <th>budget_remaining</th>
+                <th>daily_budget</th>
+                <th>lifetime_budget</th>
             </tr>
         </thead>
         <tfoot>

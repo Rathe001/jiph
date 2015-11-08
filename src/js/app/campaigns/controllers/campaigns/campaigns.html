@@ -1,23 +1,26 @@
 <div class="module">
     <h1>Campaigns <span ng-if="vm.campaigns.length > 0">{{vm.campaigns.length}} total</span></h1>
     <hr />
-    <table>
+    <div ng-if="vm.error">
+        {{vm.error}}
+    </div>
+    <table class="listing" ng-if="!vm.error && vm.campaigns.length > 0">
         <thead>
             <tr>
-                <td>name</td>
-                <td>id</td>
-                <td>adlabels</td>
-                <td>account_id</td>
-                <td>buying_type</td>
-                <td>can_use_spend_cap</td>
-                <td>configured_status</td>
-                <td>created_time</td>
-                <td>effective_status</td>
-                <td>objective</td>
-                <td>start_time</td>
-                <td>stop_time</td>
-                <td>updated_time</td>
-                <td>spend_cap</td>
+                <th>name</th>
+                <th>id</th>
+                <th>adlabels</th>
+                <th>account_id</th>
+                <th>buying_type</th>
+                <th>can_use_spend_cap</th>
+                <th>configured_status</th>
+                <th>created_time</th>
+                <th>effective_status</th>
+                <th>objective</th>
+                <th>start_time</th>
+                <th>stop_time</th>
+                <th>updated_time</th>
+                <th>spend_cap</th>
             </tr>
         </thead>
         <tfoot>

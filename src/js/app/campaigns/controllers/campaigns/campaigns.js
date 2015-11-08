@@ -5,6 +5,7 @@ modCampaigns.controller('ctrlCampaigns', ['$scope', 'Campaigns', 'Accounts',
         let vm = this;
 
         vm.campaigns = [];
+        vm.error = "";
 
         $scope.$watch(() => Accounts.active, newVal => {
             if(newVal){
@@ -19,9 +20,18 @@ modCampaigns.controller('ctrlCampaigns', ['$scope', 'Campaigns', 'Accounts',
         }
 
         function _getAll() {
+            vm.campaigns = [];
+            vm.error = "";
+
             Campaigns.getAll(Accounts.active).then(response => {
-                vm.campaigns = response.data;
-            })
+                if(response.data.length > 0) {
+                    vm.campaigns = response.data;
+                } else {
+                    vm.error = "No campaigns found.";
+                }
+            }, error => {
+                vm.error = error.message;
+            });
         }
     }
 ]);

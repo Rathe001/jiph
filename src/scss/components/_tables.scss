@@ -1,0 +1,29 @@
+table {
+  border-top: $border-normal;
+  border-left: $border-normal;
+
+  &.listing {
+    min-width:100%;
+    background:#fff;
+
+    tr {
+      th {
+        padding:5px;
+        background: #f5f5f5;
+        font-weight:800;
+        text-align:left;
+        border-right: $border-normal;
+        border-bottom: $border-normal;
+      }
+      td {
+        font-size:12px;
+        border-right: $border-normal;
+        border-bottom: $border-normal;
+        padding:5px;
+      }
+      &:nth-child(even) {
+        background: #FBFBFB;
+      }
+    }
+  }
+}
