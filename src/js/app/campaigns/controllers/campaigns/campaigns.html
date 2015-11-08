@@ -39,12 +39,12 @@
                 <td>{{c.buying_type}}</td>
                 <td>{{c.can_use_spend_cap}}</td>
                 <td>{{c.configured_status}}</td>
-                <td>{{c.created_time}}</td>
+                <td>{{c.created_time | date:'short'}}</td>
                 <td>{{c.effective_status}}</td>
                 <td>{{c.objective}}</td>
-                <td>{{c.start_time}}</td>
-                <td>{{c.stop_time}}</td>
-                <td>{{c.updated_time}}</td>
+                <td>{{c.start_time | date:'short'}}</td>
+                <td>{{c.stop_time | date:'short'}}</td>
+                <td>{{c.updated_time | date:'short'}}</td>
                 <td>{{c.spend_cap}}</td>
             </tr>
         </tbody>

@@ -62,10 +62,10 @@
                 <td>{{a.campaign}}</td>
                 <td>{{a.campaign_id}}</td>
                 <td>{{a.configured_status}}</td>
-                <td>{{a.created_time}}</td>
+                <td>{{a.created_time | date:'short'}}</td>
                 <td>{{a.creative_sequence}}</td>
                 <td>{{a.effective_status}}</td>
-                <td>{{a.end_time}}</td>
+                <td>{{a.end_time | date:'short'}}</td>
                 <td>{{a.frequency_cap}}</td>
                 <td>{{a.frequency_cap_reset_period}}</td>
                 <td>{{a.is_autobid}}</td>
@@ -76,9 +76,9 @@
                 <td>{{a.promoted_object}}</td>
                 <td>{{a.rf_prediction_id}}</td>
                 <td>{{a.rtb_flag}}</td>
-                <td>{{a.start_time}}</td>
+                <td>{{a.start_time | date:'short'}}</td>
                 <td>{{a.targeting}}</td>
-                <td>{{a.updated_time}}</td>
+                <td>{{a.updated_time | date:'short'}}</td>
                 <td>{{a.use_new_app_click}}</td>
                 <td>{{a.pacing_type}}</td>
                 <td>{{a.budget_remaining}}</td>
