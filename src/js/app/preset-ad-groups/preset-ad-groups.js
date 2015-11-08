@@ -1,3 +1,1 @@
-(function() {
-    var modPresetAdGroups = angular.module('modPresetAdGroups', []);
-}());
+let modPresetAdGroups = angular.module('modPresetAdGroups', []);

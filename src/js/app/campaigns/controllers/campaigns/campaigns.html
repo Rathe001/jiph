@@ -1,3 +1,27 @@
 <div class="module">
-    <p>Campaigns template!</p>
+    <h1>Campaigns <span ng-if="vm.campaigns.length > 0">{{vm.campaigns.length}} total</span></h1>
+    <hr />
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Name
+                </td>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>
+
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="c in vm.campaigns">
+                <td>
+                    {{c.name}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>

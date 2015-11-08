@@ -1,3 +1,1 @@
-(function() {
-    var modDashboard = angular.module('modDashboard', []);
-}());
+let modDashboard = angular.module('modDashboard', []);

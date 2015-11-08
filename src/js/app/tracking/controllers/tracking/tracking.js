@@ -1,12 +1,7 @@
-(function() {
+let modTracking = angular.module('modTracking', ['modCommon']);
 
-    'use strict';
+modTracking.controller('ctrlTracking', [
+    function() {
 
-    var modTracking = angular.module('modTracking', ['modCommon']);
-
-    modTracking.controller('ctrlTracking', [
-        function() {
-
-        }
-    ]);
-}());
+    }
+]);

@@ -1,12 +1,7 @@
-(function() {
+let modHelp = angular.module('modHelp', ['modCommon']);
 
-    'use strict';
+modHelp.controller('ctrlHelp', [
+    function() {
 
-    var modHelp = angular.module('modHelp', ['modCommon']);
-
-    modHelp.controller('ctrlHelp', [
-        function() {
-
-        }
-    ]);
-}());
+    }
+]);

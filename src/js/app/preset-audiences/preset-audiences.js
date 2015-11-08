@@ -1,3 +1,1 @@
-(function() {
-    var modPresetAudiences = angular.module('modPresetAudiences', []);
-}());
+let modPresetAudiences = angular.module('modPresetAudiences', []);

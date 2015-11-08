@@ -1,7 +1,4 @@
-(function() {
-    'use strict';
-
-    var modDashboard = angular.module('modDashboard');
+var modDashboard = angular.module('modDashboard');
 
     modDashboard.factory('Dashboard', ['$q', 'Loading', function($q, Loading) {
         let service = {};
@@ -64,4 +61,3 @@
             return deferred.promise;
         }
     }]);
-}());

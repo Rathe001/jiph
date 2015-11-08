@@ -1,3 +1,1 @@
-(function() {
-    var modTracking = angular.module('modTracking', []);
-}());
+let modTracking = angular.module('modTracking', []);

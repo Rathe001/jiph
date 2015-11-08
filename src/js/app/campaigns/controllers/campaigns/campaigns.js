@@ -1,12 +1,13 @@
-(function() {
+let modCampaigns = angular.module('modCampaigns');
 
-    'use strict';
+modCampaigns.controller('ctrlCampaigns', ['Campaigns', 'Accounts',
+    function(Campaigns, Accounts) {
+        let vm = this;
 
-    var modCampaigns = angular.module('modCampaigns', ['modCommon']);
+        vm.campaigns = [];
 
-    modCampaigns.controller('ctrlCampaigns', [
-        function() {
-
-        }
-    ]);
-}());
+        Campaigns.getAll(Accounts.active).then(response => {
+            vm.campaigns = response.data;
+        })
+    }
+]);

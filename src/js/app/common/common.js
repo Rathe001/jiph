@@ -1,3 +1,1 @@
-(function() {
-    var modCommon = angular.module('modCommon', ['ngRoute', 'ngSanitize', 'ngAnimate']);
-}());
+let modCommon = angular.module('modCommon', ['ngRoute', 'ngSanitize', 'ngAnimate']);

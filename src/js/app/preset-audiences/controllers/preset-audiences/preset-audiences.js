@@ -1,12 +1,7 @@
-(function() {
+let modPresetAudiences = angular.module('modPresetAudiences', ['modCommon']);
 
-    'use strict';
+modPresetAudiences.controller('ctrlPresetAudiences', [
+    function() {
 
-    var modPresetAudiences = angular.module('modPresetAudiences', ['modCommon']);
-
-    modPresetAudiences.controller('ctrlPresetAudiences', [
-        function() {
-
-        }
-    ]);
-}());
+    }
+]);

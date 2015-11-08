@@ -1,3 +1,1 @@
-(function() {
-    var modHelp = angular.module('modHelp', []);
-}());
+let modHelp = angular.module('modHelp', []);

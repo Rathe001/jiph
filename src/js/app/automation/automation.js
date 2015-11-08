@@ -1,3 +1,1 @@
-(function() {
-    var modAutomation = angular.module('modAutomation', []);
-}());
+let modAutomation = angular.module('modAutomation', []);

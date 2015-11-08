@@ -1,12 +1,7 @@
-(function() {
+var modAutomation = angular.module('modAutomation', ['modCommon']);
 
-    'use strict';
+modAutomation.controller('ctrlAutomation', [
+    () => {
 
-    var modAutomation = angular.module('modAutomation', ['modCommon']);
-
-    modAutomation.controller('ctrlAutomation', [
-        function() {
-
-        }
-    ]);
-}());
+    }
+]);

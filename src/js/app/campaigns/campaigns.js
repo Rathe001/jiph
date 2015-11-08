@@ -1,3 +1,1 @@
-(function() {
-    var modCampaigns = angular.module('modCampaigns', []);
-}());
+let modCampaigns = angular.module('modCampaigns', []);
