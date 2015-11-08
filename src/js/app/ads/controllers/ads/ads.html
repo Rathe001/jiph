@@ -1,5 +1,5 @@
 <div class="module">
-    <h1>Ads <span ng-if="vm.ads.length > 0">{{vm.ads.length}} total</span></h1>
+    <h1>{{vm.dictionary.terms['ads']}} <span ng-if="vm.ads.length > 0">({{vm.ads.length}})</span></h1>
     <hr />
     <div ng-if="vm.error">
         {{vm.error}}
@@ -43,14 +43,18 @@
                 <td>{{a.campaign}}</td>
                 <td>{{a.adlabels}}</td>
                 <td>{{a.adset_id}}</td>
-                <td>{{a.bid_amount}}</td>
-                <td>{{a.bid_info}}</td>
+                <td>{{vm.currency.to(a.bid_amount) | currency}}</td>
+                <td>
+                    <span ng-repeat="(k, v) in a.bid_info">
+                        {{vm.dictionary.bidInfoActions[k]}}: {{v}}
+                    </span>
+                </td>
                 <td>{{a.bid_type}}</td>
-                <td>{{a.configured_status}}</td>
+                <td>{{vm.dictionary.statuses[a.configured_status]}}</td>
                 <td>{{a.conversion_specs}}</td>
                 <td>{{a.created_time | date:'short'}}</td>
                 <td>{{a.creative}}</td>
-                <td>{{a.effective_status}}</td>
+                <td>{{vm.dictionary.statuses[a.effective_status]}}</td>
                 <td>{{a.last_updated_by_app_id}}</td>
                 <td>{{a.tracking_specs}}</td>
                 <td>{{a.updated_time | date:'short'}}</td>

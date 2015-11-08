@@ -7,12 +7,14 @@ angular.module('modCommon').factory('Accounts', ['$window', 'Facebook',
 
         service.getAll = getAll;
         service.setActive = setActive;
+        service.getActive = getActive;
         service.getAccountName = getAccountName;
+        service.getCurrencyOffset = getCurrencyOffset;
 
         return service;
 
         function getAll() {
-            return Facebook.get('/me/adaccounts', {fields: 'name,id,owner_business'}).then(results => {
+            return Facebook.get('/me/adaccounts', {fields: 'name,id,owner_business,currency,amount_spent,spend_cap'}).then(results => {
                 service.all = results.data;
                 return results.data;
             });
@@ -28,6 +30,14 @@ angular.module('modCommon').factory('Accounts', ['$window', 'Facebook',
             }
         }
 
+        function getActive() {
+            if(service.all.length > 0 && service.active) {
+                return service.all.find(account => account.id === service.active);
+            } else {
+                return {};
+            }
+        }
+
         function getAccountName(accountId) {
             if(accountId) {
                 if(service.all && service.all.length > 0) {
@@ -37,6 +47,16 @@ angular.module('modCommon').factory('Accounts', ['$window', 'Facebook',
                 }
             } else {
                 return "No account selected";
+            }
+        }
+
+        function getCurrencyOffset() {
+            let c = service.getActive().currency;
+
+            if(c === "CLP" || c === "COP" || c === "CRC" || c === "HUF" || c === "ISK" || c === "IDR" || c === "JPY" || c === "KRW" || c === "PYG" || c === "TWD" || c ===  "VND") {
+                return 1;
+            } else {
+                return 100;
             }
         }
     }]

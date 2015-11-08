@@ -5,7 +5,9 @@ angular.module('modCommon').factory('Dictionary', [
         service.terms = {
             ad_review_feedback: "Ad review feedback",
             adlabels: "Ad labels",
+            ads: "Ads",
             adset: "Ad set",
+            adsets: "Ad sets",
             adset_id: "Ad set ID",
             adset_schedule: "Ad set schedule",
             account_id: "Account ID",
@@ -16,10 +18,14 @@ angular.module('modCommon').factory('Dictionary', [
             budget_remaining: "Budget remaining",
             buying_type: "buying type",
             campaign: "Campaign",
+            campaigns: "Campaigns",
             campaign_id: "Campaign ID",
             can_use_spend_cap: "Can use spend cap",
             configured_status: "Configured status",
             conversion_specs: "Conversion specs",
+            create_ad: "Create Ad",
+            create_ad_set: "Create Ad Set",
+            create_campaign: "Create Campaign",
             created_time: "Created time",
             creative: "Creative",
             creative_sequence: "Creative sequence",
@@ -49,6 +55,85 @@ angular.module('modCommon').factory('Dictionary', [
             tracking_specs: "Tracking specs",
             updated_time: "Updated time",
             use_new_app_click: "Use new app click"
+        };
+
+        service.objectives = {
+            CANVAS_APP_ENGAGEMENT: "Canvas app engagement",
+            CANVAS_APP_INSTALLS: "Canvas app installs",
+            CONVERSIONS: "Conversions",
+            EVENT_RESPONSES: "Event responses",
+            EXTERNAL: "External",
+            LEAD_GENERATION: "Lead generation",
+            LINK_CLICKS: "Link clicks",
+            LOCAL_AWARENESS: "Local awareness",
+            MOBILE_APP_ENGAGEMENT: "Mobile app engagement",
+            MOBILE_APP_INSTALLS: "Mobile app installs",
+            OFFER_CLAIMS: "Offer claims",
+            PAGE_LIKES: "Page likes",
+            POST_ENGAGEMENT: "Post engagement",
+            PRODUCT_CATALOG_SALES: "Product catalog sales",
+            VIDEO_VIEWS: "Video views"
+        };
+
+        service.statuses = {
+            ACTIVE: "Active",
+            PAUSED: "Paused",
+            ARCHIVED: "Archived",
+            DELETED: "Deleted",
+            CAMPAIGN_PAUSED: "Campaign paused",
+            ADSET_PAUSED: "Ad set paused",
+            PENDING_REVIEW: "Pending review",
+            DISAPPROVED: "Disapproved",
+            PREAPPROVED: "Preapproved",
+            PENDING_BILLING_INFO: "Pending billing info"
+        };
+
+        service.buyingTypes = {
+            AUCTION: "Auction",
+            RESERVED: "Reserved"
+        };
+
+        service.billingEvents = {
+            APP_INSTALLS: "App installs",
+            CLICKS: "Clicks",
+            IMPRESSIONS: "Impressions",
+            LINK_CLICKS: "Link clicks",
+            OFFER_CLAIMS: "Offer claims",
+            PAGE_LIKES: "Page likes",
+            POST_ENGAGEMENT: "Post engagement",
+            VIDEO_VIEWS: "Video views"
+        };
+
+        service.optimizationGoals = {
+            NONE: "None",
+            APP_INSTALLS: "App installs",
+            BRAND_AWARENESS: "Brand awareness",
+            CLICKS: "Clicks",
+            ENGAGED_USERS: "Engaged users",
+            EXTERNAL: "External",
+            EVENT_RESPONSES: "Event responses",
+            IMPRESSIONS: "Impressions",
+            LINK_CLICKS: "Link clicks",
+            OFFER_CLAIMS: "Offer claims",
+            OFFSITE_CONVERSIONS: "Offsite conversions",
+            PAGE_ENGAGEMENT: "Page engagement",
+            PAGE_LIKES: "Page likes",
+            POST_ENGAGEMENT: "Post engagement",
+            REACH: "Reach",
+            SOCIAL_IMPRESSIONS: "Social impressions",
+            VIDEO_VIEWS: "Video views"
+        };
+
+        service.productAdBehaviors = {
+            REQUIRE_LAST_SEEN_PRODUCTS: "Require last seen products",
+            REQUIRE_AVAILABLE_LAST_SEEN_PRODUCTS: "Require available last seen products",
+            FALL_BACK_TO_FB_RECOMMENDATIONS: "Fall back to Facebook recommendations"
+        };
+
+        service.bidInfoActions = {
+            ACTIONS: "Actions",
+            CLICKS: "Clicks",
+            REACH: "Reach"
         };
 
         return service;

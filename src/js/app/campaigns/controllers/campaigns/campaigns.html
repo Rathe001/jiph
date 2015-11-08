@@ -1,5 +1,6 @@
 <div class="module">
-    <h1>Campaigns <span ng-if="vm.campaigns.length > 0">{{vm.campaigns.length}} total</span></h1>
+    <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_campaign']}}</div>
+    <h1>{{vm.dictionary.terms['campaigns']}} <span ng-if="vm.campaigns.length > 0">({{vm.campaigns.length}})</span></h1>
     <hr />
     <div ng-if="vm.error">
         {{vm.error}}
@@ -34,16 +35,16 @@
                 <td>{{c.id}}</td>
                 <td>{{c.adlabels}}</td>
                 <td>{{c.account_id}}</td>
-                <td>{{c.buying_type}}</td>
+                <td>{{vm.dictionary.buyingTypes[c.buying_type]}}</td>
                 <td>{{c.can_use_spend_cap}}</td>
-                <td>{{c.configured_status}}</td>
+                <td>{{vm.dictionary.statuses[c.configured_status]}}</td>
                 <td>{{c.created_time | date:'short'}}</td>
-                <td>{{c.effective_status}}</td>
-                <td>{{c.objective}}</td>
+                <td>{{vm.dictionary.statuses[c.effective_status]}}</td>
+                <td>{{vm.dictionary.objectives[c.objective]}}</td>
                 <td>{{c.start_time | date:'short'}}</td>
-                <td>{{c.stop_time | date:'short'}}</td>
+                <td><span ng-if="c.stop_time">{{c.stop_time | date:'short'}}</span><span ng-if="!c.stop_time">Ongoing</span></td>
                 <td>{{c.updated_time | date:'short'}}</td>
-                <td>{{c.spend_cap}}</td>
+                <td>{{vm.currency.to(c.spend_cap) | currency}}</td>
             </tr>
         </tbody>
     </table>

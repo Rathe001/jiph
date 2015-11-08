@@ -10,7 +10,7 @@ angular.module('modAds').factory('Ads', ['$q', 'Loading',
             let deferred = $q.defer();
             let payload = {
                 date_preset: 'lifetime',
-                fields: 'id,name,account_id,adset,campaign,adlabels,adset_id,bid_amount,bid_info,bid_type,configured_status,conversion_specs,created_time,creative,effective_status,last_updated_by_app_id,tracking_specs,updated_time,campaign_id,ad_review_feedback',
+                fields: 'id,name,account_id,adset{id,name},campaign{id,name},adlabels,adset_id,bid_amount,bid_info,bid_type,configured_status,conversion_specs,created_time,creative,effective_status,last_updated_by_app_id,tracking_specs,updated_time,campaign_id,ad_review_feedback',
                 limit: 5000
             };
 
