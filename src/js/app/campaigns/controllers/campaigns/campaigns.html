@@ -7,27 +7,25 @@
     <table class="listing" ng-if="!vm.error && vm.campaigns.length > 0">
         <thead>
             <tr>
-                <th>name</th>
-                <th>id</th>
-                <th>adlabels</th>
-                <th>account_id</th>
-                <th>buying_type</th>
-                <th>can_use_spend_cap</th>
-                <th>configured_status</th>
-                <th>created_time</th>
-                <th>effective_status</th>
-                <th>objective</th>
-                <th>start_time</th>
-                <th>stop_time</th>
-                <th>updated_time</th>
-                <th>spend_cap</th>
+                <th>{{vm.dictionary.terms['name']}}</th>
+                <th>{{vm.dictionary.terms['id']}}</th>
+                <th>{{vm.dictionary.terms['adlabels']}}</th>
+                <th>{{vm.dictionary.terms['account_id']}}</th>
+                <th>{{vm.dictionary.terms['buying_type']}}</th>
+                <th>{{vm.dictionary.terms['can_use_spend_cap']}}</th>
+                <th>{{vm.dictionary.terms['configured_status']}}</th>
+                <th>{{vm.dictionary.terms['created_time']}}</th>
+                <th>{{vm.dictionary.terms['effective_status']}}</th>
+                <th>{{vm.dictionary.terms['objective']}}</th>
+                <th>{{vm.dictionary.terms['start_time']}}</th>
+                <th>{{vm.dictionary.terms['stop_time']}}</th>
+                <th>{{vm.dictionary.terms['updated_time']}}</th>
+                <th>{{vm.dictionary.terms['spend_cap']}}</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <td>
-
-                </td>
+                <td colspan="14"></td>
             </tr>
         </tfoot>
         <tbody>

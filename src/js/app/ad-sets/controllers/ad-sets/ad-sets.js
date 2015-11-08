@@ -1,10 +1,11 @@
 let modAdSets = angular.module('modAdSets');
 
-modAdSets.controller('ctrlAdSets', ['$scope', 'AdSets', 'Accounts',
-    function($scope, AdSets, Accounts) {
+modAdSets.controller('ctrlAdSets', ['$scope', 'AdSets', 'Accounts', 'Dictionary',
+    function($scope, AdSets, Accounts, Dictionary) {
         let vm = this;
 
         vm.adSets = [];
+        vm.dictionary = {};
         vm.error = "";
 
         $scope.$watch(() => Accounts.active, newVal => {
@@ -16,7 +17,7 @@ modAdSets.controller('ctrlAdSets', ['$scope', 'AdSets', 'Accounts',
         _init();
 
         function _init() {
-
+            vm.dictionary = Dictionary;
         }
 
         function _getAll() {

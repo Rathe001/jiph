@@ -7,33 +7,31 @@
     <table class="listing" ng-if="!vm.error && vm.ads.length > 0">
         <thead>
             <tr>
-                <th>name</th>
-                <th>id</th>
-                <th>account_id</th>
-                <th>adset</th>
-                <th>campaign</th>
-                <th>adlabels</th>
-                <th>adset_id</th>
-                <th>bid_amount</th>
-                <th>bid_info</th>
-                <th>bid_type</th>
-                <th>configured_status</th>
-                <th>conversion_specs</th>
-                <th>created_time</th>
-                <th>creative</th>
-                <th>effective_status</th>
-                <th>last_updated_by_app_id</th>
-                <th>tracking_specs</th>
-                <th>updated_time</th>
-                <th>campaign_id</th>
-                <th>ad_review_feedback</th>
+                <th>{{vm.dictionary.terms['name']}}</th>
+                <th>{{vm.dictionary.terms['id']}}</th>
+                <th>{{vm.dictionary.terms['account_id']}}</th>
+                <th>{{vm.dictionary.terms['adset']}}</th>
+                <th>{{vm.dictionary.terms['campaign']}}</th>
+                <th>{{vm.dictionary.terms['adlabels']}}</th>
+                <th>{{vm.dictionary.terms['adset_id']}}</th>
+                <th>{{vm.dictionary.terms['bid_amount']}}</th>
+                <th>{{vm.dictionary.terms['bid_info']}}</th>
+                <th>{{vm.dictionary.terms['bid_type']}}</th>
+                <th>{{vm.dictionary.terms['configured_status']}}</th>
+                <th>{{vm.dictionary.terms['conversion_specs']}}</th>
+                <th>{{vm.dictionary.terms['created_time']}}</th>
+                <th>{{vm.dictionary.terms['creative']}}</th>
+                <th>{{vm.dictionary.terms['effective_status']}}</th>
+                <th>{{vm.dictionary.terms['last_updated_by_app_id']}}</th>
+                <th>{{vm.dictionary.terms['tracking_specs']}}</th>
+                <th>{{vm.dictionary.terms['updated_time']}}</th>
+                <th>{{vm.dictionary.terms['campaign_id']}}</th>
+                <th>{{vm.dictionary.terms['ad_review_feedback']}}</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <td>
-
-                </td>
+                <td colspan="20"></td>
             </tr>
         </tfoot>
         <tbody>

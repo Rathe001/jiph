@@ -1,10 +1,11 @@
 let modCampaigns = angular.module('modCampaigns');
 
-modCampaigns.controller('ctrlCampaigns', ['$scope', 'Campaigns', 'Accounts',
-    function($scope, Campaigns, Accounts) {
+modCampaigns.controller('ctrlCampaigns', ['$scope', 'Campaigns', 'Accounts', 'Dictionary',
+    function($scope, Campaigns, Accounts, Dictionary) {
         let vm = this;
 
         vm.campaigns = [];
+        vm.dictionary = {};
         vm.error = "";
 
         $scope.$watch(() => Accounts.active, newVal => {
@@ -16,7 +17,7 @@ modCampaigns.controller('ctrlCampaigns', ['$scope', 'Campaigns', 'Accounts',
         _init();
 
         function _init() {
-
+            vm.dictionary = Dictionary;
         }
 
         function _getAll() {

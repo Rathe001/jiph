@@ -7,46 +7,44 @@
     <table class="listing" ng-if="!vm.error && vm.adSets.length > 0">
         <thead>
             <tr>
-                <th>name</th>
-                <th>id</th>
-                <th>adlabels</th>
-                <th>adset_schedule</th>
-                <th>account_id</th>
-                <th>bid_amount</th>
-                <th>bid_info</th>
-                <th>billing_event</th>
-                <th>campaign</th>
-                <th>campaign_id</th>
-                <th>configured_status</th>
-                <th>created_time</th>
-                <th>creative_sequence</th>
-                <th>effective_status</th>
-                <th>end_time</th>
-                <th>frequency_cap</th>
-                <th>frequency_cap_reset_period</th>
-                <th>is_autobid</th>
-                <th>lifetime_frequency_cap</th>
-                <th>lifetime_imps</th>
-                <th>optimization_goal</th>
-                <th>product_ad_behavior</th>
-                <th>promoted_object</th>
-                <th>rf_prediction_id</th>
-                <th>rtb_flag</th>
-                <th>start_time</th>
-                <th>targeting</th>
-                <th>updated_time</th>
-                <th>use_new_app_click</th>
-                <th>pacing_type</th>
-                <th>budget_remaining</th>
-                <th>daily_budget</th>
-                <th>lifetime_budget</th>
+                <th>{{vm.dictionary.terms['name']}}</th>
+                <th>{{vm.dictionary.terms['id']}}</th>
+                <th>{{vm.dictionary.terms['adlabels']}}</th>
+                <th>{{vm.dictionary.terms['adset_schedule']}}</th>
+                <th>{{vm.dictionary.terms['account_id']}}</th>
+                <th>{{vm.dictionary.terms['bid_amount']}}</th>
+                <th>{{vm.dictionary.terms['bid_info']}}</th>
+                <th>{{vm.dictionary.terms['billing_event']}}</th>
+                <th>{{vm.dictionary.terms['campaign']}}</th>
+                <th>{{vm.dictionary.terms['campaign_id']}}</th>
+                <th>{{vm.dictionary.terms['configured_status']}}</th>
+                <th>{{vm.dictionary.terms['created_time']}}</th>
+                <th>{{vm.dictionary.terms['creative_sequence']}}</th>
+                <th>{{vm.dictionary.terms['effective_status']}}</th>
+                <th>{{vm.dictionary.terms['end_time']}}</th>
+                <th>{{vm.dictionary.terms['frequency_cap']}}</th>
+                <th>{{vm.dictionary.terms['frequency_cap_reset_period']}}</th>
+                <th>{{vm.dictionary.terms['is_autobid']}}</th>
+                <th>{{vm.dictionary.terms['lifetime_frequency_cap']}}</th>
+                <th>{{vm.dictionary.terms['lifetime_imps']}}</th>
+                <th>{{vm.dictionary.terms['optimization_goal']}}</th>
+                <th>{{vm.dictionary.terms['product_ad_behavior']}}</th>
+                <th>{{vm.dictionary.terms['promoted_object']}}</th>
+                <th>{{vm.dictionary.terms['rf_prediction_id']}}</th>
+                <th>{{vm.dictionary.terms['rtb_flag']}}</th>
+                <th>{{vm.dictionary.terms['start_time']}}</th>
+                <th>{{vm.dictionary.terms['targeting']}}</th>
+                <th>{{vm.dictionary.terms['updated_time']}}</th>
+                <th>{{vm.dictionary.terms['use_new_app_click']}}</th>
+                <th>{{vm.dictionary.terms['pacing_type']}}</th>
+                <th>{{vm.dictionary.terms['budget_remaining']}}</th>
+                <th>{{vm.dictionary.terms['daily_budget']}}</th>
+                <th>{{vm.dictionary.terms['lifetime_budget']}}</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <td>
-
-                </td>
+                <td colspan="33"></td>
             </tr>
         </tfoot>
         <tbody>
