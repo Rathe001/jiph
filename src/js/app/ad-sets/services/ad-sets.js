@@ -1,4 +1,4 @@
-angular.module('modCampaigns').factory('Campaigns', ['$q', 'Loading',
+angular.module('modAdSets').factory('AdSets', ['$q', 'Loading',
     ($q, Loading) => {
         let service = {};
 
@@ -10,12 +10,12 @@ angular.module('modCampaigns').factory('Campaigns', ['$q', 'Loading',
             let deferred = $q.defer();
             let payload = {
                 date_preset: 'lifetime',
-                fields: 'name,id,adlabels,account_id,buying_type,can_use_spend_cap,configured_status,created_time,effective_status,objective,start_time,stop_time,updated_time,spend_cap',
+                fields: 'name,id,adlabels,adset_schedule,account_id,bid_amount,bid_info,billing_event,campaign,campaign_id,configured_status,created_time,creative_sequence,effective_status,end_time,frequency_cap,frequency_cap_reset_period,is_autobid,lifetime_frequency_cap,lifetime_imps,optimization_goal,product_ad_behavior,promoted_object,rf_prediction_id,rtb_flag,start_time,targeting,updated_time,use_new_app_click,pacing_type,budget_remaining,daily_budget,lifetime_budget',
                 limit: 5000
             };
 
             Loading.set(true, 'facebookrequest');
-            FB.api('/' + facebookAdAccountId + '/campaigns', payload, response => {
+            FB.api('/' + facebookAdAccountId + '/adsets', payload, response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
                     deferred.reject(response.error);

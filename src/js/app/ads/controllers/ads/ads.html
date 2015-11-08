@@ -1,0 +1,61 @@
+<div class="module">
+    <h1>Ads <span ng-if="vm.ads.length > 0">{{vm.ads.length}} total</span></h1>
+    <hr />
+    <table>
+        <thead>
+            <tr>
+                <td>name</td>
+                <td>id</td>
+                <td>account_id</td>
+                <td>adset</td>
+                <td>campaign</td>
+                <td>adlabels</td>
+                <td>adset_id</td>
+                <td>bid_amount</td>
+                <td>bid_info</td>
+                <td>bid_type</td>
+                <td>configured_status</td>
+                <td>conversion_specs</td>
+                <td>created_time</td>
+                <td>creative</td>
+                <td>effective_status</td>
+                <td>last_updated_by_app_id</td>
+                <td>tracking_specs</td>
+                <td>updated_time</td>
+                <td>campaign_id</td>
+                <td>ad_review_feedback</td>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>
+
+                </td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="a in vm.ads">
+                <td>{{a.name}}</td>
+                <td>{{a.id}}</td>
+                <td>{{a.account_id}}</td>
+                <td>{{a.adset}}</td>
+                <td>{{a.campaign}}</td>
+                <td>{{a.adlabels}}</td>
+                <td>{{a.adset_id}}</td>
+                <td>{{a.bid_amount}}</td>
+                <td>{{a.bid_info}}</td>
+                <td>{{a.bid_type}}</td>
+                <td>{{a.configured_status}}</td>
+                <td>{{a.conversion_specs}}</td>
+                <td>{{a.created_time}}</td>
+                <td>{{a.creative}}</td>
+                <td>{{a.effective_status}}</td>
+                <td>{{a.last_updated_by_app_id}}</td>
+                <td>{{a.tracking_specs}}</td>
+                <td>{{a.updated_time}}</td>
+                <td>{{a.campaign_id}}</td>
+                <td>{{a.ad_review_feedback}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

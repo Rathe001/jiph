@@ -1,0 +1,1 @@
+let modAds = angular.module('modAds', []);

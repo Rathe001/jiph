@@ -4,9 +4,20 @@
     <table>
         <thead>
             <tr>
-                <td>
-                    Name
-                </td>
+                <td>name</td>
+                <td>id</td>
+                <td>adlabels</td>
+                <td>account_id</td>
+                <td>buying_type</td>
+                <td>can_use_spend_cap</td>
+                <td>configured_status</td>
+                <td>created_time</td>
+                <td>effective_status</td>
+                <td>objective</td>
+                <td>start_time</td>
+                <td>stop_time</td>
+                <td>updated_time</td>
+                <td>spend_cap</td>
             </tr>
         </thead>
         <tfoot>
@@ -18,9 +29,20 @@
         </tfoot>
         <tbody>
             <tr ng-repeat="c in vm.campaigns">
-                <td>
-                    {{c.name}}
-                </td>
+                <td>{{c.name}}</td>
+                <td>{{c.id}}</td>
+                <td>{{c.adlabels}}</td>
+                <td>{{c.account_id}}</td>
+                <td>{{c.buying_type}}</td>
+                <td>{{c.can_use_spend_cap}}</td>
+                <td>{{c.configured_status}}</td>
+                <td>{{c.created_time}}</td>
+                <td>{{c.effective_status}}</td>
+                <td>{{c.objective}}</td>
+                <td>{{c.start_time}}</td>
+                <td>{{c.stop_time}}</td>
+                <td>{{c.updated_time}}</td>
+                <td>{{c.spend_cap}}</td>
             </tr>
         </tbody>
     </table>

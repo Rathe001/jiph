@@ -2,6 +2,8 @@ let app = angular.module('app', [
     'modTemplates',
     'modAutomation',
     'modCampaigns',
+    'modAdSets',
+    'modAds',
     'modCommon',
     'modDashboard',
     'modHelp',
@@ -12,11 +14,20 @@ let app = angular.module('app', [
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
     function($routeProvider, $locationProvider, $httpProvider) {
-
         $routeProvider.
         when('/', {
             templateUrl: '/js/app/dashboard/controllers/dashboard/dashboard.html',
             controller: 'ctrlDashboard',
+            controllerAs: 'vm'
+        }).
+        when('/ad-sets', {
+            templateUrl: '/js/app/ad-sets/controllers/ad-sets/ad-sets.html',
+            controller: 'ctrlAdSets',
+            controllerAs: 'vm'
+        }).
+        when('/ads', {
+            templateUrl: '/js/app/ads/controllers/ads/ads.html',
+            controller: 'ctrlAds',
             controllerAs: 'vm'
         }).
         when('/automation', {
