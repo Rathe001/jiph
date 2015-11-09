@@ -1,7 +1,7 @@
 let modAds = angular.module('modAds');
 
-modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictionary',
-    function($scope, Ads, Accounts, Currency, Dictionary) {
+modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictionary', 'DateIntervals',
+    function($scope, Ads, Accounts, Currency, Dictionary, DateIntervals) {
         let vm = this;
 
         vm.ads = [];
@@ -10,9 +10,12 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictiona
         vm.currency = {};
         vm.orderBy = "";
         vm.error = "";
+        vm.dateIntervals = [];
+        vm.selectedInterval = "";
 
         vm.toggleColumn = toggleColumn;
         vm.toggleOrderBy = toggleOrderBy;
+        vm.selectInterval = selectInterval;
 
         $scope.$watch(() => Accounts.active, newVal => {
             if(newVal){
@@ -26,6 +29,8 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictiona
             vm.currency = Currency;
             vm.dictionary = Dictionary;
             vm.columns = Ads.getDataColumns();
+            vm.dateIntervals = DateIntervals.intervals;
+            vm.selectedInterval = DateIntervals.getSelected();
         }
 
         function _getAll() {
@@ -77,6 +82,11 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictiona
             } else {
                 vm.orderBy = col;
             }
+        }
+
+        function selectInterval(interval) {
+            vm.selectedInterval = interval;
+            DateIntervals.setSelected(interval);
         }
     }
 ]);

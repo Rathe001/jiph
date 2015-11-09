@@ -1,7 +1,31 @@
 [drop-menu] {
   &.customize-columns {
     position:relative;
-    margin:10px 15px 0 0;
+    margin:0 15px;
+
+    .menu {
+      width: 50vw;
+      max-width: 500px;
+
+      li {
+        float:left;
+        width: 33%;
+      }
+    }
+  }
+
+  &.date-intervals {
+    position: relative;
+
+    .menu {
+      width: 50vw;
+      max-width: 500px;
+
+      li {
+        float:left;
+        width: 33%;
+      }
+    }
   }
 
   .menu {

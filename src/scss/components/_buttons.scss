@@ -7,7 +7,13 @@
   border-radius: 5px;
 
   &.btn-default {
-    background: #797979;
+    border: 1px solid #797979;
+    background: #fff;
+    color: inherit;
+
+    &:hover {
+      background: #e8e8e8;
+    }
   }
 
   &:hover {

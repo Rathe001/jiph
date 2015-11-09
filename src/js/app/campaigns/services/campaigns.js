@@ -28,8 +28,8 @@ angular.module('modCampaigns').factory('Campaigns', ['$q', '$window', 'Loading',
         function getAll(facebookAdAccountId) {
             let deferred = $q.defer();
             let payload = {
-                date_preset: 'lifetime',
-                fields: 'name,id,adlabels,account_id,buying_type,can_use_spend_cap,configured_status,created_time,effective_status,objective,start_time,stop_time,updated_time,spend_cap',
+                date_preset: 'last_7_days',
+                fields: 'name,insights,id,adlabels,account_id,buying_type,can_use_spend_cap,configured_status,created_time,effective_status,objective,start_time,stop_time,updated_time,spend_cap',
                 limit: 5000
             };
 

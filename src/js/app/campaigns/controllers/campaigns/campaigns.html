@@ -1,12 +1,22 @@
 <div class="module">
     <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_campaign']}}</div>
     <div drop-menu class="customize-columns pull-right">
-        <div><i class="fa fa-th"></i> {{vm.dictionary.terms['customize_columns']}}</div>
+        <div class="btn btn-default"><i class="fa fa-th"></i> {{vm.dictionary.terms['customize_columns']}}</div>
         <div class="menu">
             <i class="fa fa-caret-up"></i>
             <h2>Select columns:</h2>
             <ul>
                 <li ng-repeat="(k, v) in vm.columns" ng-click="vm.toggleColumn(k);"><i class="fa" ng-class="{'fa-square': !v, 'fa-check-square': v}"></i> {{vm.dictionary.terms[k]}}</li>
+            </ul>
+        </div>
+    </div>
+    <div drop-menu class="date-intervals pull-right">
+        <div class="btn btn-default"><i class="fa fa-calendar"></i> {{vm.dictionary.dateIntervals[vm.selectedInterval]}}</div>
+        <div class="menu">
+            <i class="fa fa-caret-up"></i>
+            <h2>Select a date interval:</h2>
+            <ul>
+                <li ng-repeat="d in vm.dateIntervals" ng-click="vm.selectInterval(d);">{{vm.dictionary.dateIntervals[d]}}</li>
             </ul>
         </div>
     </div>

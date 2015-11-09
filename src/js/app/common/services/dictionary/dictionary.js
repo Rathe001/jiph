@@ -137,6 +137,24 @@ angular.module('modCommon').factory('Dictionary', [
             REACH: "Reach"
         };
 
+        service.dateIntervals = {
+            today: "Today",
+            yesterday: "Yesterday",
+            last_3_days: "Last 3 days",
+            this_week: "This week",
+            last_week: "Last week",
+            last_7_days: "Last 7 days",
+            last_14_days: "Last 14 days",
+            last_28_days: "Last 28 days",
+            last_30_days: "Last 30 days",
+            last_90_days: "Last 90 days",
+            this_month: "This month",
+            last_month: "Last month",
+            this_quarter: "This quarter",
+            last_3_months: "Last 3 months",
+            lifetime: "Lifetime"
+        };
+
         return service;
     }]
 );
