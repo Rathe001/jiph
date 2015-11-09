@@ -27,7 +27,10 @@ table {
           border-right: $border-normal;
           border-bottom: $border-normal;
           padding:5px;
+          max-width: 300px;
+          overflow: hidden;
           white-space: nowrap;
+          text-overflow: ellipsis;
         }
 
         &:nth-child(even) {

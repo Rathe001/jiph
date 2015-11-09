@@ -1,8 +1,46 @@
-angular.module('modAdSets').factory('AdSets', ['$q', 'Loading',
-    ($q, Loading) => {
+angular.module('modAdSets').factory('AdSets', ['$q', '$window', 'Loading',
+    ($q, $window, Loading) => {
         let service = {};
+        
+        let defaultDataColumns = {
+            name: true,
+            id: false,
+            adlabels: false,
+            adset_schedule: false,
+            account_id: false,
+            bid_amount: true,
+            bid_info: true,
+            billing_event: true,
+            campaign: false,
+            campaign_id: false,
+            configured_status: false,
+            created_time: false,
+            creative_sequence: false,
+            effective_status: true,
+            end_time: true,
+            frequency_cap: false,
+            frequency_cap_reset_period: false,
+            is_autobid: true,
+            lifetime_frequency_cap: false,
+            lifetime_imps: false,
+            optimization_goal: true,
+            product_ad_behavior: false,
+            promoted_object: false,
+            rf_prediction_id: false,
+            rtb_flag: false,
+            start_time: true,
+            targeting: false,
+            updated_time: false,
+            use_new_app_click: false,
+            pacing_type: false,
+            budget_remaining: true,
+            daily_budget: true,
+            lifetime_budget: true
+        };
 
         service.getAll = getAll;
+        service.getDataColumns = getDataColumns;
+        service.setDataColumns = setDataColumns;
 
         return service;
 
@@ -25,6 +63,18 @@ angular.module('modAdSets').factory('AdSets', ['$q', 'Loading',
                 }
             });
             return deferred.promise;
+        }
+
+        function getDataColumns() {
+            let columns = $window.localStorage.getItem("adSetColumns");
+
+            if(!columns) columns = defaultDataColumns;
+
+            return columns;
+        }
+
+        function setDataColumns(columns) {
+            $window.localStorage.setItem("adSetColumns", JSON.stringify(columns));
         }
     }]
 );

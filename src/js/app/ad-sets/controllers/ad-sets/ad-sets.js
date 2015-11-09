@@ -5,6 +5,7 @@ modAdSets.controller('ctrlAdSets', ['$scope', 'AdSets', 'Accounts', 'Dictionary'
         let vm = this;
 
         vm.adSets = [];
+        vm.columns = {};
         vm.dictionary = {};
         vm.currency = {};
         vm.error = "";
@@ -20,6 +21,7 @@ modAdSets.controller('ctrlAdSets', ['$scope', 'AdSets', 'Accounts', 'Dictionary'
         function _init() {
             vm.dictionary = Dictionary;
             vm.currency = Currency;
+            vm.columns = AdSets.getDataColumns();
         }
 
         function _getAll() {
