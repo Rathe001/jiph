@@ -1,8 +1,33 @@
-angular.module('modAds').factory('Ads', ['$q', 'Loading',
-    ($q, Loading) => {
+angular.module('modAds').factory('Ads', ['$q', '$window', 'Loading',
+    ($q, $window, Loading) => {
         let service = {};
 
+        let defaultDataColumns = {
+            id: false,
+            name: true,
+            account_id: false,
+            adset: false,
+            campaign: false,
+            adlabels: false,
+            adset_id: false,
+            bid_amount: true,
+            bid_info: true,
+            bid_type: true,
+            configured_status: true,
+            conversion_specs: false,
+            created_time: false,
+            creative: false,
+            effective_status: true,
+            last_updated_by_app_id: false,
+            tracking_specs: false,
+            updated_time: false,
+            campaign_id: false,
+            ad_review_feedback: false
+        };
+
         service.getAll = getAll;
+        service.getDataColumns = getDataColumns;
+        service.setDataColumns = setDataColumns;
 
         return service;
 
@@ -25,6 +50,18 @@ angular.module('modAds').factory('Ads', ['$q', 'Loading',
                 }
             });
             return deferred.promise;
+        }
+
+        function getDataColumns() {
+            let columns = JSON.parse($window.localStorage.getItem("adColumns"));
+
+            if(!columns) columns = defaultDataColumns;
+
+            return columns;
+        }
+
+        function setDataColumns(columns) {
+            $window.localStorage.setItem("adColumns", JSON.stringify(columns));
         }
     }]
 );

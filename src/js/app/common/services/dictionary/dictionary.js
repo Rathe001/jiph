@@ -29,6 +29,7 @@ angular.module('modCommon').factory('Dictionary', [
             created_time: "Created time",
             creative: "Creative",
             creative_sequence: "Creative sequence",
+            customize_columns: "Customize Columns",
             daily_budget: "Daily budget",
             effective_status: "Effective status",
             end_time: "End time",

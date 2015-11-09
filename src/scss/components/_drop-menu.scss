@@ -1,4 +1,8 @@
 [drop-menu] {
+  &.customize-columns {
+    position:relative;
+    margin:10px 15px 0 0;
+  }
 
   .menu {
     z-index: 100;

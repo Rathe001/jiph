@@ -8,7 +8,11 @@ modAdSets.controller('ctrlAdSets', ['$scope', 'AdSets', 'Accounts', 'Dictionary'
         vm.columns = {};
         vm.dictionary = {};
         vm.currency = {};
+        vm.orderBy = "";
         vm.error = "";
+
+        vm.toggleColumn = toggleColumn;
+        vm.toggleOrderBy = toggleOrderBy;
 
         $scope.$watch(() => Accounts.active, newVal => {
             if(newVal){
@@ -30,13 +34,49 @@ modAdSets.controller('ctrlAdSets', ['$scope', 'AdSets', 'Accounts', 'Dictionary'
 
             AdSets.getAll(Accounts.active).then(response => {
                 if(response.data.length > 0) {
-                    vm.adSets = response.data;
+                    vm.adSets = _processResponse(response.data);
                 } else {
                     vm.error = "No ad sets found.";
                 }
             }, error => {
                 vm.error = error.message;
             });
+        }
+
+        function _processResponse(input) {
+            let output = input;
+
+            for(let i=0; i<input.length; i++) {
+                for (let j in input[i]) {
+                    switch(j) {
+                        case "budget_remaining":
+                        case "daily_budget":
+                        case "lifetime_budget":
+                        case "bid_amount":
+                            output[i][j] = parseInt(output[i][j]);
+                            break;
+                    }
+                }
+            }
+
+            return output;
+        }
+
+        function toggleColumn(col) {
+            vm.columns[col] = !vm.columns[col];
+            AdSets.setDataColumns(vm.columns);
+        }
+
+        function toggleOrderBy(col) {
+            if(vm.orderBy === col) {
+                if(col[0] === "-") {
+                    vm.orderBy.replace("-", "");
+                } else {
+                    vm.orderBy = "-" + col;
+                }
+            } else {
+                vm.orderBy = col;
+            }
         }
     }
 ]);

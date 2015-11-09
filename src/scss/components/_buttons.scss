@@ -6,6 +6,10 @@
   cursor: pointer;
   border-radius: 5px;
 
+  &.btn-default {
+    background: #797979;
+  }
+
   &:hover {
     opacity: 1.0;
   }

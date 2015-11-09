@@ -66,7 +66,7 @@ angular.module('modAdSets').factory('AdSets', ['$q', '$window', 'Loading',
         }
 
         function getDataColumns() {
-            let columns = $window.localStorage.getItem("adSetColumns");
+            let columns = JSON.parse($window.localStorage.getItem("adSetColumns"));
 
             if(!columns) columns = defaultDataColumns;
 
