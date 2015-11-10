@@ -4,12 +4,12 @@
     margin:0 15px;
 
     .menu {
-      width: 50vw;
-      max-width: 500px;
+      width: 500px;
 
       li {
         float:left;
-        width: 33%;
+        width: 50%;
+        cursor: pointer;
       }
     }
   }
@@ -18,12 +18,12 @@
     position: relative;
 
     .menu {
-      width: 50vw;
-      max-width: 500px;
+      width: 500px;
 
       li {
         float:left;
         width: 33%;
+        cursor: pointer;
       }
     }
   }

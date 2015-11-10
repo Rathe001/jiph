@@ -44,16 +44,19 @@ angular.module('modAdSets').factory('AdSets', ['$q', '$window', 'Loading',
 
         return service;
 
-        function getAll(facebookAdAccountId) {
+        function getAll(facebookAdAccountId, date_preset, campaignId) {
             let deferred = $q.defer();
+            let url = "";
             let payload = {
-                date_preset: 'last_7_days',
-                fields: 'name,id,insights,adlabels,adset_schedule,account_id,bid_amount,bid_info,billing_event,campaign{id,name},campaign_id,configured_status,created_time,creative_sequence,effective_status,end_time,frequency_cap,frequency_cap_reset_period,is_autobid,lifetime_frequency_cap,lifetime_imps,optimization_goal,product_ad_behavior,promoted_object,rf_prediction_id,rtb_flag,start_time,targeting,updated_time,use_new_app_click,pacing_type,budget_remaining,daily_budget,lifetime_budget',
+                fields: 'name,id,insights.date_preset(' + date_preset +'),adlabels,adset_schedule,account_id,bid_amount,bid_info,billing_event,campaign{id,name},campaign_id,configured_status,created_time,creative_sequence,effective_status,end_time,frequency_cap,frequency_cap_reset_period,is_autobid,lifetime_frequency_cap,lifetime_imps,optimization_goal,product_ad_behavior,promoted_object,rf_prediction_id,rtb_flag,start_time,targeting,updated_time,use_new_app_click,pacing_type,budget_remaining,daily_budget,lifetime_budget',
                 limit: 5000
             };
 
+            if(!campaignId) url = '/' + facebookAdAccountId + '/adsets';
+            if(campaignId) url = '/' + campaignId + '/adsets';
+
             Loading.set(true, 'facebookrequest');
-            FB.api('/' + facebookAdAccountId + '/adsets', payload, response => {
+            FB.api(url, payload, response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
                     deferred.reject(response.error);

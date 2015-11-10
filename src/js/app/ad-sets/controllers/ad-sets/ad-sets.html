@@ -70,7 +70,7 @@
         </tfoot>
         <tbody>
             <tr ng-repeat="a in vm.adSets | orderBy: vm.orderBy">
-                <td ng-if="vm.columns.name" title="{{a.name}}">{{a.name}}</td>
+                <td ng-if="vm.columns.name" title="{{a.name}}"><a ng-href="/campaigns/{{a.campaign.id}}/ad-sets/{{a.id}}/ads">{{a.name}}</a></td>
                 <td ng-if="vm.columns.id" title="{{a.id}}">{{a.id}}</td>
                 <td ng-if="vm.columns.adlabels" title="{{a.adlabels}}">{{a.adlabels}}</td>
                 <td ng-if="vm.columns.adset_schedule" title="{{a.adset_schedule}}">{{a.adset_schedule}}</td>

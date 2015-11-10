@@ -31,16 +31,19 @@ angular.module('modAds').factory('Ads', ['$q', '$window', 'Loading',
 
         return service;
 
-        function getAll(facebookAdAccountId) {
+        function getAll(facebookAdAccountId, date_preset, campaignId, adSetId) {
             let deferred = $q.defer();
+            let url = "";
             let payload = {
-                date_preset: 'last_7_days',
-                fields: 'id,name,insights,account_id,adset{id,name},campaign{id,name},adlabels,adset_id,bid_amount,bid_info,bid_type,configured_status,conversion_specs,created_time,creative,effective_status,last_updated_by_app_id,tracking_specs,updated_time,campaign_id,ad_review_feedback',
+                fields: 'id,name,insights.date_preset(' + date_preset +'),account_id,adset{id,name},campaign{id,name},adlabels,adset_id,bid_amount,bid_info,bid_type,configured_status,conversion_specs,created_time,creative,effective_status,last_updated_by_app_id,tracking_specs,updated_time,campaign_id,ad_review_feedback',
                 limit: 5000
             };
 
+            if(campaignId) url = '/' + campaignId + '/ads';
+            if(adSetId) url = '/' + adSetId + '/ads';
+
             Loading.set(true, 'facebookrequest');
-            FB.api('/' + facebookAdAccountId + '/ads', payload, response => {
+            FB.api(url, payload, response => {
                 if (!response || response.error) {
                     Loading.set(false, 'facebookrequest');
                     deferred.reject(response.error);

@@ -38,7 +38,7 @@ modCommon.controller('ctrlMain', ['$scope', '$interval', '$location', '$window',
                         }
                     }
                 });
-            }, 20000);
+            }, 300000);
 
         }
 

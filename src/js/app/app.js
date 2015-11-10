@@ -25,9 +25,19 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
             controller: 'ctrlAdSets',
             controllerAs: 'vm'
         }).
+        when('/ad-sets/:adSetId', {
+            templateUrl: '/js/app/ad-sets/controllers/edit-create/edit-create.html',
+            controller: 'ctrlAdSetsCreateEdit',
+            controllerAs: 'vm'
+        }).
         when('/ads', {
             templateUrl: '/js/app/ads/controllers/ads/ads.html',
             controller: 'ctrlAds',
+            controllerAs: 'vm'
+        }).
+        when('/ads/:adId', {
+            templateUrl: '/js/app/ads/controllers/edit-create/edit-create.html',
+            controller: 'ctrlAdsCreateEdit',
             controllerAs: 'vm'
         }).
         when('/automation', {
@@ -38,6 +48,26 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
         when('/campaigns', {
             templateUrl: '/js/app/campaigns/controllers/campaigns/campaigns.html',
             controller: 'ctrlCampaigns',
+            controllerAs: 'vm'
+        }).
+        when('/campaigns/:campaignId', {
+            templateUrl: '/js/app/campaigns/controllers/edit-create/edit-create.html',
+            controller: 'ctrlCampaignsEditCreate',
+            controllerAs: 'vm'
+        }).
+        when('/campaigns/:campaignId/ad-sets', {
+            templateUrl: '/js/app/ad-sets/controllers/ad-sets/ad-sets.html',
+            controller: 'ctrlAdSets',
+            controllerAs: 'vm'
+        }).
+        when('/campaigns/:campaignId/ads', {
+            templateUrl: '/js/app/ads/controllers/ads/ads.html',
+            controller: 'ctrlAds',
+            controllerAs: 'vm'
+        }).
+        when('/campaigns/:campaignId/ad-sets/:adSetId/ads', {
+            templateUrl: '/js/app/ads/controllers/ads/ads.html',
+            controller: 'ctrlAds',
             controllerAs: 'vm'
         }).
         when('/help', {

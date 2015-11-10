@@ -1,8 +1,10 @@
 let modAds = angular.module('modAds');
 
-modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictionary', 'DateIntervals',
-    function($scope, Ads, Accounts, Currency, Dictionary, DateIntervals) {
+modAds.controller('ctrlAds', ['$scope', '$routeParams', 'Ads', 'Accounts', 'Currency', 'Dictionary', 'DateIntervals',
+    function($scope, $routeParams, Ads, Accounts, Currency, Dictionary, DateIntervals) {
         let vm = this;
+        let campaignId = $routeParams.campaignId;
+        let adSetId = $routeParams.adSetId;
 
         vm.ads = [];
         vm.columns = {};
@@ -17,7 +19,7 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictiona
         vm.toggleOrderBy = toggleOrderBy;
         vm.selectInterval = selectInterval;
 
-        $scope.$watch(() => Accounts.active, newVal => {
+        $scope.$watch(() => Accounts.active + vm.selectedInterval, newVal => {
             if(newVal){
                 _getAll();
             }
@@ -37,7 +39,7 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictiona
             vm.ads = [];
             vm.error = "";
 
-            Ads.getAll(Accounts.active).then(response => {
+            Ads.getAll(Accounts.active, vm.selectedInterval, campaignId, adSetId).then(response => {
                 if(response.data.length > 0) {
                     vm.ads = _processResponse(response.data);
                 } else {
@@ -50,16 +52,26 @@ modAds.controller('ctrlAds', ['$scope', 'Ads', 'Accounts', 'Currency', 'Dictiona
 
         function _processResponse(input) {
             let output = input;
+            let numTest = "";
 
             for(let i=0; i<input.length; i++) {
+                if(input[i].insights && input[i].insights.data && input[i].insights.data[0]) {
+                    Object.assign(output[i], input[i].insights.data[0]);
+                }
+
                 for (let j in input[i]) {
+                    // Parse all numbers as numbers except dates
                     switch(j) {
-                        case "budget_remaining":
-                        case "daily_budget":
-                        case "lifetime_budget":
-                        case "bid_amount":
-                            output[i][j] = parseInt(output[i][j]);
+                        case "created_time":
+                        case "start_time":
+                        case "stop_time":
+                        case "date_start":
+                        case "date_stop":
+                        case "updated_time":
                             break;
+                        default:
+                            numTest = parseFloat(input[i][j]);
+                            if(!isNaN(numTest)) input[i][j] = numTest;
                     }
                 }
             }
