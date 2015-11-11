@@ -38,6 +38,8 @@ angular.module('modAdSets').factory('AdSets', ['$q', '$window', 'Loading',
             lifetime_budget: true
         };
 
+        service.active = "";
+
         service.getAll = getAll;
         service.getDataColumns = getDataColumns;
         service.setDataColumns = setDataColumns;

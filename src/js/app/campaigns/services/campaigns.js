@@ -58,6 +58,8 @@ angular.module('modCampaigns').factory('Campaigns', ['$q', '$window', 'Loading',
             website_ctr: false
         };
 
+        service.active = "";
+
         service.getAll = getAll;
         service.getDataColumns = getDataColumns;
         service.setDataColumns = setDataColumns;

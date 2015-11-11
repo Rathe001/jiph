@@ -49,6 +49,25 @@
           a {
             font-size: 12px;
             padding: 5px 5px 5px 35px;
+
+            .fa-caret-left {
+              position: absolute;
+              top: 7px;
+              right: -1px;
+              font-size: 16px;
+            }
+
+            &.active {
+              background: #575757;
+
+              &:hover {
+                background: #575757;
+              }
+            }
+
+            &:hover {
+              background: #393939;
+            }
           }
         }
       }

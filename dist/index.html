@@ -65,17 +65,25 @@
                     <nav id="nav-main">
                         <ul>
                             <li ng-repeat="n in main.navigation.all">
-                                <a ng-href="{{n.url}}" ng-class="{'active': n.url === main.navigation.active}">
+                                <a ng-href="/{{n.url}}" ng-class="{'active': n.url === main.navigation.active[1]}">
                                     <i class="fa" ng-class="n.icon"></i>
                                     {{n.name}}
-                                    <i class="fa fa-caret-left" ng-if="n.url === main.navigation.active"></i>
+                                    <i class="fa fa-caret-left" ng-if="n.url === main.navigation.active[1]"></i>
                                 </a>
-                                <ul ng-if="n.children.length > 0">
+                                <ul ng-if="n.children.length > 0 && main.activeCampaign !== ''">
                                     <li ng-repeat="c in n.children">
-                                        <a ng-href="{{c.url}}">
+                                        <a ng-href="/campaigns/{{main.activeCampaign}}/{{c.url}}" ng-class="{'active': c.url === main.navigation.active[3]}">
                                             {{c.name}}
-                                            <i class="fa fa-caret-left" ng-if="false"></i>
+                                            <i class="fa fa-caret-left" ng-if="c.url === main.navigation.active[3]"></i>
                                         </a>
+                                        <ul ng-if="c.children.length > 0 && main.activeCampaign !== ''">
+                                            <li ng-repeat="s in c.children">
+                                                <a ng-href="/campaigns/{{main.activeCampaign}}/{{s.url}}" ng-class="{'active': s.url === main.navigation.active[3] || s.url === main.navigation.active[5]}">
+                                                    {{s.name}}
+                                                    <i class="fa fa-caret-left" ng-if="s.url === main.navigation.active[3] || main.navigation.active[5]"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>

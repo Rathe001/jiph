@@ -1,7 +1,7 @@
 let modAds = angular.module('modAds');
 
-modAds.controller('ctrlAds', ['$scope', '$routeParams', 'Ads', 'Accounts', 'Currency', 'Dictionary', 'DateIntervals',
-    function($scope, $routeParams, Ads, Accounts, Currency, Dictionary, DateIntervals) {
+modAds.controller('ctrlAds', ['$scope', '$routeParams', 'AdSets', 'Ads', 'Accounts', 'Currency', 'Dictionary', 'DateIntervals', 'Campaigns',
+    function($scope, $routeParams, AdSets, Ads, Accounts, Currency, Dictionary, DateIntervals, Campaigns) {
         let vm = this;
         let campaignId = $routeParams.campaignId;
         let adSetId = $routeParams.adSetId;
@@ -33,6 +33,9 @@ modAds.controller('ctrlAds', ['$scope', '$routeParams', 'Ads', 'Accounts', 'Curr
             vm.columns = Ads.getDataColumns();
             vm.dateIntervals = DateIntervals.intervals;
             vm.selectedInterval = DateIntervals.getSelected();
+
+            if(campaignId) Campaigns.active = campaignId;
+            if(adSetId) AdSets.active = adSetId;
         }
 
         function _getAll() {

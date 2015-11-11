@@ -20,19 +20,9 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
             controller: 'ctrlDashboard',
             controllerAs: 'vm'
         }).
-        when('/ad-sets', {
-            templateUrl: '/js/app/ad-sets/controllers/ad-sets/ad-sets.html',
-            controller: 'ctrlAdSets',
-            controllerAs: 'vm'
-        }).
         when('/ad-sets/:adSetId', {
             templateUrl: '/js/app/ad-sets/controllers/edit-create/edit-create.html',
             controller: 'ctrlAdSetsCreateEdit',
-            controllerAs: 'vm'
-        }).
-        when('/ads', {
-            templateUrl: '/js/app/ads/controllers/ads/ads.html',
-            controller: 'ctrlAds',
             controllerAs: 'vm'
         }).
         when('/ads/:adId', {

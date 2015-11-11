@@ -1,7 +1,7 @@
 var modCommon = angular.module('modCommon');
 
-modCommon.controller('ctrlMain', ['$scope', '$interval', '$location', '$window', 'User', 'Facebook', 'Accounts', 'Navigation', 'Loading', 'Version',
-    function($scope, $interval, $location, $window, User, Facebook, Accounts, Navigation, Loading, Version) {
+modCommon.controller('ctrlMain', ['$scope', '$interval', '$location', '$window', 'User', 'Facebook', 'Accounts', 'Navigation', 'Loading', 'Version', 'Campaigns', 'AdSets',
+    function($scope, $interval, $location, $window, User, Facebook, Accounts, Navigation, Loading, Version, Campaigns, AdSets) {
         let vm = this;
 
         vm.user = {};
@@ -10,12 +10,18 @@ modCommon.controller('ctrlMain', ['$scope', '$interval', '$location', '$window',
         vm.loading = {};
         vm.version = "";
         vm.year = "";
+        vm.activeCampaign = "";
 
         vm.logout = logout;
         vm.login = login;
 
+        $scope.$watch(() => Campaigns.active, newVal => vm.activeCampaign = newVal);
+        $scope.$watch(() => AdSets.active, newVal => vm.activeAdSet = newVal);
+
         $scope.$on('$locationChangeStart', function(event) {
-            Navigation.active = $location.path();
+            Navigation.active = $location.path().split("/");
+            Campaigns.active = "";
+            AdSets.active = "";
         });
 
         _init();
@@ -33,7 +39,6 @@ modCommon.controller('ctrlMain', ['$scope', '$interval', '$location', '$window',
                 Version.get().then(v => {
                     if(vm.version !== v.version) {
                         if($window.confirm("A newer version of the Jiph application is available. Please click \"OK\" to refresh the application.")) {
-                            console.log("Hit!");
                             $window.location.href = "/";
                         }
                     }
