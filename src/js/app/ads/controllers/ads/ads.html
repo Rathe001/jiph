@@ -1,4 +1,10 @@
 <div class="module">
+    <ul id="breadcrumb">
+        <li><span class="heading">Campaign:</span>{{vm.campaign.name}}</li>
+        <li ng-if="vm.adSet.name"><span class="heading">Ad set:</span>{{vm.adSet.name}}</li>
+        <li ng-if="!vm.adSet.name"><span class="heading">Ad set:</span>All ad sets</li>
+        <li><span class="heading">Ad:</span>All ads</li>
+    </ul>
     <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_ad']}}</div>
     <div drop-menu class="customize-columns pull-right">
         <div class="btn btn-default"><i class="fa fa-th"></i> {{vm.dictionary.terms['customize_columns']}}</div>

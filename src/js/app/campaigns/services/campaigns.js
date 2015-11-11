@@ -60,11 +60,32 @@ angular.module('modCampaigns').factory('Campaigns', ['$q', '$window', 'Loading',
 
         service.active = "";
 
+        service.get = get;
         service.getAll = getAll;
         service.getDataColumns = getDataColumns;
         service.setDataColumns = setDataColumns;
 
         return service;
+
+        function get(campaignId, date_preset) {
+            let deferred = $q.defer();
+            let payload = {
+                fields: 'name,insights.date_preset(' + date_preset +'),id,adlabels,account_id,buying_type,can_use_spend_cap,configured_status,created_time,effective_status,objective,start_time,stop_time,updated_time,spend_cap',
+                limit: 5000
+            };
+
+            Loading.set(true, 'facebookrequest');
+            FB.api('/' + campaignId, payload, response => {
+                if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.reject(response.error);
+                } else {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        }
 
         function getAll(facebookAdAccountId, date_preset) {
             let deferred = $q.defer();

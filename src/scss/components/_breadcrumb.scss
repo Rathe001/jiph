@@ -1,0 +1,19 @@
+#breadcrumb {
+  float:left;
+  width:100%;
+  background: #F5F5F5;
+  padding: 10px;
+  margin: 0 0 15px 0;
+
+  li {
+    float:left;
+    width:33%;
+
+    .heading {
+      float:left;
+      width:100%;
+      font-size:18px;
+      font-weight:800;
+    }
+  }
+}

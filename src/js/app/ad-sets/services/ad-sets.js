@@ -40,11 +40,33 @@ angular.module('modAdSets').factory('AdSets', ['$q', '$window', 'Loading',
 
         service.active = "";
 
+        service.get = get;
         service.getAll = getAll;
         service.getDataColumns = getDataColumns;
         service.setDataColumns = setDataColumns;
 
         return service;
+
+        function get(adSetId, date_preset) {
+            let deferred = $q.defer();
+            let url = "";
+            let payload = {
+                fields: 'name,id,insights.date_preset(' + date_preset +'),adlabels,adset_schedule,account_id,bid_amount,bid_info,billing_event,campaign{id,name},campaign_id,configured_status,created_time,creative_sequence,effective_status,end_time,frequency_cap,frequency_cap_reset_period,is_autobid,lifetime_frequency_cap,lifetime_imps,optimization_goal,product_ad_behavior,promoted_object,rf_prediction_id,rtb_flag,start_time,targeting,updated_time,use_new_app_click,pacing_type,budget_remaining,daily_budget,lifetime_budget',
+                limit: 5000
+            };
+
+            Loading.set(true, 'facebookrequest');
+            FB.api('/' + adSetId, payload, response => {
+                if (!response || response.error) {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.reject(response.error);
+                } else {
+                    Loading.set(false, 'facebookrequest');
+                    deferred.resolve(response);
+                }
+            });
+            return deferred.promise;
+        }
 
         function getAll(facebookAdAccountId, date_preset, campaignId) {
             let deferred = $q.defer();

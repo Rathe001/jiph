@@ -4,7 +4,6 @@ modAdSets.controller('ctrlAdSets', ['$scope', '$routeParams', 'AdSets', 'Account
     function($scope, $routeParams, AdSets, Accounts, Dictionary, Currency, DateIntervals, Campaigns) {
         let vm = this;
         let campaignId = $routeParams.campaignId;
-        let adSetId = $routeParams.adSetId;
 
         vm.adSets = [];
         vm.columns = {};
@@ -14,6 +13,7 @@ modAdSets.controller('ctrlAdSets', ['$scope', '$routeParams', 'AdSets', 'Account
         vm.error = "";
         vm.dateIntervals = [];
         vm.selectedInterval = "";
+        vm.campaign = {};
 
         vm.toggleColumn = toggleColumn;
         vm.toggleOrderBy = toggleOrderBy;
@@ -22,6 +22,9 @@ modAdSets.controller('ctrlAdSets', ['$scope', '$routeParams', 'AdSets', 'Account
         $scope.$watch(() => Accounts.active + vm.selectedInterval, newVal => {
             if(newVal){
                 _getAll();
+                if(campaignId) {
+                    _getCampaign();
+                }
             }
         });
 
@@ -35,7 +38,6 @@ modAdSets.controller('ctrlAdSets', ['$scope', '$routeParams', 'AdSets', 'Account
             vm.selectedInterval = DateIntervals.getSelected();
 
             if(campaignId) Campaigns.active = campaignId;
-            if(adSetId) AdSets.active = adSetId;
         }
 
         function _getAll() {
@@ -50,6 +52,13 @@ modAdSets.controller('ctrlAdSets', ['$scope', '$routeParams', 'AdSets', 'Account
                 }
             }, error => {
                 vm.error = error.message;
+            });
+        }
+
+        function _getCampaign() {
+            Campaigns.active = campaignId;
+            Campaigns.get(campaignId, vm.selectedInterval).then(campaign => {
+                vm.campaign = campaign;
             });
         }
 

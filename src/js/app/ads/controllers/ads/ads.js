@@ -14,6 +14,8 @@ modAds.controller('ctrlAds', ['$scope', '$routeParams', 'AdSets', 'Ads', 'Accoun
         vm.error = "";
         vm.dateIntervals = [];
         vm.selectedInterval = "";
+        vm.campaign = {};
+        vm.adSet = {};
 
         vm.toggleColumn = toggleColumn;
         vm.toggleOrderBy = toggleOrderBy;
@@ -22,6 +24,12 @@ modAds.controller('ctrlAds', ['$scope', '$routeParams', 'AdSets', 'Ads', 'Accoun
         $scope.$watch(() => Accounts.active + vm.selectedInterval, newVal => {
             if(newVal){
                 _getAll();
+                if(campaignId) {
+                    _getCampaign();
+                }
+                if(adSetId) {
+                    _getAdSet();
+                }
             }
         });
 
@@ -33,9 +41,6 @@ modAds.controller('ctrlAds', ['$scope', '$routeParams', 'AdSets', 'Ads', 'Accoun
             vm.columns = Ads.getDataColumns();
             vm.dateIntervals = DateIntervals.intervals;
             vm.selectedInterval = DateIntervals.getSelected();
-
-            if(campaignId) Campaigns.active = campaignId;
-            if(adSetId) AdSets.active = adSetId;
         }
 
         function _getAll() {
@@ -50,6 +55,20 @@ modAds.controller('ctrlAds', ['$scope', '$routeParams', 'AdSets', 'Ads', 'Accoun
                 }
             }, error => {
                 vm.error = error.message;
+            });
+        }
+
+        function _getCampaign() {
+            Campaigns.active = campaignId;
+            Campaigns.get(campaignId, vm.selectedInterval).then(campaign => {
+                vm.campaign = campaign;
+            });
+        }
+
+        function _getAdSet() {
+            AdSets.active = adSetId;
+            AdSets.get(adSetId, vm.selectedInterval).then(adSet => {
+                vm.adSet = adSet;
             });
         }
 
