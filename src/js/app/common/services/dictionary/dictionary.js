@@ -26,6 +26,8 @@ angular.module('modCommon').factory('Dictionary', [
             create_ad: "Create Ad",
             create_ad_set: "Create Ad Set",
             create_campaign: "Create Campaign",
+            create_ad_group: "Create Ad Group",
+            create_audience: "Create Audience",
             created_time: "Created time",
             creative: "Creative",
             creative_sequence: "Creative sequence",
@@ -193,6 +195,14 @@ angular.module('modCommon').factory('Dictionary', [
             this_quarter: "This quarter",
             last_3_months: "Last 3 months",
             lifetime: "Lifetime"
+        };
+
+        service.adGroups = {
+            ad_groups: "Ad groups"
+        };
+
+        service.audiences = {
+            audiences: "Audiences"
         };
 
         return service;

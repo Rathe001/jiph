@@ -1,9 +1,9 @@
 .loading {
-  float:right;
-  margin:0 10px 0 0;
+  width:100%;
 
   /* Animations */
   &.ng-enter {
+    position: absolute;
     transition:0.25s linear all;
     opacity:0;
 
@@ -13,6 +13,7 @@
   }
 
   &.ng-leave {
+    position: absolute;
     transition:0.25s linear all;
     opacity:1;
 
@@ -34,10 +35,11 @@
   }
 
   .spinner > div {
-    background-color: $color-secondary;
+    background-color: #333;
     height: 100%;
     width: 3px;
     display: inline-block;
+    margin:0 3px 0 0;
 
     -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
     animation: sk-stretchdelay 1.2s infinite ease-in-out;
@@ -81,5 +83,16 @@
       transform: scaleY(1.0);
       -webkit-transform: scaleY(1.0);
     }
+  }
+}
+
+header .loading {
+  position: relative;
+  float:right;
+  margin:0 10px 0 0;
+  width: auto;
+
+  .spinner > div {
+    background-color: $color-secondary;
   }
 }

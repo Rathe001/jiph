@@ -1,0 +1,31 @@
+<div class="module">
+    <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_ad_group']}}</div>
+    <h1>{{vm.dictionary.adGroups['ad_groups']}} <span ng-if="vm.adGroups.length > 0">({{vm.ads.length}})</span></h1>
+    <hr />
+    <div ng-if="vm.error">
+        {{vm.error}}
+    </div>
+    <div ng-if="!vm.error && vm.adGroups.length === 0">
+        No ad groups found. Please <a href="/adGroups/create">create a new ad group</a> to get started.
+    </div>
+
+    <div loading="main.loading.get('All')"></div>
+
+    <table class="listing" ng-if="!vm.error && vm.adGroups.length > 0">
+        <thead>
+            <tr>
+                <th ng-if="vm.columns.name" ng-click="vm.toggleOrderBy('name');">{{vm.dictionary.terms['name']}}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="1"></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr ng-repeat="a in vm.adGroups | orderBy: vm.orderBy">
+                <td ng-if="vm.columns.name" title="{{a.name}}">{{a.name}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

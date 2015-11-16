@@ -29,8 +29,8 @@ var angularAppScripts = [
     'src/js/app/ads/ads.js',
     'src/js/app/dashboard/dashboard.js',
     'src/js/app/help/help.js',
-    'src/js/app/preset-ad-groups/preset-ad-groups.js',
-    'src/js/app/preset-audiences/preset-audiences.js',
+    'src/js/app/ad-groups/ad-groups.js',
+    'src/js/app/audiences/audiences.js',
     'src/js/app/tracking/tracking.js',
     '!src/js/app/**/*.spec.js',
     'src/js/app/**/*.js'

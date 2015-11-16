@@ -28,6 +28,12 @@
     <div ng-if="vm.error">
         {{vm.error}}
     </div>
+    <div ng-if="!vm.error && vm.campaigns.length === 0 && !main.loading.get('All')">
+        No campaigns found. Please <a href="/campaigns/create">create a new campaign</a> to get started.
+    </div>
+
+    <div loading="main.loading.get('All')"></div>
+
     <table class="listing" ng-if="!vm.error && vm.campaigns.length > 0">
         <thead>
             <tr>

@@ -11,8 +11,8 @@ angular.module('modCommon').factory('Navigation', [
                 ] }
             ] },
             { name: "Tracking", icon: "fa-bullseye", url: "tracking", children: [] },
-            { name: "Preset Audiences", icon: "fa-users", url: "preset-audiences", children: [] },
-            { name: "Preset Ad Groups ", icon: "fa-files-o", url: "preset-ad-groups", children: [] },
+            { name: "Audiences", icon: "fa-users", url: "audiences", children: [] },
+            { name: "Ad Groups ", icon: "fa-files-o", url: "ad-groups", children: [] },
             { name: "Automation", icon: "fa-gears", url: "automation", children: [] },
             { name: "Help", icon: "fa-question-circle", url: "help", children: [] }
         ];

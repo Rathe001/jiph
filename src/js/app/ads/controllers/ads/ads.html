@@ -31,6 +31,12 @@
     <div ng-if="vm.error">
         {{vm.error}}
     </div>
+    <div ng-if="!vm.error && vm.ads.length === 0">
+        No ads found. Please <a href="/ads/create">create a new ad</a> to get started.
+    </div>
+
+    <div loading="main.loading.get('All')"></div>
+
     <table class="listing" ng-if="!vm.error && vm.ads.length > 0">
         <thead>
             <tr>
@@ -62,7 +68,7 @@
             </tr>
         </tfoot>
         <tbody>
-            <tr ng-repeat="a in vm.ads | orderBy: vm.orderBy"">
+            <tr ng-repeat="a in vm.ads | orderBy: vm.orderBy">
                 <td ng-if="vm.columns.name" title="{{a.name}}">{{a.name}}</td>
                 <td ng-if="vm.columns.id" title="{{a.id}}">{{a.id}}</td>
                 <td ng-if="vm.columns.account_id" title="{{a.account_id}}">{{a.account_id}}</td>

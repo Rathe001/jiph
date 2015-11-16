@@ -7,82 +7,127 @@ let app = angular.module('app', [
     'modCommon',
     'modDashboard',
     'modHelp',
-    'modPresetAdGroups',
-    'modPresetAudiences',
+    'modAdGroups',
+    'modAudiences',
     'modTracking'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider',
     function($routeProvider, $locationProvider, $httpProvider) {
-        $routeProvider.
-        when('/', {
-            templateUrl: '/js/app/dashboard/controllers/dashboard/dashboard.html',
-            controller: 'ctrlDashboard',
-            controllerAs: 'vm'
-        }).
-        when('/ad-sets/:adSetId', {
-            templateUrl: '/js/app/ad-sets/controllers/edit-create/edit-create.html',
-            controller: 'ctrlAdSetsCreateEdit',
-            controllerAs: 'vm'
-        }).
-        when('/ads/:adId', {
-            templateUrl: '/js/app/ads/controllers/edit-create/edit-create.html',
-            controller: 'ctrlAdsCreateEdit',
-            controllerAs: 'vm'
-        }).
-        when('/automation', {
-            templateUrl: '/js/app/automation/controllers/automation/automation.html',
-            controller: 'ctrlAutomation',
-            controllerAs: 'vm'
-        }).
-        when('/campaigns', {
-            templateUrl: '/js/app/campaigns/controllers/campaigns/campaigns.html',
-            controller: 'ctrlCampaigns',
-            controllerAs: 'vm'
-        }).
-        when('/campaigns/:campaignId', {
-            templateUrl: '/js/app/campaigns/controllers/edit-create/edit-create.html',
-            controller: 'ctrlCampaignsEditCreate',
-            controllerAs: 'vm'
-        }).
-        when('/campaigns/:campaignId/ad-sets', {
-            templateUrl: '/js/app/ad-sets/controllers/ad-sets/ad-sets.html',
-            controller: 'ctrlAdSets',
-            controllerAs: 'vm'
-        }).
-        when('/campaigns/:campaignId/ads', {
-            templateUrl: '/js/app/ads/controllers/ads/ads.html',
-            controller: 'ctrlAds',
-            controllerAs: 'vm'
-        }).
-        when('/campaigns/:campaignId/ad-sets/:adSetId/ads', {
-            templateUrl: '/js/app/ads/controllers/ads/ads.html',
-            controller: 'ctrlAds',
-            controllerAs: 'vm'
-        }).
-        when('/help', {
-            templateUrl: '/js/app/help/controllers/help/help.html',
-            controller: 'ctrlHelp',
-            controllerAs: 'vm'
-        }).
-        when('/preset-ad-groups', {
-            templateUrl: '/js/app/preset-ad-groups/controllers/preset-ad-groups/preset-ad-groups.html',
-            controller: 'ctrlPresetAdGroups',
-            controllerAs: 'vm'
-        }).
-        when('/preset-audiences', {
-            templateUrl: '/js/app/preset-audiences/controllers/preset-audiences/preset-audiences.html',
-            controller: 'ctrlPresetAudiences',
-            controllerAs: 'vm'
-        }).
-        when('/tracking', {
-            templateUrl: '/js/app/tracking/controllers/tracking/tracking.html',
-            controller: 'ctrlTracking',
-            controllerAs: 'vm'
-        }).
-        otherwise({
-            redirectTo: '/'
-        });
+        $routeProvider
+/* Dashboard */
+            // Dashboard
+            .when('/', {
+                templateUrl: '/js/app/dashboard/controllers/dashboard/dashboard.html',
+                controller: 'ctrlDashboard',
+                controllerAs: 'vm'
+            })
+/* Campaigns */
+            // Campaigns
+            .when('/campaigns', {
+                templateUrl: '/js/app/campaigns/controllers/campaigns/campaigns.html',
+                controller: 'ctrlCampaigns',
+                controllerAs: 'vm'
+            })
+            // Edit campaign
+            .when('/campaigns/:campaignId', {
+                templateUrl: '/js/app/campaigns/controllers/edit-create/edit-create.html',
+                controller: 'ctrlCampaignsEditCreate',
+                controllerAs: 'vm'
+            })
+            // Ad sets of campaign
+            .when('/campaigns/:campaignId/ad-sets', {
+                templateUrl: '/js/app/ad-sets/controllers/ad-sets/ad-sets.html',
+                controller: 'ctrlAdSets',
+                controllerAs: 'vm'
+            })
+            // Edit ad set
+            .when('/ad-sets/:adSetId', {
+                templateUrl: '/js/app/ad-sets/controllers/edit-create/edit-create.html',
+                controller: 'ctrlAdSetsCreateEdit',
+                controllerAs: 'vm'
+            })
+            // Ads of campaign
+            .when('/campaigns/:campaignId/ads', {
+                templateUrl: '/js/app/ads/controllers/ads/ads.html',
+                controller: 'ctrlAds',
+                controllerAs: 'vm'
+            })
+            // Ads of ad set
+            .when('/campaigns/:campaignId/ad-sets/:adSetId/ads', {
+                templateUrl: '/js/app/ads/controllers/ads/ads.html',
+                controller: 'ctrlAds',
+                controllerAs: 'vm'
+            })
+            // Edit ad
+            .when('/ads/:adId', {
+                templateUrl: '/js/app/ads/controllers/edit-create/edit-create.html',
+                controller: 'ctrlAdsCreateEdit',
+                controllerAs: 'vm'
+            })
+/* Campaign wizard */
+            .when('/campaigns/create/', {
+                templateUrl: '/js/app/campaigns/controllers/campaigns/campaigns.html',
+                controller: 'ctrlCampaigns',
+                controllerAs: 'vm'
+            })
+/* Automation */
+            .when('/automation', {
+                templateUrl: '/js/app/automation/controllers/automation/automation.html',
+                controller: 'ctrlAutomation',
+                controllerAs: 'vm'
+            })
+/* Help */
+            .when('/help', {
+                templateUrl: '/js/app/help/controllers/help/help.html',
+                controller: 'ctrlHelp',
+                controllerAs: 'vm'
+            })
+/* Ad groups */
+            .when('/ad-groups', {
+                templateUrl: '/js/app/ad-groups/controllers/ad-groups/ad-groups.html',
+                controller: 'ctrlAdGroups',
+                controllerAs: 'vm'
+            })
+            // Create
+            .when('/ad-groups/create', {
+                templateUrl: '/js/app/ad-groups/controllers/create-edit/create-edit.html',
+                controller: 'ctrlAdGroupsCreateEdit',
+                controllerAs: 'vm'
+            })
+            // Edit
+            .when('/ad-groups/:adGroupId', {
+                templateUrl: '/js/app/ad-groups/controllers/create-edit/create-edit.html',
+                controller: 'ctrlAdGroupsCreateEdit',
+                controllerAs: 'vm'
+            })
+/* Audiences */
+            .when('/audiences', {
+                templateUrl: '/js/app/audiences/controllers/audiences/audiences.html',
+                controller: 'ctrlAudiences',
+                controllerAs: 'vm'
+            })
+            // Create
+            .when('/audiences/create', {
+                templateUrl: '/js/app/audiences/controllers/create-edit/create-edit.html',
+                controller: 'ctrlAudiencesCreateEdit',
+                controllerAs: 'vm'
+            })
+            // Edit
+            .when('/audiences/:audienceId', {
+                templateUrl: '/js/app/audiences/controllers/create-edit/create-edit.html',
+                controller: 'ctrlAudiencesCreateEdit',
+                controllerAs: 'vm'
+            })
+/* Tracking */
+            .when('/tracking', {
+                templateUrl: '/js/app/tracking/controllers/tracking/tracking.html',
+                controller: 'ctrlTracking',
+                controllerAs: 'vm'
+            })
+            .otherwise({
+                redirectTo: '/'
+            });
 
         $locationProvider.html5Mode(true).hashPrefix('!');
         $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
@@ -145,3 +190,5 @@ app.run(['$window', 'Facebook', 'User', 'Accounts',
         }(document, 'script', 'facebook-jssdk'));
 
     }]);
+
+
