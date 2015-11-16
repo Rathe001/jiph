@@ -2,30 +2,32 @@
     <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_audience']}}</div>
     <h1>{{vm.dictionary.audiences['audiences']}} <span ng-if="vm.audiences.length > 0">({{vm.audiences.length}})</span></h1>
     <hr />
-    <div ng-if="vm.error">
-        {{vm.error}}
-    </div>
-    <div ng-if="!vm.error && vm.audiences.length === 0">
-        No audiences found. Please <a href="/adGroups/create">create a new audience</a> to get started.
-    </div>
+    <div class="loaded-content">
+        <div ng-if="vm.error">
+            {{vm.error}}
+        </div>
+        <div ng-if="!vm.error && vm.audiences.length === 0">
+            No audiences found. Please <a href="/adGroups/create">create a new audience</a> to get started.
+        </div>
 
-    <div loading="main.loading.get('All')"></div>
+        <div loading="main.loading.get('All')"></div>
 
-    <table class="listing" ng-if="!vm.error && vm.audiences.length > 0">
-        <thead>
-            <tr>
-                <th ng-click="vm.toggleOrderBy('name');">{{vm.dictionary.terms['name']}}</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="20"></td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr ng-repeat="a in vm.audiences | orderBy: vm.orderBy">
-                <td title="{{a.name}}">{{a.name}}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="listing" ng-if="!vm.error && vm.audiences.length > 0">
+            <thead>
+                <tr>
+                    <th ng-click="vm.toggleOrderBy('name');">{{vm.dictionary.terms['name']}}</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="20"></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr ng-repeat="a in vm.audiences | orderBy: vm.orderBy">
+                    <td title="{{a.name}}">{{a.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

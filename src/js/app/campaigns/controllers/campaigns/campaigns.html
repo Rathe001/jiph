@@ -1,7 +1,4 @@
 <div class="module">
-    <ul id="breadcrumb">
-        <li><span class="heading">Campaign:</span>All campaigns</li>
-    </ul>
     <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_campaign']}}</div>
     <div drop-menu class="customize-columns pull-right">
         <div class="btn btn-default"><i class="fa fa-th"></i> {{vm.dictionary.terms['customize_columns']}}</div>
@@ -25,136 +22,142 @@
     </div>
     <h1>{{vm.dictionary.terms['campaigns']}} <span ng-if="vm.campaigns.length > 0">({{vm.campaigns.length}})</span></h1>
     <hr />
-    <div ng-if="vm.error">
-        {{vm.error}}
-    </div>
-    <div ng-if="!vm.error && vm.campaigns.length === 0 && !main.loading.get('All')">
-        No campaigns found. Please <a href="/campaigns/create">create a new campaign</a> to get started.
-    </div>
+    <div class="loaded-content">
+        <ul id="breadcrumb">
+            <li><span class="heading">Campaign:</span>All campaigns</li>
+        </ul>
+        <div ng-if="vm.error">
+            {{vm.error}}
+        </div>
+        <div ng-if="!vm.error && vm.campaigns.length === 0 && !main.loading.get('All')">
+            No campaigns found. Please <a href="/campaigns/create">create a new campaign</a> to get started.
+        </div>
 
-    <div loading="main.loading.get('All')"></div>
 
-    <table class="listing" ng-if="!vm.error && vm.campaigns.length > 0">
-        <thead>
-            <tr>
-                <th ng-click="vm.toggleOrderBy('name');">{{vm.dictionary.terms['name']}}</th>
-                <th ng-if="vm.columns.id" ng-click="vm.toggleOrderBy('id');">{{vm.dictionary.terms['id']}}</th>
-                <th ng-if="vm.columns.adlabels" ng-click="vm.toggleOrderBy('adlabels');">{{vm.dictionary.terms['adlabels']}}</th>
-                <th ng-if="vm.columns.account_id" ng-click="vm.toggleOrderBy('account_id');">{{vm.dictionary.terms['account_id']}}</th>
-                <th ng-if="vm.columns.buying_type" ng-click="vm.toggleOrderBy('buying_type');">{{vm.dictionary.terms['buying_type']}}</th>
-                <th ng-if="vm.columns.can_use_spend_cap" ng-click="vm.toggleOrderBy('can_use_spend_cap');">{{vm.dictionary.terms['can_use_spend_cap']}}</th>
-                <th ng-if="vm.columns.configured_status" ng-click="vm.toggleOrderBy('configured_status');">{{vm.dictionary.terms['configured_status']}}</th>
-                <th ng-if="vm.columns.created_time" ng-click="vm.toggleOrderBy('created_time');">{{vm.dictionary.terms['created_time']}}</th>
-                <th ng-if="vm.columns.effective_status" ng-click="vm.toggleOrderBy('effective_status');">{{vm.dictionary.terms['effective_status']}}</th>
-                <th ng-if="vm.columns.objective" ng-click="vm.toggleOrderBy('objective');">{{vm.dictionary.terms['objective']}}</th>
-                <th ng-if="vm.columns.start_time" ng-click="vm.toggleOrderBy('start_time');">{{vm.dictionary.terms['start_time']}}</th>
-                <th ng-if="vm.columns.stop_time" ng-click="vm.toggleOrderBy('stop_time');">{{vm.dictionary.terms['stop_time']}}</th>
-                <th ng-if="vm.columns.updated_time" ng-click="vm.toggleOrderBy('updated_time');">{{vm.dictionary.terms['updated_time']}}</th>
-                <th ng-if="vm.columns.spend_cap" ng-click="vm.toggleOrderBy('spend_cap');" class="text-right">{{vm.dictionary.terms['spend_cap']}}</th>
-                <th ng-if="vm.columns.actions" ng-click="vm.toggleOrderBy('actions');" class="text-right">{{vm.dictionary.terms['actions']}}</th>
-                <th ng-if="vm.columns.app_store_clicks" ng-click="vm.toggleOrderBy('app_store_clicks');" class="text-right">{{vm.dictionary.terms['app_store_clicks']}}</th>
-                <th ng-if="vm.columns.call_to_action_clicks" ng-click="vm.toggleOrderBy('call_to_action_clicks');" class="text-right">{{vm.dictionary.terms['call_to_action_clicks']}}</th>
-                <th ng-if="vm.columns.card_views" ng-click="vm.toggleOrderBy('card_views');" class="text-right">{{vm.dictionary.terms['card_views']}}</th>
-                <th ng-if="vm.columns.cost_per_action_type" ng-click="vm.toggleOrderBy('cost_per_action_type');" class="text-right">{{vm.dictionary.terms['cost_per_action_type']}}</th>
-                <th ng-if="vm.columns.cost_per_inline_link_click" ng-click="vm.toggleOrderBy('cost_per_inline_link_click');" class="text-right">{{vm.dictionary.terms['cost_per_inline_link_click']}}</th>
-                <th ng-if="vm.columns.cost_per_inline_post_engagement" ng-click="vm.toggleOrderBy('cost_per_inline_post_engagement');" class="text-right">{{vm.dictionary.terms['cost_per_inline_post_engagement']}}</th>
-                <th ng-if="vm.columns.cost_per_total_action" ng-click="vm.toggleOrderBy('cost_per_total_action');" class="text-right">{{vm.dictionary.terms['cost_per_total_action']}}</th>
-                <th ng-if="vm.columns.cost_per_unique_action_type" ng-click="vm.toggleOrderBy('cost_per_unique_action_type');" class="text-right">{{vm.dictionary.terms['cost_per_unique_action_type']}}</th>
-                <th ng-if="vm.columns.cost_per_unique_click" ng-click="vm.toggleOrderBy('cost_per_unique_click');" class="text-right">{{vm.dictionary.terms['cost_per_unique_click']}}</th>
-                <th ng-if="vm.columns.cpm" ng-click="vm.toggleOrderBy('cpm');" class="text-right">{{vm.dictionary.terms['cpm']}}</th>
-                <th ng-if="vm.columns.cpp" ng-click="vm.toggleOrderBy('cpp');" class="text-right">{{vm.dictionary.terms['cpp']}}</th>
-                <th ng-if="vm.columns.ctr" ng-click="vm.toggleOrderBy('ctr');" class="text-right">{{vm.dictionary.terms['ctr']}}</th>
-                <th ng-if="vm.columns.date_start" ng-click="vm.toggleOrderBy('date_start');">{{vm.dictionary.terms['date_start']}}</th>
-                <th ng-if="vm.columns.date_stop" ng-click="vm.toggleOrderBy('date_stop');">{{vm.dictionary.terms['date_stop']}}</th>
-                <th ng-if="vm.columns.deeplink_clicks" ng-click="vm.toggleOrderBy('deeplink_clicks');" class="text-right">{{vm.dictionary.terms['deeplink_clicks']}}</th>
-                <th ng-if="vm.columns.estimated_ad_recall_rate" ng-click="vm.toggleOrderBy('estimated_ad_recall_rate');" class="text-right">{{vm.dictionary.terms['estimated_ad_recall_rate']}}</th>
-                <th ng-if="vm.columns.estimated_ad_recall_rate_lower_bound" ng-click="vm.toggleOrderBy('estimated_ad_recall_rate_lower_bound');" class="text-right">{{vm.dictionary.terms['estimated_ad_recall_rate_lower_bound']}}</th>
-                <th ng-if="vm.columns.estimated_ad_recall_rate_upper_bound" ng-click="vm.toggleOrderBy('estimated_ad_recall_rate_upper_bound');" class="text-right">{{vm.dictionary.terms['estimated_ad_recall_rate_upper_bound']}}</th>
-                <th ng-if="vm.columns.frequency" ng-click="vm.toggleOrderBy('frequency');" class="text-right">{{vm.dictionary.terms['frequency']}}</th>
-                <th ng-if="vm.columns.impressions" ng-click="vm.toggleOrderBy('impressions');" class="text-right">{{vm.dictionary.terms['impressions']}}</th>
-                <th ng-if="vm.columns.inline_link_clicks" ng-click="vm.toggleOrderBy('inline_link_clicks');" class="text-right">{{vm.dictionary.terms['inline_link_clicks']}}</th>
-                <th ng-if="vm.columns.inline_post_engagement" ng-click="vm.toggleOrderBy('inline_post_engagement');" class="text-right">{{vm.dictionary.terms['inline_post_engagement']}}</th>
-                <th ng-if="vm.columns.reach" ng-click="vm.toggleOrderBy('reach');" class="text-right">{{vm.dictionary.terms['reach']}}</th>
-                <th ng-if="vm.columns.social_clicks" ng-click="vm.toggleOrderBy('social_clicks');" class="text-right">{{vm.dictionary.terms['social_clicks']}}</th>
-                <th ng-if="vm.columns.social_impressions" ng-click="vm.toggleOrderBy('social_impressions');" class="text-right">{{vm.dictionary.terms['social_impressions']}}</th>
-                <th ng-if="vm.columns.social_reach" ng-click="vm.toggleOrderBy('social_reach');" class="text-right">{{vm.dictionary.terms['social_reach']}}</th>
-                <th ng-if="vm.columns.spend" ng-click="vm.toggleOrderBy('spend');" class="text-right">{{vm.dictionary.terms['spend']}}</th>
-                <th ng-if="vm.columns.total_action_value" ng-click="vm.toggleOrderBy('total_action_value');" class="text-right">{{vm.dictionary.terms['total_action_value']}}</th>
-                <th ng-if="vm.columns.total_actions" ng-click="vm.toggleOrderBy('total_actions');" class="text-right">{{vm.dictionary.terms['total_actions']}}</th>
-                <th ng-if="vm.columns.total_unique_actions" ng-click="vm.toggleOrderBy('total_unique_actions');" class="text-right">{{vm.dictionary.terms['total_unique_actions']}}</th>
-                <th ng-if="vm.columns.unique_actions" ng-click="vm.toggleOrderBy('unique_actions');" class="text-right">{{vm.dictionary.terms['unique_actions']}}</th>
-                <th ng-if="vm.columns.unique_clicks" ng-click="vm.toggleOrderBy('unique_clicks');" class="text-right">{{vm.dictionary.terms['unique_clicks']}}</th>
-                <th ng-if="vm.columns.unique_ctr" ng-click="vm.toggleOrderBy('unique_ctr');" class="text-right">{{vm.dictionary.terms['unique_ctr']}}</th>
-                <th ng-if="vm.columns.unique_impressions" ng-click="vm.toggleOrderBy('unique_impressions');" class="text-right">{{vm.dictionary.terms['unique_impressions']}}</th>
-                <th ng-if="vm.columns.unique_link_clicks_ctr" ng-click="vm.toggleOrderBy('unique_link_clicks_ctr');" class="text-right">{{vm.dictionary.terms['unique_link_clicks_ctr']}}</th>
-                <th ng-if="vm.columns.unique_social_clicks" ng-click="vm.toggleOrderBy('unique_social_clicks');" class="text-right">{{vm.dictionary.terms['unique_social_clicks']}}</th>
-                <th ng-if="vm.columns.unique_social_impressions" ng-click="vm.toggleOrderBy('unique_social_impressions');" class="text-right">{{vm.dictionary.terms['unique_social_impressions']}}</th>
-                <th ng-if="vm.columns.website_clicks" ng-click="vm.toggleOrderBy('website_clicks');" class="text-right">{{vm.dictionary.terms['website_clicks']}}</th>
-                <th ng-if="vm.columns.website_ctr" ng-click="vm.toggleOrderBy('website_ctr');" class="text-right">{{vm.dictionary.terms['website_ctr']}}</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="14"></td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr ng-repeat="c in vm.campaigns | orderBy: vm.orderBy">
-                <td title="{{c.name}}"><a ng-href="/campaigns/{{c.id}}/ad-sets">{{c.name}}</a></td>
-                <td ng-if="vm.columns.id" title="{{c.id}}">{{c.id}}</td>
-                <td ng-if="vm.columns.adlabels" title="{{c.adlabels}}">{{c.adlabels}}</td>
-                <td ng-if="vm.columns.account_id" title="{{c.account_id}}">{{c.account_id}}</td>
-                <td ng-if="vm.columns.buying_type" title="{{c.buying_type}}">{{vm.dictionary.buyingTypes[c.buying_type]}}</td>
-                <td ng-if="vm.columns.can_use_spend_cap" title="{{c.can_use_spend_cap}}">{{c.can_use_spend_cap}}</td>
-                <td ng-if="vm.columns.configured_status" title="{{c.configured_status}}">{{vm.dictionary.statuses[c.configured_status]}}</td>
-                <td ng-if="vm.columns.created_time" title="{{c.created_time}}">{{c.created_time | date:'short'}}</td>
-                <td ng-if="vm.columns.effective_status" title="{{c.effective_status}}">{{vm.dictionary.statuses[c.effective_status]}}</td>
-                <td ng-if="vm.columns.objective" title="{{c.objective}}">{{vm.dictionary.objectives[c.objective]}}</td>
-                <td ng-if="vm.columns.start_time" title="{{c.start_time}}">{{c.start_time | date:'shortTime'}}</td>
-                <td ng-if="vm.columns.stop_time" title="{{c.stop_time}}"><span ng-if="c.stop_time">{{c.stop_time | date:'shortTime'}}</span><span ng-if="!c.stop_time">Ongoing</span></td>
-                <td ng-if="vm.columns.updated_time" title="{{c.updated_time}}">{{c.updated_time | date:'short'}}</td>
-                <td ng-if="vm.columns.spend_cap" title="{{c.spend_cap}}" class="text-right">{{vm.currency.to(c.spend_cap) | currency}}</td>
-                <td ng-if="vm.columns.actions" title="{{c.actions}}" class="text-right">{{c.actions | number}}</td>
-                <td ng-if="vm.columns.app_store_clicks" title="{{c.app_store_clicks}}" class="text-right">{{c.app_store_clicks | number}}</td>
-                <td ng-if="vm.columns.call_to_action_clicks" title="{{c.call_to_action_clicks}}" class="text-right">{{c.call_to_action_clicks | number}}</td>
-                <td ng-if="vm.columns.card_views" title="{{c.card_views}}" class="text-right">{{c.card_views | number}}</td>
-                <td ng-if="vm.columns.cost_per_action_type" title="{{c.cost_per_action_type}}" class="text-right">{{c.cost_per_action_type}}</td>
-                <td ng-if="vm.columns.cost_per_inline_link_click" title="{{c.cost_per_inline_link_click}}" class="text-right">{{vm.currency.to(c.cost_per_inline_link_click) | currency}}</td>
-                <td ng-if="vm.columns.cost_per_inline_post_engagement" title="{{c.cost_per_inline_post_engagement}}" class="text-right">{{vm.currency.to(c.cost_per_inline_post_engagement) | currency}}</td>
-                <td ng-if="vm.columns.cost_per_total_action" title="{{c.cost_per_total_action}}" class="text-right">{{vm.currency.to(c.cost_per_total_action) | currency}}</td>
-                <td ng-if="vm.columns.cost_per_unique_action_type" title="{{c.cost_per_unique_action_type}}" class="text-right">{{vm.currency.to(c.cost_per_unique_action_type) | currency}}</td>
-                <td ng-if="vm.columns.cost_per_unique_click" title="{{c.cost_per_unique_click}}" class="text-right">{{vm.currency.to(c.cost_per_unique_click) | currency}}</td>
-                <td ng-if="vm.columns.cpm" title="{{c.cpm}}" class="text-right">{{vm.currency.to(c.cpm) | currency}}</td>
-                <td ng-if="vm.columns.cpp" title="{{c.cpp}}" class="text-right">{{vm.currency.to(c.cpp) | currency}}</td>
-                <td ng-if="vm.columns.ctr" title="{{c.ctr}}" class="text-right">{{c.ctr | number}}</td>
-                <td ng-if="vm.columns.date_start" title="{{c.date_start}}">{{c.date_start | date:'mediumDate'}}</td>
-                <td ng-if="vm.columns.date_stop" title="{{c.date_stop}}">{{c.date_stop | date:'mediumDate'}}</td>
-                <td ng-if="vm.columns.deeplink_clicks" title="{{c.deeplink_clicks}}" class="text-right">{{c.deeplink_clicks | number}}</td>
-                <td ng-if="vm.columns.estimated_ad_recall_rate" title="{{c.estimated_ad_recall_rate}}" class="text-right">{{c.estimated_ad_recall_rate | number}}</td>
-                <td ng-if="vm.columns.estimated_ad_recall_rate_lower_bound" title="{{c.estimated_ad_recall_rate_lower_bound}}" class="text-right">{{c.estimated_ad_recall_rate_lower_bound | number}}</td>
-                <td ng-if="vm.columns.estimated_ad_recall_rate_upper_bound" title="{{c.estimated_ad_recall_rate_upper_bound}}" class="text-right">{{c.estimated_ad_recall_rate_upper_bound | number}}</td>
-                <td ng-if="vm.columns.frequency" title="{{c.frequency}}" class="text-right">{{c.frequency | number}}</td>
-                <td ng-if="vm.columns.impressions" title="{{c.impressions}}" class="text-right">{{c.impressions | number}}</td>
-                <td ng-if="vm.columns.inline_link_clicks" title="{{c.inline_link_clicks}}" class="text-right">{{c.inline_link_clicks | number}}</td>
-                <td ng-if="vm.columns.inline_post_engagement" title="{{c.inline_post_engagement}}" class="text-right">{{c.inline_post_engagement | number}}</td>
-                <td ng-if="vm.columns.reach" title="{{c.reach}}" class="text-right">{{c.reach | number}}</td>
-                <td ng-if="vm.columns.social_clicks" title="{{c.social_clicks}}" class="text-right">{{c.social_clicks | number}}</td>
-                <td ng-if="vm.columns.social_impressions" title="{{c.social_impressions}}" class="text-right">{{c.social_impressions | number}}</td>
-                <td ng-if="vm.columns.social_reach" title="{{c.social_reach}}" class="text-right">{{c.social_reach | number}}</td>
-                <td ng-if="vm.columns.spend" title="{{c.spend}}" class="text-right">{{vm.currency.to(c.spend) | currency}}</td>
-                <td ng-if="vm.columns.total_action_value" title="{{c.total_action_value}}" class="text-right">{{vm.currency.to(c.total_action_value) | currency}}</td>
-                <td ng-if="vm.columns.total_actions" title="{{c.total_actions}}" class="text-right">{{c.total_actions | number}}</td>
-                <td ng-if="vm.columns.total_unique_actions" title="{{c.total_unique_actions}}" class="text-right">{{c.total_unique_actions | number}}</td>
-                <td ng-if="vm.columns.unique_actions" title="{{c.unique_actions}}" class="text-right">{{c.unique_actions | number}}</td>
-                <td ng-if="vm.columns.unique_clicks" title="{{c.unique_clicks}}" class="text-right">{{c.unique_clicks | number}}</td>
-                <td ng-if="vm.columns.unique_ctr" title="{{c.unique_ctr}}" class="text-right">{{c.unique_ctr | number}}</td>
-                <td ng-if="vm.columns.unique_impressions" title="{{c.unique_impressions}}" class="text-right">{{c.unique_impressions | number}}</td>
-                <td ng-if="vm.columns.unique_link_clicks_ctr" title="{{c.unique_link_clicks_ctr}}" class="text-right">{{c.unique_link_clicks_ctr | number}}</td>
-                <td ng-if="vm.columns.unique_social_clicks" title="{{c.unique_social_clicks}}" class="text-right">{{c.unique_social_clicks | number}}</td>
-                <td ng-if="vm.columns.unique_social_impressions" title="{{c.unique_social_impressions}}" class="text-right">{{c.unique_social_impressions | number}}</td>
-                <td ng-if="vm.columns.website_clicks" title="{{c.website_clicks}}" class="text-right">{{c.website_clicks | number}}</td>
-                <td ng-if="vm.columns.website_ctr" title="{{c.website_ctr}}" class="text-right">{{c.website_ctr | number}}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div loading="main.loading.get('All')"></div>
+
+        <table class="listing" ng-if="!vm.error && vm.campaigns.length > 0">
+            <thead>
+                <tr>
+                    <th ng-click="vm.toggleOrderBy('name');">{{vm.dictionary.terms['name']}}</th>
+                    <th ng-if="vm.columns.id" ng-click="vm.toggleOrderBy('id');">{{vm.dictionary.terms['id']}}</th>
+                    <th ng-if="vm.columns.adlabels" ng-click="vm.toggleOrderBy('adlabels');">{{vm.dictionary.terms['adlabels']}}</th>
+                    <th ng-if="vm.columns.account_id" ng-click="vm.toggleOrderBy('account_id');">{{vm.dictionary.terms['account_id']}}</th>
+                    <th ng-if="vm.columns.buying_type" ng-click="vm.toggleOrderBy('buying_type');">{{vm.dictionary.terms['buying_type']}}</th>
+                    <th ng-if="vm.columns.can_use_spend_cap" ng-click="vm.toggleOrderBy('can_use_spend_cap');">{{vm.dictionary.terms['can_use_spend_cap']}}</th>
+                    <th ng-if="vm.columns.configured_status" ng-click="vm.toggleOrderBy('configured_status');">{{vm.dictionary.terms['configured_status']}}</th>
+                    <th ng-if="vm.columns.created_time" ng-click="vm.toggleOrderBy('created_time');">{{vm.dictionary.terms['created_time']}}</th>
+                    <th ng-if="vm.columns.effective_status" ng-click="vm.toggleOrderBy('effective_status');">{{vm.dictionary.terms['effective_status']}}</th>
+                    <th ng-if="vm.columns.objective" ng-click="vm.toggleOrderBy('objective');">{{vm.dictionary.terms['objective']}}</th>
+                    <th ng-if="vm.columns.start_time" ng-click="vm.toggleOrderBy('start_time');">{{vm.dictionary.terms['start_time']}}</th>
+                    <th ng-if="vm.columns.stop_time" ng-click="vm.toggleOrderBy('stop_time');">{{vm.dictionary.terms['stop_time']}}</th>
+                    <th ng-if="vm.columns.updated_time" ng-click="vm.toggleOrderBy('updated_time');">{{vm.dictionary.terms['updated_time']}}</th>
+                    <th ng-if="vm.columns.spend_cap" ng-click="vm.toggleOrderBy('spend_cap');" class="text-right">{{vm.dictionary.terms['spend_cap']}}</th>
+                    <th ng-if="vm.columns.actions" ng-click="vm.toggleOrderBy('actions');" class="text-right">{{vm.dictionary.terms['actions']}}</th>
+                    <th ng-if="vm.columns.app_store_clicks" ng-click="vm.toggleOrderBy('app_store_clicks');" class="text-right">{{vm.dictionary.terms['app_store_clicks']}}</th>
+                    <th ng-if="vm.columns.call_to_action_clicks" ng-click="vm.toggleOrderBy('call_to_action_clicks');" class="text-right">{{vm.dictionary.terms['call_to_action_clicks']}}</th>
+                    <th ng-if="vm.columns.card_views" ng-click="vm.toggleOrderBy('card_views');" class="text-right">{{vm.dictionary.terms['card_views']}}</th>
+                    <th ng-if="vm.columns.cost_per_action_type" ng-click="vm.toggleOrderBy('cost_per_action_type');" class="text-right">{{vm.dictionary.terms['cost_per_action_type']}}</th>
+                    <th ng-if="vm.columns.cost_per_inline_link_click" ng-click="vm.toggleOrderBy('cost_per_inline_link_click');" class="text-right">{{vm.dictionary.terms['cost_per_inline_link_click']}}</th>
+                    <th ng-if="vm.columns.cost_per_inline_post_engagement" ng-click="vm.toggleOrderBy('cost_per_inline_post_engagement');" class="text-right">{{vm.dictionary.terms['cost_per_inline_post_engagement']}}</th>
+                    <th ng-if="vm.columns.cost_per_total_action" ng-click="vm.toggleOrderBy('cost_per_total_action');" class="text-right">{{vm.dictionary.terms['cost_per_total_action']}}</th>
+                    <th ng-if="vm.columns.cost_per_unique_action_type" ng-click="vm.toggleOrderBy('cost_per_unique_action_type');" class="text-right">{{vm.dictionary.terms['cost_per_unique_action_type']}}</th>
+                    <th ng-if="vm.columns.cost_per_unique_click" ng-click="vm.toggleOrderBy('cost_per_unique_click');" class="text-right">{{vm.dictionary.terms['cost_per_unique_click']}}</th>
+                    <th ng-if="vm.columns.cpm" ng-click="vm.toggleOrderBy('cpm');" class="text-right">{{vm.dictionary.terms['cpm']}}</th>
+                    <th ng-if="vm.columns.cpp" ng-click="vm.toggleOrderBy('cpp');" class="text-right">{{vm.dictionary.terms['cpp']}}</th>
+                    <th ng-if="vm.columns.ctr" ng-click="vm.toggleOrderBy('ctr');" class="text-right">{{vm.dictionary.terms['ctr']}}</th>
+                    <th ng-if="vm.columns.date_start" ng-click="vm.toggleOrderBy('date_start');">{{vm.dictionary.terms['date_start']}}</th>
+                    <th ng-if="vm.columns.date_stop" ng-click="vm.toggleOrderBy('date_stop');">{{vm.dictionary.terms['date_stop']}}</th>
+                    <th ng-if="vm.columns.deeplink_clicks" ng-click="vm.toggleOrderBy('deeplink_clicks');" class="text-right">{{vm.dictionary.terms['deeplink_clicks']}}</th>
+                    <th ng-if="vm.columns.estimated_ad_recall_rate" ng-click="vm.toggleOrderBy('estimated_ad_recall_rate');" class="text-right">{{vm.dictionary.terms['estimated_ad_recall_rate']}}</th>
+                    <th ng-if="vm.columns.estimated_ad_recall_rate_lower_bound" ng-click="vm.toggleOrderBy('estimated_ad_recall_rate_lower_bound');" class="text-right">{{vm.dictionary.terms['estimated_ad_recall_rate_lower_bound']}}</th>
+                    <th ng-if="vm.columns.estimated_ad_recall_rate_upper_bound" ng-click="vm.toggleOrderBy('estimated_ad_recall_rate_upper_bound');" class="text-right">{{vm.dictionary.terms['estimated_ad_recall_rate_upper_bound']}}</th>
+                    <th ng-if="vm.columns.frequency" ng-click="vm.toggleOrderBy('frequency');" class="text-right">{{vm.dictionary.terms['frequency']}}</th>
+                    <th ng-if="vm.columns.impressions" ng-click="vm.toggleOrderBy('impressions');" class="text-right">{{vm.dictionary.terms['impressions']}}</th>
+                    <th ng-if="vm.columns.inline_link_clicks" ng-click="vm.toggleOrderBy('inline_link_clicks');" class="text-right">{{vm.dictionary.terms['inline_link_clicks']}}</th>
+                    <th ng-if="vm.columns.inline_post_engagement" ng-click="vm.toggleOrderBy('inline_post_engagement');" class="text-right">{{vm.dictionary.terms['inline_post_engagement']}}</th>
+                    <th ng-if="vm.columns.reach" ng-click="vm.toggleOrderBy('reach');" class="text-right">{{vm.dictionary.terms['reach']}}</th>
+                    <th ng-if="vm.columns.social_clicks" ng-click="vm.toggleOrderBy('social_clicks');" class="text-right">{{vm.dictionary.terms['social_clicks']}}</th>
+                    <th ng-if="vm.columns.social_impressions" ng-click="vm.toggleOrderBy('social_impressions');" class="text-right">{{vm.dictionary.terms['social_impressions']}}</th>
+                    <th ng-if="vm.columns.social_reach" ng-click="vm.toggleOrderBy('social_reach');" class="text-right">{{vm.dictionary.terms['social_reach']}}</th>
+                    <th ng-if="vm.columns.spend" ng-click="vm.toggleOrderBy('spend');" class="text-right">{{vm.dictionary.terms['spend']}}</th>
+                    <th ng-if="vm.columns.total_action_value" ng-click="vm.toggleOrderBy('total_action_value');" class="text-right">{{vm.dictionary.terms['total_action_value']}}</th>
+                    <th ng-if="vm.columns.total_actions" ng-click="vm.toggleOrderBy('total_actions');" class="text-right">{{vm.dictionary.terms['total_actions']}}</th>
+                    <th ng-if="vm.columns.total_unique_actions" ng-click="vm.toggleOrderBy('total_unique_actions');" class="text-right">{{vm.dictionary.terms['total_unique_actions']}}</th>
+                    <th ng-if="vm.columns.unique_actions" ng-click="vm.toggleOrderBy('unique_actions');" class="text-right">{{vm.dictionary.terms['unique_actions']}}</th>
+                    <th ng-if="vm.columns.unique_clicks" ng-click="vm.toggleOrderBy('unique_clicks');" class="text-right">{{vm.dictionary.terms['unique_clicks']}}</th>
+                    <th ng-if="vm.columns.unique_ctr" ng-click="vm.toggleOrderBy('unique_ctr');" class="text-right">{{vm.dictionary.terms['unique_ctr']}}</th>
+                    <th ng-if="vm.columns.unique_impressions" ng-click="vm.toggleOrderBy('unique_impressions');" class="text-right">{{vm.dictionary.terms['unique_impressions']}}</th>
+                    <th ng-if="vm.columns.unique_link_clicks_ctr" ng-click="vm.toggleOrderBy('unique_link_clicks_ctr');" class="text-right">{{vm.dictionary.terms['unique_link_clicks_ctr']}}</th>
+                    <th ng-if="vm.columns.unique_social_clicks" ng-click="vm.toggleOrderBy('unique_social_clicks');" class="text-right">{{vm.dictionary.terms['unique_social_clicks']}}</th>
+                    <th ng-if="vm.columns.unique_social_impressions" ng-click="vm.toggleOrderBy('unique_social_impressions');" class="text-right">{{vm.dictionary.terms['unique_social_impressions']}}</th>
+                    <th ng-if="vm.columns.website_clicks" ng-click="vm.toggleOrderBy('website_clicks');" class="text-right">{{vm.dictionary.terms['website_clicks']}}</th>
+                    <th ng-if="vm.columns.website_ctr" ng-click="vm.toggleOrderBy('website_ctr');" class="text-right">{{vm.dictionary.terms['website_ctr']}}</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="14"></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr ng-repeat="c in vm.campaigns | orderBy: vm.orderBy">
+                    <td title="{{c.name}}"><a ng-href="/campaigns/{{c.id}}/ad-sets">{{c.name}}</a></td>
+                    <td ng-if="vm.columns.id" title="{{c.id}}">{{c.id}}</td>
+                    <td ng-if="vm.columns.adlabels" title="{{c.adlabels}}">{{c.adlabels}}</td>
+                    <td ng-if="vm.columns.account_id" title="{{c.account_id}}">{{c.account_id}}</td>
+                    <td ng-if="vm.columns.buying_type" title="{{c.buying_type}}">{{vm.dictionary.buyingTypes[c.buying_type]}}</td>
+                    <td ng-if="vm.columns.can_use_spend_cap" title="{{c.can_use_spend_cap}}">{{c.can_use_spend_cap}}</td>
+                    <td ng-if="vm.columns.configured_status" title="{{c.configured_status}}">{{vm.dictionary.statuses[c.configured_status]}}</td>
+                    <td ng-if="vm.columns.created_time" title="{{c.created_time}}">{{c.created_time | date:'short'}}</td>
+                    <td ng-if="vm.columns.effective_status" title="{{c.effective_status}}">{{vm.dictionary.statuses[c.effective_status]}}</td>
+                    <td ng-if="vm.columns.objective" title="{{c.objective}}">{{vm.dictionary.objectives[c.objective]}}</td>
+                    <td ng-if="vm.columns.start_time" title="{{c.start_time}}">{{c.start_time | date:'shortTime'}}</td>
+                    <td ng-if="vm.columns.stop_time" title="{{c.stop_time}}"><span ng-if="c.stop_time">{{c.stop_time | date:'shortTime'}}</span><span ng-if="!c.stop_time">Ongoing</span></td>
+                    <td ng-if="vm.columns.updated_time" title="{{c.updated_time}}">{{c.updated_time | date:'short'}}</td>
+                    <td ng-if="vm.columns.spend_cap" title="{{c.spend_cap}}" class="text-right">{{vm.currency.to(c.spend_cap) | currency}}</td>
+                    <td ng-if="vm.columns.actions" title="{{c.actions}}" class="text-right">{{c.actions | number}}</td>
+                    <td ng-if="vm.columns.app_store_clicks" title="{{c.app_store_clicks}}" class="text-right">{{c.app_store_clicks | number}}</td>
+                    <td ng-if="vm.columns.call_to_action_clicks" title="{{c.call_to_action_clicks}}" class="text-right">{{c.call_to_action_clicks | number}}</td>
+                    <td ng-if="vm.columns.card_views" title="{{c.card_views}}" class="text-right">{{c.card_views | number}}</td>
+                    <td ng-if="vm.columns.cost_per_action_type" title="{{c.cost_per_action_type}}" class="text-right">{{c.cost_per_action_type}}</td>
+                    <td ng-if="vm.columns.cost_per_inline_link_click" title="{{c.cost_per_inline_link_click}}" class="text-right">{{vm.currency.to(c.cost_per_inline_link_click) | currency}}</td>
+                    <td ng-if="vm.columns.cost_per_inline_post_engagement" title="{{c.cost_per_inline_post_engagement}}" class="text-right">{{vm.currency.to(c.cost_per_inline_post_engagement) | currency}}</td>
+                    <td ng-if="vm.columns.cost_per_total_action" title="{{c.cost_per_total_action}}" class="text-right">{{vm.currency.to(c.cost_per_total_action) | currency}}</td>
+                    <td ng-if="vm.columns.cost_per_unique_action_type" title="{{c.cost_per_unique_action_type}}" class="text-right">{{vm.currency.to(c.cost_per_unique_action_type) | currency}}</td>
+                    <td ng-if="vm.columns.cost_per_unique_click" title="{{c.cost_per_unique_click}}" class="text-right">{{vm.currency.to(c.cost_per_unique_click) | currency}}</td>
+                    <td ng-if="vm.columns.cpm" title="{{c.cpm}}" class="text-right">{{vm.currency.to(c.cpm) | currency}}</td>
+                    <td ng-if="vm.columns.cpp" title="{{c.cpp}}" class="text-right">{{vm.currency.to(c.cpp) | currency}}</td>
+                    <td ng-if="vm.columns.ctr" title="{{c.ctr}}" class="text-right">{{c.ctr | number}}</td>
+                    <td ng-if="vm.columns.date_start" title="{{c.date_start}}">{{c.date_start | date:'mediumDate'}}</td>
+                    <td ng-if="vm.columns.date_stop" title="{{c.date_stop}}">{{c.date_stop | date:'mediumDate'}}</td>
+                    <td ng-if="vm.columns.deeplink_clicks" title="{{c.deeplink_clicks}}" class="text-right">{{c.deeplink_clicks | number}}</td>
+                    <td ng-if="vm.columns.estimated_ad_recall_rate" title="{{c.estimated_ad_recall_rate}}" class="text-right">{{c.estimated_ad_recall_rate | number}}</td>
+                    <td ng-if="vm.columns.estimated_ad_recall_rate_lower_bound" title="{{c.estimated_ad_recall_rate_lower_bound}}" class="text-right">{{c.estimated_ad_recall_rate_lower_bound | number}}</td>
+                    <td ng-if="vm.columns.estimated_ad_recall_rate_upper_bound" title="{{c.estimated_ad_recall_rate_upper_bound}}" class="text-right">{{c.estimated_ad_recall_rate_upper_bound | number}}</td>
+                    <td ng-if="vm.columns.frequency" title="{{c.frequency}}" class="text-right">{{c.frequency | number}}</td>
+                    <td ng-if="vm.columns.impressions" title="{{c.impressions}}" class="text-right">{{c.impressions | number}}</td>
+                    <td ng-if="vm.columns.inline_link_clicks" title="{{c.inline_link_clicks}}" class="text-right">{{c.inline_link_clicks | number}}</td>
+                    <td ng-if="vm.columns.inline_post_engagement" title="{{c.inline_post_engagement}}" class="text-right">{{c.inline_post_engagement | number}}</td>
+                    <td ng-if="vm.columns.reach" title="{{c.reach}}" class="text-right">{{c.reach | number}}</td>
+                    <td ng-if="vm.columns.social_clicks" title="{{c.social_clicks}}" class="text-right">{{c.social_clicks | number}}</td>
+                    <td ng-if="vm.columns.social_impressions" title="{{c.social_impressions}}" class="text-right">{{c.social_impressions | number}}</td>
+                    <td ng-if="vm.columns.social_reach" title="{{c.social_reach}}" class="text-right">{{c.social_reach | number}}</td>
+                    <td ng-if="vm.columns.spend" title="{{c.spend}}" class="text-right">{{vm.currency.to(c.spend) | currency}}</td>
+                    <td ng-if="vm.columns.total_action_value" title="{{c.total_action_value}}" class="text-right">{{vm.currency.to(c.total_action_value) | currency}}</td>
+                    <td ng-if="vm.columns.total_actions" title="{{c.total_actions}}" class="text-right">{{c.total_actions | number}}</td>
+                    <td ng-if="vm.columns.total_unique_actions" title="{{c.total_unique_actions}}" class="text-right">{{c.total_unique_actions | number}}</td>
+                    <td ng-if="vm.columns.unique_actions" title="{{c.unique_actions}}" class="text-right">{{c.unique_actions | number}}</td>
+                    <td ng-if="vm.columns.unique_clicks" title="{{c.unique_clicks}}" class="text-right">{{c.unique_clicks | number}}</td>
+                    <td ng-if="vm.columns.unique_ctr" title="{{c.unique_ctr}}" class="text-right">{{c.unique_ctr | number}}</td>
+                    <td ng-if="vm.columns.unique_impressions" title="{{c.unique_impressions}}" class="text-right">{{c.unique_impressions | number}}</td>
+                    <td ng-if="vm.columns.unique_link_clicks_ctr" title="{{c.unique_link_clicks_ctr}}" class="text-right">{{c.unique_link_clicks_ctr | number}}</td>
+                    <td ng-if="vm.columns.unique_social_clicks" title="{{c.unique_social_clicks}}" class="text-right">{{c.unique_social_clicks | number}}</td>
+                    <td ng-if="vm.columns.unique_social_impressions" title="{{c.unique_social_impressions}}" class="text-right">{{c.unique_social_impressions | number}}</td>
+                    <td ng-if="vm.columns.website_clicks" title="{{c.website_clicks}}" class="text-right">{{c.website_clicks | number}}</td>
+                    <td ng-if="vm.columns.website_ctr" title="{{c.website_ctr}}" class="text-right">{{c.website_ctr | number}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

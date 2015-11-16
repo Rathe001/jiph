@@ -1,8 +1,4 @@
 <div class="module">
-    <ul id="breadcrumb">
-        <li><span class="heading">Campaign:</span>{{vm.campaign.name}}</li>
-        <li><span class="heading">Ad set:</span>All ad sets</li>
-    </ul>
     <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_ad_set']}}</div>
     <div drop-menu class="customize-columns pull-right">
         <div class="btn btn-default"><i class="fa fa-th"></i> {{vm.dictionary.terms['customize_columns']}}</div>
@@ -26,101 +22,107 @@
     </div>
     <h1>{{vm.dictionary.terms['adsets']}} <span ng-if="vm.adSets.length > 0">({{vm.adSets.length}})</span></h1>
     <hr />
-    <div ng-if="vm.error">
-        {{vm.error}}
-    </div>
-    <div ng-if="!vm.error && vm.adSets.length === 0">
-        No ad sets found. Please <a href="/adSets/create">create a new ad set</a> to get started.
-    </div>
+    <div class="loaded-content">
+        <ul id="breadcrumb">
+            <li><span class="heading">Campaign:</span>{{vm.campaign.name}}</li>
+            <li><span class="heading">Ad set:</span>All ad sets</li>
+        </ul>
+        <div ng-if="vm.error">
+            {{vm.error}}
+        </div>
+        <div ng-if="!vm.error && vm.adSets.length === 0">
+            No ad sets found. Please <a href="/adSets/create">create a new ad set</a> to get started.
+        </div>
 
-    <div loading="main.loading.get('All')"></div>
+        <div loading="main.loading.get('All')"></div>
 
-    <table class="listing" ng-if="!vm.error && vm.adSets.length > 0">
-        <thead>
-            <tr>
-                <th ng-if="vm.columns.name" ng-click="vm.toggleOrderBy('name');">{{vm.dictionary.terms['name']}}</th>
-                <th ng-if="vm.columns.id" ng-click="vm.toggleOrderBy('id');">{{vm.dictionary.terms['id']}}</th>
-                <th ng-if="vm.columns.adlabels" ng-click="vm.toggleOrderBy('adlabels');">{{vm.dictionary.terms['adlabels']}}</th>
-                <th ng-if="vm.columns.adset_schedule" ng-click="vm.toggleOrderBy('adset_schedule');">{{vm.dictionary.terms['adset_schedule']}}</th>
-                <th ng-if="vm.columns.account_id" ng-click="vm.toggleOrderBy('account_id');">{{vm.dictionary.terms['account_id']}}</th>
-                <th class="text-right" ng-if="vm.columns.bid_amount" ng-click="vm.toggleOrderBy('bid_amount');">{{vm.dictionary.terms['bid_amount']}}</th>
-                <th ng-if="vm.columns.bid_info" ng-click="vm.toggleOrderBy('bid_info');">{{vm.dictionary.terms['bid_info']}}</th>
-                <th ng-if="vm.columns.billing_event" ng-click="vm.toggleOrderBy('billing_event');">{{vm.dictionary.terms['billing_event']}}</th>
-                <th ng-if="vm.columns.campaign" ng-click="vm.toggleOrderBy('campaign');">{{vm.dictionary.terms['campaign']}}</th>
-                <th ng-if="vm.columns.campaign_id" ng-click="vm.toggleOrderBy('campaign_id');">{{vm.dictionary.terms['campaign_id']}}</th>
-                <th ng-if="vm.columns.configured_status" ng-click="vm.toggleOrderBy('configured_status');">{{vm.dictionary.terms['configured_status']}}</th>
-                <th ng-if="vm.columns.created_time" ng-click="vm.toggleOrderBy('created_time');">{{vm.dictionary.terms['created_time']}}</th>
-                <th ng-if="vm.columns.creative_sequence" ng-click="vm.toggleOrderBy('creative_sequence');">{{vm.dictionary.terms['creative_sequence']}}</th>
-                <th ng-if="vm.columns.effective_status" ng-click="vm.toggleOrderBy('effective_status');">{{vm.dictionary.terms['effective_status']}}</th>
-                <th ng-if="vm.columns.start_time" ng-click="vm.toggleOrderBy('start_time');">{{vm.dictionary.terms['start_time']}}</th>
-                <th ng-if="vm.columns.end_time" ng-click="vm.toggleOrderBy('end_time');">{{vm.dictionary.terms['end_time']}}</th>
-                <th ng-if="vm.columns.frequency_cap" ng-click="vm.toggleOrderBy('frequency_cap');">{{vm.dictionary.terms['frequency_cap']}}</th>
-                <th ng-if="vm.columns.frequency_cap_reset_period" ng-click="vm.toggleOrderBy('frequency_cap_reset_period');">{{vm.dictionary.terms['frequency_cap_reset_period']}}</th>
-                <th ng-if="vm.columns.is_autobid" ng-click="vm.toggleOrderBy('is_autobid');">{{vm.dictionary.terms['is_autobid']}}</th>
-                <th ng-if="vm.columns.lifetime_frequency_cap" ng-click="vm.toggleOrderBy('lifetime_frequency_cap');">{{vm.dictionary.terms['lifetime_frequency_cap']}}</th>
-                <th ng-if="vm.columns.lifetime_imps" ng-click="vm.toggleOrderBy('lifetime_imps');">{{vm.dictionary.terms['lifetime_imps']}}</th>
-                <th ng-if="vm.columns.optimization_goal" ng-click="vm.toggleOrderBy('optimization_goal');">{{vm.dictionary.terms['optimization_goal']}}</th>
-                <th ng-if="vm.columns.product_ad_behavior" ng-click="vm.toggleOrderBy('product_ad_behavior');">{{vm.dictionary.terms['product_ad_behavior']}}</th>
-                <th ng-if="vm.columns.promoted_object" ng-click="vm.toggleOrderBy('promoted_object');">{{vm.dictionary.terms['promoted_object']}}</th>
-                <th ng-if="vm.columns.rf_prediction_id" ng-click="vm.toggleOrderBy('rf_prediction_id');">{{vm.dictionary.terms['rf_prediction_id']}}</th>
-                <th ng-if="vm.columns.rtb_flag" ng-click="vm.toggleOrderBy('rtb_flag');">{{vm.dictionary.terms['rtb_flag']}}</th>
-                <th ng-if="vm.columns.targeting" ng-click="vm.toggleOrderBy('targeting');">{{vm.dictionary.terms['targeting']}}</th>
-                <th ng-if="vm.columns.updated_time" ng-click="vm.toggleOrderBy('updated_time');">{{vm.dictionary.terms['updated_time']}}</th>
-                <th ng-if="vm.columns.use_new_app_click" ng-click="vm.toggleOrderBy('use_new_app_click');">{{vm.dictionary.terms['use_new_app_click']}}</th>
-                <th ng-if="vm.columns.pacing_type" ng-click="vm.toggleOrderBy('pacing_type');">{{vm.dictionary.terms['pacing_type']}}</th>
-                <th class="text-right" ng-if="vm.columns.budget_remaining" ng-click="vm.toggleOrderBy('budget_remaining');">{{vm.dictionary.terms['budget_remaining']}}</th>
-                <th class="text-right" ng-if="vm.columns.daily_budget" ng-click="vm.toggleOrderBy('daily_budget');">{{vm.dictionary.terms['daily_budget']}}</th>
-                <th class="text-right" ng-if="vm.columns.lifetime_budget" ng-click="vm.toggleOrderBy('lifetime_budget');">{{vm.dictionary.terms['lifetime_budget']}}</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <td colspan="33"></td>
-            </tr>
-        </tfoot>
-        <tbody>
-            <tr ng-repeat="a in vm.adSets | orderBy: vm.orderBy">
-                <td ng-if="vm.columns.name" title="{{a.name}}"><a ng-href="/campaigns/{{a.campaign.id}}/ad-sets/{{a.id}}/ads">{{a.name}}</a></td>
-                <td ng-if="vm.columns.id" title="{{a.id}}">{{a.id}}</td>
-                <td ng-if="vm.columns.adlabels" title="{{a.adlabels}}">{{a.adlabels}}</td>
-                <td ng-if="vm.columns.adset_schedule" title="{{a.adset_schedule}}">{{a.adset_schedule}}</td>
-                <td ng-if="vm.columns.account_id" title="{{a.account_id}}">{{a.account_id}}</td>
-                <td class="text-right" ng-if="vm.columns.bid_amount" title="{{a.bid_amount}}">{{vm.currency.to(a.bid_amount) | currency}}</td>
-                <td ng-if="vm.columns.bid_info" title="{{a.bid_info}}">
-                    <span ng-repeat="(k, v) in a.bid_info">
-                        {{vm.dictionary.bidInfoActions[k]}}: {{v}}
-                    </span>
-                </td>
-                <td ng-if="vm.columns.billing_event" title="{{a.billing_event}}">{{vm.dictionary.billingEvents[a.billing_event]}}</td>
-                <td ng-if="vm.columns.campaign" title="{{a.campaign}}">{{a.campaign}}</td>
-                <td ng-if="vm.columns.campaign_id" title="{{a.campaign_id}}">{{a.campaign_id}}</td>
-                <td ng-if="vm.columns.configured_status" title="{{a.configured_status}}">{{vm.dictionary.statuses[a.configured_status]}}</td>
-                <td ng-if="vm.columns.created_time" title="{{a.created_time}}">{{a.created_time | date:'short'}}</td>
-                <td ng-if="vm.columns.creative_sequence" title="{{a.creative_sequence}}">{{a.creative_sequence}}</td>
-                <td ng-if="vm.columns.effective_status" title="{{a.effective_status}}">{{vm.dictionary.statuses[a.effective_status]}}</td>
-                <td ng-if="vm.columns.start_time" title="{{a.start_time}}">{{a.start_time | date:'short'}}</td>
-                <td ng-if="vm.columns.end_time" title="{{a.end_time}}">
-                    <span ng-if="a.end_time">{{a.end_time | date:'short'}}</span>
-                    <span ng-if="!a.end_time">Ongoing</span>
-                </td>
-                <td ng-if="vm.columns.frequency_cap" title="{{a.frequency_cap}}">{{a.frequency_cap}}</td>
-                <td ng-if="vm.columns.frequency_cap_reset_period" title="{{a.frequency_cap_reset_period}}">{{a.frequency_cap_reset_period}}</td>
-                <td ng-if="vm.columns.is_autobid" title="{{a.is_autobid}}">{{a.is_autobid}}</td>
-                <td ng-if="vm.columns.lifetime_frequency_cap" title="{{a.lifetime_frequency_cap}}">{{a.lifetime_frequency_cap}}</td>
-                <td ng-if="vm.columns.lifetime_imps" title="{{a.lifetime_imps}}">{{a.lifetime_imps}}</td>
-                <td ng-if="vm.columns.optimization_goal" title="{{a.optimization_goal}}">{{vm.dictionary.optimizationGoals[a.optimization_goal]}}</td>
-                <td ng-if="vm.columns.product_ad_behavior">{{vm.dictionary.productAdBehaviors[a.product_ad_behavior]}}</td>
-                <td ng-if="vm.columns.promoted_object" title="{{a.promoted_object}}">{{a.promoted_object}}</td>
-                <td ng-if="vm.columns.rf_prediction_id" title="{{a.rf_prediction_id}}">{{a.rf_prediction_id}}</td>
-                <td ng-if="vm.columns.rtb_flag" title="{{a.rtb_flag}}">{{a.rtb_flag}}</td>
-                <td ng-if="vm.columns.targeting" title="{{a.targeting}}">{{a.targeting}}</td>
-                <td ng-if="vm.columns.updated_time" title="{{a.updated_time}}">{{a.updated_time | date:'short'}}</td>
-                <td ng-if="vm.columns.use_new_app_click" title="{{a.use_new_app_click}}">{{a.use_new_app_click}}</td>
-                <td ng-if="vm.columns.pacing_type" title="{{a.pacing_type}}">{{a.pacing_type}}</td>
-                <td class="text-right" ng-if="vm.columns.budget_remaining" title="{{a.budget_remaining}}">{{vm.currency.to(a.budget_remaining) | currency}}</td>
-                <td class="text-right" ng-if="vm.columns.daily_budget" title="{{a.daily_budget}}">{{vm.currency.to(a.daily_budget) | currency}}</td>
-                <td class="text-right" ng-if="vm.columns.lifetime_budget" title="{{a.lifetime_budget}}">{{vm.currency.to(a.lifetime_budget) | currency}}</td>
-            </tr>
-        </tbody>
-    </table>
+        <table class="listing" ng-if="!vm.error && vm.adSets.length > 0">
+            <thead>
+                <tr>
+                    <th ng-if="vm.columns.name" ng-click="vm.toggleOrderBy('name');">{{vm.dictionary.terms['name']}}</th>
+                    <th ng-if="vm.columns.id" ng-click="vm.toggleOrderBy('id');">{{vm.dictionary.terms['id']}}</th>
+                    <th ng-if="vm.columns.adlabels" ng-click="vm.toggleOrderBy('adlabels');">{{vm.dictionary.terms['adlabels']}}</th>
+                    <th ng-if="vm.columns.adset_schedule" ng-click="vm.toggleOrderBy('adset_schedule');">{{vm.dictionary.terms['adset_schedule']}}</th>
+                    <th ng-if="vm.columns.account_id" ng-click="vm.toggleOrderBy('account_id');">{{vm.dictionary.terms['account_id']}}</th>
+                    <th class="text-right" ng-if="vm.columns.bid_amount" ng-click="vm.toggleOrderBy('bid_amount');">{{vm.dictionary.terms['bid_amount']}}</th>
+                    <th ng-if="vm.columns.bid_info" ng-click="vm.toggleOrderBy('bid_info');">{{vm.dictionary.terms['bid_info']}}</th>
+                    <th ng-if="vm.columns.billing_event" ng-click="vm.toggleOrderBy('billing_event');">{{vm.dictionary.terms['billing_event']}}</th>
+                    <th ng-if="vm.columns.campaign" ng-click="vm.toggleOrderBy('campaign');">{{vm.dictionary.terms['campaign']}}</th>
+                    <th ng-if="vm.columns.campaign_id" ng-click="vm.toggleOrderBy('campaign_id');">{{vm.dictionary.terms['campaign_id']}}</th>
+                    <th ng-if="vm.columns.configured_status" ng-click="vm.toggleOrderBy('configured_status');">{{vm.dictionary.terms['configured_status']}}</th>
+                    <th ng-if="vm.columns.created_time" ng-click="vm.toggleOrderBy('created_time');">{{vm.dictionary.terms['created_time']}}</th>
+                    <th ng-if="vm.columns.creative_sequence" ng-click="vm.toggleOrderBy('creative_sequence');">{{vm.dictionary.terms['creative_sequence']}}</th>
+                    <th ng-if="vm.columns.effective_status" ng-click="vm.toggleOrderBy('effective_status');">{{vm.dictionary.terms['effective_status']}}</th>
+                    <th ng-if="vm.columns.start_time" ng-click="vm.toggleOrderBy('start_time');">{{vm.dictionary.terms['start_time']}}</th>
+                    <th ng-if="vm.columns.end_time" ng-click="vm.toggleOrderBy('end_time');">{{vm.dictionary.terms['end_time']}}</th>
+                    <th ng-if="vm.columns.frequency_cap" ng-click="vm.toggleOrderBy('frequency_cap');">{{vm.dictionary.terms['frequency_cap']}}</th>
+                    <th ng-if="vm.columns.frequency_cap_reset_period" ng-click="vm.toggleOrderBy('frequency_cap_reset_period');">{{vm.dictionary.terms['frequency_cap_reset_period']}}</th>
+                    <th ng-if="vm.columns.is_autobid" ng-click="vm.toggleOrderBy('is_autobid');">{{vm.dictionary.terms['is_autobid']}}</th>
+                    <th ng-if="vm.columns.lifetime_frequency_cap" ng-click="vm.toggleOrderBy('lifetime_frequency_cap');">{{vm.dictionary.terms['lifetime_frequency_cap']}}</th>
+                    <th ng-if="vm.columns.lifetime_imps" ng-click="vm.toggleOrderBy('lifetime_imps');">{{vm.dictionary.terms['lifetime_imps']}}</th>
+                    <th ng-if="vm.columns.optimization_goal" ng-click="vm.toggleOrderBy('optimization_goal');">{{vm.dictionary.terms['optimization_goal']}}</th>
+                    <th ng-if="vm.columns.product_ad_behavior" ng-click="vm.toggleOrderBy('product_ad_behavior');">{{vm.dictionary.terms['product_ad_behavior']}}</th>
+                    <th ng-if="vm.columns.promoted_object" ng-click="vm.toggleOrderBy('promoted_object');">{{vm.dictionary.terms['promoted_object']}}</th>
+                    <th ng-if="vm.columns.rf_prediction_id" ng-click="vm.toggleOrderBy('rf_prediction_id');">{{vm.dictionary.terms['rf_prediction_id']}}</th>
+                    <th ng-if="vm.columns.rtb_flag" ng-click="vm.toggleOrderBy('rtb_flag');">{{vm.dictionary.terms['rtb_flag']}}</th>
+                    <th ng-if="vm.columns.targeting" ng-click="vm.toggleOrderBy('targeting');">{{vm.dictionary.terms['targeting']}}</th>
+                    <th ng-if="vm.columns.updated_time" ng-click="vm.toggleOrderBy('updated_time');">{{vm.dictionary.terms['updated_time']}}</th>
+                    <th ng-if="vm.columns.use_new_app_click" ng-click="vm.toggleOrderBy('use_new_app_click');">{{vm.dictionary.terms['use_new_app_click']}}</th>
+                    <th ng-if="vm.columns.pacing_type" ng-click="vm.toggleOrderBy('pacing_type');">{{vm.dictionary.terms['pacing_type']}}</th>
+                    <th class="text-right" ng-if="vm.columns.budget_remaining" ng-click="vm.toggleOrderBy('budget_remaining');">{{vm.dictionary.terms['budget_remaining']}}</th>
+                    <th class="text-right" ng-if="vm.columns.daily_budget" ng-click="vm.toggleOrderBy('daily_budget');">{{vm.dictionary.terms['daily_budget']}}</th>
+                    <th class="text-right" ng-if="vm.columns.lifetime_budget" ng-click="vm.toggleOrderBy('lifetime_budget');">{{vm.dictionary.terms['lifetime_budget']}}</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td colspan="33"></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr ng-repeat="a in vm.adSets | orderBy: vm.orderBy">
+                    <td ng-if="vm.columns.name" title="{{a.name}}"><a ng-href="/campaigns/{{a.campaign.id}}/ad-sets/{{a.id}}/ads">{{a.name}}</a></td>
+                    <td ng-if="vm.columns.id" title="{{a.id}}">{{a.id}}</td>
+                    <td ng-if="vm.columns.adlabels" title="{{a.adlabels}}">{{a.adlabels}}</td>
+                    <td ng-if="vm.columns.adset_schedule" title="{{a.adset_schedule}}">{{a.adset_schedule}}</td>
+                    <td ng-if="vm.columns.account_id" title="{{a.account_id}}">{{a.account_id}}</td>
+                    <td class="text-right" ng-if="vm.columns.bid_amount" title="{{a.bid_amount}}">{{vm.currency.to(a.bid_amount) | currency}}</td>
+                    <td ng-if="vm.columns.bid_info" title="{{a.bid_info}}">
+                        <span ng-repeat="(k, v) in a.bid_info">
+                            {{vm.dictionary.bidInfoActions[k]}}: {{v}}
+                        </span>
+                    </td>
+                    <td ng-if="vm.columns.billing_event" title="{{a.billing_event}}">{{vm.dictionary.billingEvents[a.billing_event]}}</td>
+                    <td ng-if="vm.columns.campaign" title="{{a.campaign}}">{{a.campaign}}</td>
+                    <td ng-if="vm.columns.campaign_id" title="{{a.campaign_id}}">{{a.campaign_id}}</td>
+                    <td ng-if="vm.columns.configured_status" title="{{a.configured_status}}">{{vm.dictionary.statuses[a.configured_status]}}</td>
+                    <td ng-if="vm.columns.created_time" title="{{a.created_time}}">{{a.created_time | date:'short'}}</td>
+                    <td ng-if="vm.columns.creative_sequence" title="{{a.creative_sequence}}">{{a.creative_sequence}}</td>
+                    <td ng-if="vm.columns.effective_status" title="{{a.effective_status}}">{{vm.dictionary.statuses[a.effective_status]}}</td>
+                    <td ng-if="vm.columns.start_time" title="{{a.start_time}}">{{a.start_time | date:'short'}}</td>
+                    <td ng-if="vm.columns.end_time" title="{{a.end_time}}">
+                        <span ng-if="a.end_time">{{a.end_time | date:'short'}}</span>
+                        <span ng-if="!a.end_time">Ongoing</span>
+                    </td>
+                    <td ng-if="vm.columns.frequency_cap" title="{{a.frequency_cap}}">{{a.frequency_cap}}</td>
+                    <td ng-if="vm.columns.frequency_cap_reset_period" title="{{a.frequency_cap_reset_period}}">{{a.frequency_cap_reset_period}}</td>
+                    <td ng-if="vm.columns.is_autobid" title="{{a.is_autobid}}">{{a.is_autobid}}</td>
+                    <td ng-if="vm.columns.lifetime_frequency_cap" title="{{a.lifetime_frequency_cap}}">{{a.lifetime_frequency_cap}}</td>
+                    <td ng-if="vm.columns.lifetime_imps" title="{{a.lifetime_imps}}">{{a.lifetime_imps}}</td>
+                    <td ng-if="vm.columns.optimization_goal" title="{{a.optimization_goal}}">{{vm.dictionary.optimizationGoals[a.optimization_goal]}}</td>
+                    <td ng-if="vm.columns.product_ad_behavior">{{vm.dictionary.productAdBehaviors[a.product_ad_behavior]}}</td>
+                    <td ng-if="vm.columns.promoted_object" title="{{a.promoted_object}}">{{a.promoted_object}}</td>
+                    <td ng-if="vm.columns.rf_prediction_id" title="{{a.rf_prediction_id}}">{{a.rf_prediction_id}}</td>
+                    <td ng-if="vm.columns.rtb_flag" title="{{a.rtb_flag}}">{{a.rtb_flag}}</td>
+                    <td ng-if="vm.columns.targeting" title="{{a.targeting}}">{{a.targeting}}</td>
+                    <td ng-if="vm.columns.updated_time" title="{{a.updated_time}}">{{a.updated_time | date:'short'}}</td>
+                    <td ng-if="vm.columns.use_new_app_click" title="{{a.use_new_app_click}}">{{a.use_new_app_click}}</td>
+                    <td ng-if="vm.columns.pacing_type" title="{{a.pacing_type}}">{{a.pacing_type}}</td>
+                    <td class="text-right" ng-if="vm.columns.budget_remaining" title="{{a.budget_remaining}}">{{vm.currency.to(a.budget_remaining) | currency}}</td>
+                    <td class="text-right" ng-if="vm.columns.daily_budget" title="{{a.daily_budget}}">{{vm.currency.to(a.daily_budget) | currency}}</td>
+                    <td class="text-right" ng-if="vm.columns.lifetime_budget" title="{{a.lifetime_budget}}">{{vm.currency.to(a.lifetime_budget) | currency}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
