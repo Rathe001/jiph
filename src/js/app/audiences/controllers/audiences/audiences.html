@@ -1,5 +1,5 @@
 <div class="module">
-    <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_audience']}}</div>
+    <a href="/audiences/create" class="btn btn-primary pull-right">{{vm.dictionary.terms['create_audience']}}</a>
     <h1>{{vm.dictionary.audiences['audiences']}} <span ng-if="vm.audiences.length > 0">({{vm.audiences.length}})</span></h1>
     <hr />
     <div class="loaded-content">
@@ -7,7 +7,7 @@
             {{vm.error}}
         </div>
         <div ng-if="!vm.error && vm.audiences.length === 0">
-            No audiences found. Please <a href="/adGroups/create">create a new audience</a> to get started.
+            No audiences found. Please <a href="/audiences/create">create a new audience</a> to get started.
         </div>
 
         <div loading="main.loading.get('All')"></div>

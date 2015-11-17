@@ -1,5 +1,5 @@
-angular.module('modAdGroups').factory('AdGroups', ['$q', '$window', 'Loading',
-    ($q, $window, Loading) => {
+angular.module('modAdGroups').factory('AdGroups', ['$http', '$q', '$window', 'Loading', 'Api',
+    ($http, $q, $window, Loading, Api) => {
         let service = {};
 
         service.getAll = getAll;
@@ -7,20 +7,18 @@ angular.module('modAdGroups').factory('AdGroups', ['$q', '$window', 'Loading',
         return service;
 
         function getAll(facebookAdAccountId) {
-            let deferred = $q.defer();
-            let url = "/api/prototype/adGroups";
+            let url = Api.path + "/adGroups";
 
             Loading.set(true, url);
-            FB.api(url, payload, response => {
-                if (!response || response.error) {
+            return $http.get(url).then(
+                success => {
                     Loading.set(false, url);
-                    deferred.reject(response.error);
-                } else {
+                    return success;
+                },
+                error => {
                     Loading.set(false, url);
-                    deferred.resolve(response);
-                }
-            });
-            return deferred.promise;
+                    return $q.reject(error);
+                });
         }
     }]
 );

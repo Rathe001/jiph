@@ -1,4 +1,4 @@
-let modAudiences = angular.module('modAudiences', ['modCommon']);
+let modAudiences = angular.module('modAudiences');
 
 modAudiences.controller('ctrlAudiences', ['$scope', 'Accounts', 'Dictionary', 'Audiences',
     function($scope, Accounts, Dictionary, Audiences) {
@@ -26,17 +26,13 @@ modAudiences.controller('ctrlAudiences', ['$scope', 'Accounts', 'Dictionary', 'A
         function _getAll() {
             vm.audiences = [];
             vm.error = "";
-            /*
-             Audiences.getAll(Accounts.active).then(response => {
-                 if(response.data.length > 0) {
+            Audiences.getAll(Accounts.active).then(response => {
+                if(response.data.length > 0) {
                     vm.audiences = _processResponse(response.data);
-                 } else {
-                    vm.error = "No ad sets found.";
-                 }
-             }, error => {
+                }
+            }, error => {
                 vm.error = error.message;
-             });
-             */
+            });
         }
 
         function _processResponse(input) {

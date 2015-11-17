@@ -1,4 +1,4 @@
-var modAdGroups = angular.module('modAdGroups', ['modCommon']);
+var modAdGroups = angular.module('modAdGroups');
 
 modAdGroups.controller('ctrlAdGroups', ['$scope', 'Accounts', 'Dictionary', 'AdGroups',
     function($scope, Accounts, Dictionary, AdGroups) {
@@ -26,17 +26,14 @@ modAdGroups.controller('ctrlAdGroups', ['$scope', 'Accounts', 'Dictionary', 'AdG
         function _getAll() {
             vm.adGroups = [];
             vm.error = "";
-/*
+
             AdGroups.getAll(Accounts.active).then(response => {
                 if(response.data.length > 0) {
                     vm.adGroups = _processResponse(response.data);
-                } else {
-                    vm.error = "No ad sets found.";
                 }
             }, error => {
-                vm.error = error.message;
+                vm.error = error.data;
             });
-            */
         }
 
         function _processResponse(input) {

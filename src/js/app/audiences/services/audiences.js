@@ -1,26 +1,72 @@
-angular.module('modAudiences').factory('Audiences', ['$q', '$window', 'Loading',
-    ($q, $window, Loading) => {
+angular.module('modAudiences').factory('Audiences', ['$http', '$q', '$window', 'Loading', 'Api',
+    ($http, $q, $window, Loading, Api) => {
         let service = {};
 
         service.getAll = getAll;
+        service.create = create;
+        service.update = update;
+        service.remove = remove;
 
         return service;
 
-        function getAll(facebookAdAccountId) {
-            let deferred = $q.defer();
-            let url = "/api/prototype/adGroups";
+        function create(payload) {
+            let url = Api.path + "/audiences";
 
             Loading.set(true, url);
-            FB.api(url, payload, response => {
-                if (!response || response.error) {
+            return $http.post(url, payload).then(
+                success => {
                     Loading.set(false, url);
-                    deferred.reject(response.error);
-                } else {
+                    return success;
+                },
+                error => {
                     Loading.set(false, url);
-                    deferred.resolve(response);
-                }
-            });
-            return deferred.promise;
+                    return $q.reject(error);
+                });
+        }
+
+        function getAll(facebookAdAccountId) {
+            let url = Api.path + "/audiences";
+
+            Loading.set(true, url);
+            return $http.get(url).then(
+                success => {
+                    Loading.set(false, url);
+                    return success;
+                },
+                error => {
+                    Loading.set(false, url);
+                    return $q.reject(error);
+                });
+        }
+
+        function update(payload) {
+            let url = Api.path + "/audiences";
+
+            Loading.set(true, url);
+            return $http.put(url, payload).then(
+                success => {
+                    Loading.set(false, url);
+                    return success;
+                },
+                error => {
+                    Loading.set(false, url);
+                    return $q.reject(error);
+                });
+        }
+
+        function remove() {
+            let url = Api.path + "/audiences";
+
+            Loading.set(true, url);
+            return $http.delete(url).then(
+                success => {
+                    Loading.set(false, url);
+                    return success;
+                },
+                error => {
+                    Loading.set(false, url);
+                    return $q.reject(error);
+                });
         }
     }]
 );

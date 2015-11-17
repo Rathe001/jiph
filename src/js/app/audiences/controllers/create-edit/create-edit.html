@@ -1,0 +1,53 @@
+<div class="module">
+    <h1>{{vm.title}}</h1>
+    <hr />
+    <div class="loaded-content">
+        <div ng-if="vm.error">
+            {{vm.error}}
+        </div>
+
+        <div loading="main.loading.get('All')"></div>
+
+        <div class="row">
+            Location
+        </div>
+
+        <div class="row">
+            Age
+        </div>
+
+        <div class="row">
+            Gender
+        </div>
+
+        <div class="row">
+            Languages
+        </div>
+
+        <hr />
+
+        <div class="row">
+            Interests
+        </div>
+
+        <hr />
+
+        <div class="row">
+            Behaviors
+        </div>
+
+        <hr />
+
+        <div class="row">
+            More categories
+        </div>
+
+        <hr />
+
+        <div class="row">
+            Connections
+        </div>
+
+        <div class="btn pull-right" ng-click="vm.save()">Save data!</div>
+    </div>
+</div>
