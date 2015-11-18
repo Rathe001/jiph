@@ -1,0 +1,95 @@
+.click-catcher {
+  position: fixed;
+  height:100%;
+  width:100%;
+  top:0;
+  left:0;
+  z-index: 9;
+}
+.combo-box {
+  position:relative;
+  float:left;
+  width:100%;
+
+  .wrapper {
+    position:relative;
+    float:left;
+    width:100%;
+
+    &:before {
+      position:absolute;
+      content: $fa-var-caret-down;
+      font-family: FontAwesome;
+      right: 10px;
+      top: 5px;
+      z-index: 1;
+    }
+
+    &.loading {
+      &:before {
+        position:absolute;
+        content: "Loading data...";
+        font-family: FontAwesome;
+        top: 0;
+        left: 0;
+        padding: 3px 5px;
+        z-index: 3;
+        width: 100%;
+        text-align: left;
+        border: 1px solid #cfcfcf;
+        background: #fff;
+        height: 100%;
+      }
+    }
+
+    input {
+      position: relative;
+      z-index: 2;
+      background:none;
+      cursor: pointer;
+      text-overflow:ellipsis;
+      padding:5px 25px 5px 5px;
+    }
+  }
+
+  .drop-menu {
+    position: absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    background:rgba(255,255,255,0.95);
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+    max-height:200px;
+    overflow-y: scroll;
+    z-index: 10;
+
+    ul{
+      text-align:left;
+      font-size: 12px;
+      padding:5px 0 0 0;
+
+      li{
+        cursor: pointer;
+        padding:1px 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        img {
+          float:left;
+          max-width: 35px;
+          max-height: 35px;
+          margin:3px 5px 3px 0;
+        }
+
+        .pad-content {
+          padding: 5px 0 0 0;
+        }
+
+        &:hover {
+          background:$color-primary;
+          color: $color-secondary;
+        }
+      }
+    }
+  }
+}

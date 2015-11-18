@@ -36,7 +36,6 @@
     right: -10px;
     width:300px;
     color: #141823;
-    padding:5px;
     background: $color-secondary;
     box-shadow: 0 0 15px rgba(0,0,0,.5);
     font-size: 12px;
@@ -47,9 +46,12 @@
       color: $color-primary;
       background: #F5F5F5;
       padding:0 0 0 5px;
+      margin: 0 0 5px 0;
     }
 
     ul {
+      margin:0;
+      padding:0;
 
       li {
         padding: 0 10px;

@@ -9,17 +9,18 @@
     float:left;
     width:100%;
 
-    ul {
+    ul.list {
       position: relative;
       float:left;
       width:300px;
       z-index: 2;
 
       li {
-        padding: 5px;
+        padding: 10px;
         font-size: 18px;
         border: 1px solid #E0E0E0;
         border-bottom: none;
+        cursor:pointer;
 
         &:last-child {
           border-bottom: 1px solid #E0E0E0;

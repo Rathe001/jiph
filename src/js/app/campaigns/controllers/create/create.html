@@ -7,61 +7,89 @@
 <div class="module campaign-create margin">
     <h2>Select objective</h2>
     <div class="objectives">
-        <ul>
+        <ul class="list">
             <li ng-repeat="o in vm.objectives" ng-click="vm.campaign.objective = o.id" ng-if="o.enabled" ng-class="{'active': vm.campaign.objective === o.id}"><i class="fa" ng-class="o.icon"></i> {{o.name}}</li>
         </ul>
         <div class="objective-box" ng-repeat="o in vm.objectives" ng-show="vm.campaign.objective === o.id">
             <i class="fa" ng-class="o.icon"></i>
             <h3>{{o.name}}</h3>
             <p>{{o.shortDesc}}</p>
+            <div class="row">
+                <label>Campaign name:</label>
+                <input type="text" ng-model="vm.campaign.name" />
+            </div>
+
             <div ng-if="o.id === 'POST_ENGAGEMENT'">
-                <select>
-                    <option value="">Page</option>
-                </select>
-                <select>
-                    <option value="">Post</option>
-                </select>
+                <div class="row">
+                    <label>Page:</label>
+                    <div combo-box="vm.pages" bind="vm.campaign.promoted_object.page_id" placeholder="Select a page..." type="connectionobjects"></div>
+                </div>
+                <div class="row">
+                    <label>Post:</label>
+                    <div combo-box="vm.posts" bind="vm.campaign.object_story_id" placeholder="Select a post..." type="connectionobjects"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'PAGE_LIKES'">
-                <select>
-                    <option value="">Page</option>
-                </select>
+                <div class="row">
+                    <label>Page:</label>
+                    <div combo-box="vm.pages" bind="vm.campaign.promoted_object.page_id" placeholder="Select a page..." type="connectionobjects"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'LINK_CLICKS'">
-                <input type="text" value="Url" />
-                <select>
-                    <option value="">(optional) Pixel</option>
-                </select>
+                <div class="row">
+                    <label>Page:</label>
+                    <div combo-box="vm.pages" bind="vm.campaign.promoted_object.page_id" placeholder="Select a page..." type="connectionobjects"></div>
+                </div>
+                <div class="row">
+                    <label>Pixel (optional):</label>
+                    <div combo-box="vm.pixels" bind="vm.campaign.promoted_object.pixel_id" placeholder="Select a pixel..." type="pixels"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'CONVERSIONS'">
-                <input type="text" value="Url" />
-                <select>
-                    <option value="">(required) Pixel</option>
-                </select>
+                <div class="row">
+                    <label>Page:</label>
+                    <div combo-box="vm.pages" bind="vm.campaign.promoted_object.page_id" placeholder="Select a page..." type="connectionobjects"></div>
+                </div>
+                <div class="row">
+                    <label>Pixel</label>
+                    <div combo-box="vm.pixels" bind="vm.campaign.promoted_object.pixel_id" placeholder="Select a pixel..." type="pixels"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'MOBILE_APP_INSTALLS'">
-                <input type="text" value="Url" />
+                <div class="row">
+                    <label>Application:</label>
+                    <div combo-box="vm.applications" bind="vm.campaign.promoted_object.page_id" placeholder="Select an application..." type="connectionobjects"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'MOBILE_APP_ENGAGEMENT'">
-                <input type="text" value="Url" />
+                <div class="row">
+                    <label>Application:</label>
+                    <div combo-box="vm.applications" bind="vm.campaign.promoted_object.page_id" placeholder="Select an application..." type="connectionobjects"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'LOCAL_AWARENESS'">
-                <select>
-                    <option value="">Page</option>
-                </select>
+                <div class="row">
+                    <label>Page:</label>
+                    <div combo-box="vm.pages" bind="vm.campaign.promoted_object.page_id" placeholder="Select a page..." type="connectionobjects"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'EVENT_RESPONSES'">
-                <input type="text" value="Url" />
+                <div class="row">
+                    <label>Event:</label>
+                    <div combo-box="vm.events" bind="vm.campaign.promoted_object.page_id" placeholder="Select an event..." type="connectionobjects"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'OFFER_CLAIMS'">
-                <select>
-                    <option value="">Page</option>
-                </select>
+                <div class="row">
+                    <label>Page:</label>
+                    <div combo-box="vm.pages" bind="vm.campaign.promoted_object.offer_id" placeholder="Select a page..." type="connectionobjects"></div>
+                </div>
             </div>
             <div ng-if="o.id === 'VIDEO_VIEWS'">
-                <select>
-                    <option value="">Page</option>
-                </select>
+                <div class="row">
+                    <label>Page:</label>
+                    <div combo-box="vm.pages" bind="vm.campaign.promoted_object.page_id" placeholder="Select a page..." type="connectionobjects"></div>
+                </div>
             </div>
         </div>
     </div>
