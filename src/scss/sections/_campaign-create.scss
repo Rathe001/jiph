@@ -1,0 +1,76 @@
+.campaign-create {
+
+  &.margin {
+    margin-top: 15px;
+  }
+
+  .objectives {
+    position:relative;
+    float:left;
+    width:100%;
+
+    ul {
+      position: relative;
+      float:left;
+      width:300px;
+      z-index: 2;
+
+      li {
+        padding: 5px;
+        font-size: 18px;
+        border: 1px solid #E0E0E0;
+        border-bottom: none;
+
+        &:last-child {
+          border-bottom: 1px solid #E0E0E0;
+        }
+
+        &:hover {
+          background: #f6f6f6;
+        }
+
+        &.active {
+          background: $color-primary;
+          color: $color-secondary;
+        }
+
+        i {
+          float: left;
+          width: 35px;
+          padding: 4px 0 0 0;
+          text-align: center;
+        }
+      }
+    }
+
+    .objective-box {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      margin: 0 0 0 -13%;
+      width: 500px;
+      padding: 25px;
+      text-align: center;
+
+      h3 {
+        font-size:26px;
+        color:$color-primary;
+        margin: 0 0 15px 0;
+      }
+
+      i {
+        color: $color-primary;
+        font-size:100px;
+        width:100%;
+        margin: 0 0 5px 0;
+      }
+    }
+  }
+
+  .stats-box {
+    float:right;
+    width: 300px;
+    height:300px;
+    border:1px solid black;
+  }
+}

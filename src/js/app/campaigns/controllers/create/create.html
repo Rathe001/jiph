@@ -1,0 +1,100 @@
+<div class="module campaign-create">
+    <h1>Create campaign</h1>
+    <p>Description of campaign creation here.</p>
+    <div debug="vm.campaign"></div>
+</div>
+
+<div class="module campaign-create margin">
+    <h2>Select objective</h2>
+    <div class="objectives">
+        <ul>
+            <li ng-repeat="o in vm.objectives" ng-click="vm.campaign.objective = o.id" ng-if="o.enabled" ng-class="{'active': vm.campaign.objective === o.id}"><i class="fa" ng-class="o.icon"></i> {{o.name}}</li>
+        </ul>
+        <div class="objective-box" ng-repeat="o in vm.objectives" ng-show="vm.campaign.objective === o.id">
+            <i class="fa" ng-class="o.icon"></i>
+            <h3>{{o.name}}</h3>
+            <p>{{o.shortDesc}}</p>
+            <div ng-if="o.id === 'POST_ENGAGEMENT'">
+                <select>
+                    <option value="">Page</option>
+                </select>
+                <select>
+                    <option value="">Post</option>
+                </select>
+            </div>
+            <div ng-if="o.id === 'PAGE_LIKES'">
+                <select>
+                    <option value="">Page</option>
+                </select>
+            </div>
+            <div ng-if="o.id === 'LINK_CLICKS'">
+                <input type="text" value="Url" />
+                <select>
+                    <option value="">(optional) Pixel</option>
+                </select>
+            </div>
+            <div ng-if="o.id === 'CONVERSIONS'">
+                <input type="text" value="Url" />
+                <select>
+                    <option value="">(required) Pixel</option>
+                </select>
+            </div>
+            <div ng-if="o.id === 'MOBILE_APP_INSTALLS'">
+                <input type="text" value="Url" />
+            </div>
+            <div ng-if="o.id === 'MOBILE_APP_ENGAGEMENT'">
+                <input type="text" value="Url" />
+            </div>
+            <div ng-if="o.id === 'LOCAL_AWARENESS'">
+                <select>
+                    <option value="">Page</option>
+                </select>
+            </div>
+            <div ng-if="o.id === 'EVENT_RESPONSES'">
+                <input type="text" value="Url" />
+            </div>
+            <div ng-if="o.id === 'OFFER_CLAIMS'">
+                <select>
+                    <option value="">Page</option>
+                </select>
+            </div>
+            <div ng-if="o.id === 'VIDEO_VIEWS'">
+                <select>
+                    <option value="">Page</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="module campaign-create margin" ng-if="vm.showDetails()">
+    <h2>Select campaign details</h2>
+    <div class="stats-box">
+        Campaign stats
+    </div>
+</div>
+
+<div class="module campaign-create margin" ng-if="vm.showDetails()">
+    <h2>Select audience</h2>
+    <div class="stats-box">
+        Audience Definition
+    </div>
+</div>
+
+<div class="module campaign-create margin" ng-if="vm.showDetails()">
+    <h2>Select budget &amp; pricing</h2>
+    <div class="stats-box">
+        Estimated Daily Reach
+    </div>
+</div>
+
+<div class="module campaign-create margin" ng-if="vm.showDetails()">
+    <h2>Select ad group</h2>
+    <div class="stats-box">
+        video/image guidelines
+    </div>
+</div>
+
+<div class="module campaign-create margin" ng-if="vm.showDetails()">
+    <div class="btn pull-right">Review campaign</div>
+</div>

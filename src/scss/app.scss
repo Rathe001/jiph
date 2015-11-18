@@ -15,9 +15,11 @@
 @import 'components/tables';
 @import 'components/buttons';
 @import 'components/breadcrumb';
+@import 'components/debug';
 
 @import 'sections/login';
 @import 'sections/dashboard';
+@import 'sections/campaign-create';
 
 @import 'vendor/font-awesome/font-awesome';
 
@@ -50,6 +52,14 @@ h1 {
     font-size:18px;
     color:#AFAFAF;
   }
+}
+h2 {
+  background:#f5f5f5;
+  font-weight: 800;
+  white-space: nowrap;
+  padding: 5px;
+  border: 1px solid #cfcfcf;
+  margin:0 0 15px 0;
 }
 th {
   text-align: left;

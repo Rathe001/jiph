@@ -29,7 +29,13 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
                 controller: 'ctrlCampaigns',
                 controllerAs: 'vm'
             })
-            // Edit campaign
+            // Create
+            .when('/campaigns/create', {
+                templateUrl: '/js/app/campaigns/controllers/create/create.html',
+                controller: 'ctrlCampaignsCreate',
+                controllerAs: 'vm'
+            })
+            // Edit
             .when('/campaigns/:campaignId', {
                 templateUrl: '/js/app/campaigns/controllers/edit-create/edit-create.html',
                 controller: 'ctrlCampaignsEditCreate',
@@ -63,12 +69,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider',
             .when('/ads/:adId', {
                 templateUrl: '/js/app/ads/controllers/edit-create/edit-create.html',
                 controller: 'ctrlAdsCreateEdit',
-                controllerAs: 'vm'
-            })
-/* Campaign wizard */
-            .when('/campaigns/create/', {
-                templateUrl: '/js/app/campaigns/controllers/campaigns/campaigns.html',
-                controller: 'ctrlCampaigns',
                 controllerAs: 'vm'
             })
 /* Automation */
