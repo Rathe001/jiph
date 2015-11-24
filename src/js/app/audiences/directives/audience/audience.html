@@ -1,3 +1,57 @@
 <div>
-    Audience
+    <div class="row locations">
+        <label>Locations</label>
+        <div>
+            Include:
+            <span ng-repeat="(k, v) in vm.audience.targeting.geo_locations" ng-if="vm.audience.targeting.geo_locations[k].length > 0">
+                {{k}}: <span ng-repeat="l in vm.audience.targeting.geo_locations[k]">{{l.key}}&nbsp;</span>
+            </span>
+        </div>
+        <div>
+            Exclude:
+            <span ng-repeat="(k, v) in vm.audience.targeting.excluded_geo_locations" ng-if="vm.audience.targeting.excluded_geo_locations[k].length > 0">
+                {{k}}: <span ng-repeat="l in vm.audience.targeting.excluded_geo_locations[k]">{{l.key}}&nbsp;</span>
+            </span>
+        </div>
+        <select ng-model="vm.locations.type">
+            <option value="geo_locations">Include</option>
+            <option value="excluded_geo_locations">Exclude</option>
+        </select>
+        <div class="search" combo-box="vm.locations.all" bind="vm.locations.selected" placeholder="Add a country, state/province, city, ZIP, DMA or address" autocomplete="vm.autocompleteLocation" type="locations"></div>
+    </div>
+    <div class="row">
+        <label>Age</label>
+        <select class="width-auto" ng-model="vm.audience.targeting.age_min" ng-options="a.id as a.name for a in vm.ages"></select>
+        <span class="pull-left pad-5"> to </span>
+        <select class="width-auto" ng-model="vm.audience.targeting.age_max" ng-options="a.id as a.name for a in vm.ages"></select>
+    </div>
+    <div class="row">
+        <label>Gender</label>
+        <select class="width-auto" ng-model="vm.audience.targeting.genders">
+            <option value="[1]">Male</option>
+            <option value="[2]">Female</option>
+            <option value="[1,2]">Both</option>
+        </select>
+    </div>
+    <div class="row">
+        <label>Language</label>
+    </div>
+    <div class="row">
+        <label>More demographics</label>
+    </div>
+    <div class="row">
+        <label>Interests</label>
+    </div>
+    <div class="row">
+        <label>Behaviors</label>
+    </div>
+    <div class="row">
+        <label>More categories</label>
+    </div>
+    <div class="row">
+        <label>Connections</label>
+    </div>
+    <div class="row">
+        <label>Locations</label>
+    </div>
 </div>

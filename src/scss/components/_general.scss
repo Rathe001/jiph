@@ -42,7 +42,7 @@ th {
 a {
   color:#44619d;
 }
-input {
+input, select {
   float: left;
   width:100%;
   line-height: 16px;
@@ -50,6 +50,13 @@ input {
   padding: 5px;
   background:#fff;
   border:1px solid #cfcfcf;
+  border-radius: 5px;
+}
+input {
+
+}
+select {
+  height:29px;
 }
 label {
   text-align: left;

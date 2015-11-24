@@ -7,6 +7,7 @@ modCommon.directive('comboBox', [function () {
         bindToController: {
             comboBox: '=',
             bind: '=',
+            autocomplete: '=',
             type: '@',
             placeholder: '@'
         },
@@ -43,6 +44,14 @@ modCommon.directive('comboBox', [function () {
                             <li ng-if="vm.comboBox.length === 0">No data found.</li>
                         </ul>
                     </div>
+                    <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="locations">
+                        <ul>
+                            <li ng-repeat="c in vm.comboBox" ng-click="vm.selectObject(c)">
+                                {{c.name}} <small>{{c.type}}</small>
+                            </li>
+                            <li ng-if="vm.comboBox.length === 0">No data found.</li>
+                        </ul>
+                    </div>
                     <div class="drop-menu" ng-if="vm.showMenu" ng-switch-default>
                         <ul>
                             <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.select(c)">{{c.name}}</li>
@@ -54,16 +63,30 @@ modCommon.directive('comboBox', [function () {
         `
     };
 
-    function controller() {
+    function controller($scope) {
         let vm = this;
 
         vm.showMenu = false;
 
         vm.select = select;
+        vm.selectObject = selectObject;
         vm.toggleMenu = toggleMenu;
+
+        $scope.$watch(() => vm.filter, (newVal, oldVal) => {
+            if(vm.autocomplete && vm.filter && vm.filter !== "" && newVal !== oldVal && newVal.length > 0) {
+                vm.autocomplete(vm.filter);
+            }
+        });
 
         function select(c) {
             vm.bind = c.id;
+            vm.bindName = c.name;
+            vm.filter = vm.bindName;
+            toggleMenu();
+        }
+
+        function selectObject(c) {
+            vm.bind = c;
             vm.bindName = c.name;
             vm.filter = vm.bindName;
             toggleMenu();
