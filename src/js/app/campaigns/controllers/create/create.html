@@ -96,30 +96,62 @@
 </div>
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
-    <h2>Select campaign details</h2>
-    <div class="stats-box">
-        Campaign stats
+    <h2>Audiences</h2>
+    <p>A new ad set will be created for each campaign audience.</p>
+    <div class="row" style="padding:0 0 15px 0;">
+        <div class="col half">
+            <label>Add audiences</label>
+            <div combo-box="vm.audiences" bind="vm.selectedAudience" placeholder="Select an audience..."></div>
+        </div>
+    </div>
+    <div class="row" ng-if="vm.campaign.audiences.length > 0">
+        <table class="listing">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td></td>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr ng-repeat="a in vm.campaign.audiences track by $index">
+                    <td>{{a.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row" style="padding:15px 0;">
+        <div class="checkbox" ng-click="vm.ui.createAudience = !vm.ui.createAudience"><i class="fa" ng-class="{'fa-square': !vm.ui.createAudience, 'fa-check-square': vm.ui.createAudience}"></i> Create new audience</div>
+    </div>
+    <div ng-if="vm.ui.createAudience">
+        <div class="row">
+            <div class="col half">
+                <label>Audence name</label>
+                <input type="text" ng-model="vm.audience.name" />
+            </div>
+        </div>
+
+        <div audience="vm.audience"></div>
+
     </div>
 </div>
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
-    <h2>Select audience</h2>
-    <div class="stats-box">
-        Audience Definition
-    </div>
-</div>
-
-<div class="module campaign-create margin" ng-if="vm.showDetails()">
-    <h2>Select budget &amp; pricing</h2>
+    <h2>Budget &amp; pricing</h2>
     <div class="stats-box">
         Estimated Daily Reach
     </div>
 </div>
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
-    <h2>Select ad group</h2>
-    <div class="stats-box">
-        video/image guidelines
+    <h2>Ad groups</h2>
+    <p>Ads will be created for each added ad group, within each ad set, up to a maximum of 50.</p>
+    <div class="add-box">
+        <label>Select an ad group</label>
+        <div combo-box="vm.adGroups" bind="vm.selectedAdGroup" placeholder="Select an ad group..."></div>
     </div>
 </div>
 

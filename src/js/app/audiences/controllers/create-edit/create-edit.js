@@ -267,18 +267,18 @@ modAudiences.controller('ctrlAudiencesCreateEdit', ['Audiences',
             for(let i=0; i<12; i++) {
                 payload.push(angular.copy(testData));
             }
-            payload[0].name = "Test 1";
-            payload[1].name = "Test 2";
-            payload[2].name = "Test 3";
-            payload[3].name = "Another";
-            payload[4].name = "Cabbage";
-            payload[5].name = "Justin is super cool!";
-            payload[6].name = "I lied.";
-            payload[7].name = "...this is really lame";
-            payload[8].name = "Yay!";
-            payload[9].name = "Mad?";
-            payload[10].name = "MAD?!?!";
-            payload[11].name = "MAD?!?!?!?!?!?!?";
+            payload[0].name = "Test 1";payload[0].id = "0";
+            payload[1].name = "Test 2";payload[1].id = "1";
+            payload[2].name = "Test 3";payload[2].id = "2";
+            payload[3].name = "Another";payload[3].id = "3";
+            payload[4].name = "Cabbage";payload[4].id = "4";
+            payload[5].name = "Justin is super cool!";payload[5].id = "5";
+            payload[6].name = "I lied.";payload[6].id = "6";
+            payload[7].name = "...this is really lame";payload[7].id = "7";
+            payload[8].name = "Yay!";payload[8].id = "8";
+            payload[9].name = "Mad?";payload[9].id = "9";
+            payload[10].name = "MAD?!?!";payload[10].id = "10";
+            payload[11].name = "MAD?!?!?!?!?!?!?";payload[11].id = "11";
             if(!saveLock) {
                 saveLock = true;
                 Audiences.remove().then(deleted => {

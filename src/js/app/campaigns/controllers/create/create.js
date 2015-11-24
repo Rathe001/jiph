@@ -1,7 +1,7 @@
 let modCampaigns = angular.module('modCampaigns');
 
-modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns', 'Dictionary', 'Objectives', 'Facebook',
-    function($scope, Accounts, Campaigns, Dictionary, Objectives, Facebook) {
+modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns', 'Dictionary', 'Objectives', 'Facebook', 'Audiences',
+    function($scope, Accounts, Campaigns, Dictionary, Objectives, Facebook, Audiences) {
         let vm = this;
 
         vm.objectives = [];
@@ -10,26 +10,40 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
         vm.pages = [];
         vm.posts = [];
         vm.pixels = [];
+        vm.audiences = [];
+        vm.selectedAudience = {};
+        vm.ui = {};
 
         vm.showDetails = showDetails;
 
         _init();
 
+        // Watch objective change
         $scope.$watch(() => vm.campaign.objective, newVal => {
             if(newVal) {
                 //console.log(newVal);
             }
         });
 
+        // Watch account change
         $scope.$watch(() => Accounts.active, newVal => {
             if(newVal) {
                 _init();
             }
         });
 
+        // Watch page change
         $scope.$watch(() => vm.campaign.promoted_object.page_id, newVal => {
             if(newVal && vm.campaign.objective === "POST_ENGAGEMENT") {
                 _getPagePosts();
+            }
+        });
+
+        // Watch selected audience
+        $scope.$watch(() => vm.selectedAudience, newVal => {
+            if(newVal && JSON.stringify(newVal) !== "{}") {
+                console.log(vm.selectedAudience);
+                _addAudience(vm.selectedAudience);
             }
         });
 
@@ -39,11 +53,32 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
             vm.campaign = _setDefaultCampaign();
             vm.pages = _getAccountPages();
             vm.pixels = _getAccountPixels();
+
+            _getAudiences();
+        }
+
+        function _getAudiences() {
+            Audiences.getAll(Accounts.active).then(response => {
+                if(response.data.length > 0) {
+                    vm.audiences = response.data;
+                } else {
+                    vm.ui.createAudience = true;
+                }
+            }, error => {
+                vm.error = error.message;
+            });
+        }
+
+        function _addAudience(id) {
+            let add = vm.audiences.find(audience => audience.id === id);
+            vm.campaign.audiences.push(add);
+            vm.selectedAudience = {};
         }
 
         function _setDefaultCampaign() {
             return {
                 name: "",
+                audiences: [],
                 objective: "",
                 buying_type: "AUCTION",
                 promoted_object: {
