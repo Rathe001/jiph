@@ -1,7 +1,7 @@
 <div class="module campaign-create">
     <h1>Create campaign</h1>
     <p>Description of campaign creation here.</p>
-    <div debug="vm.audience"></div>
+    <div debug="vm.campaign"></div>
 </div>
 
 <div class="module campaign-create margin">
@@ -134,7 +134,7 @@
             </div>
         </div>
 
-        <div audience="vm.audience"></div>
+        <div audience="vm.audience" on-save="vm.saveAudience"></div>
 
     </div>
 </div>

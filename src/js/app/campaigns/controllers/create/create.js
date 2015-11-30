@@ -15,6 +15,7 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
         vm.ui = {};
 
         vm.showDetails = showDetails;
+        vm.saveAudience = saveAudience;
 
         _init();
 
@@ -42,7 +43,6 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
         // Watch selected audience
         $scope.$watch(() => vm.selectedAudience, newVal => {
             if(newVal && JSON.stringify(newVal) !== "{}") {
-                console.log(vm.selectedAudience);
                 _addAudience(vm.selectedAudience);
             }
         });
@@ -122,6 +122,11 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
 
         function showDetails() {
             return !!vm.campaign.objective;
+        }
+
+        function saveAudience(audienceId) {
+            vm.ui.createAudience = false;
+            _getAudiences();
         }
     }
 ]);

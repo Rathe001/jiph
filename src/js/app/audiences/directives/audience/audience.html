@@ -164,5 +164,9 @@
 <!-- Connections -->
     <div class="row">
         <label>Connections</label>
+        <div combo-box="vm.connections.all" bind="vm.connections.selected" placeholder="Select connection type" type="connections"></div>
+    </div>
+    <div class="row">
+        <div class="btn btn-primary pull-right" ng-click="vm.saveAudience()">Save audience</div>
     </div>
 </div>

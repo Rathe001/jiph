@@ -1,12 +1,13 @@
 var modAudiences = angular.module('modAudiences');
 
-modAudiences.directive('audience', ['Facebook', 'Accounts',
-    function (Facebook, Accounts) {
+modAudiences.directive('audience', ['Facebook', 'Accounts', 'Audiences',
+    function (Facebook, Accounts, Audiences) {
         return {
             restrict: 'EA',
             scope: {},
             bindToController: {
-                audience: '='
+                audience: '=',
+                onSave: '='
             },
             controller: controller,
             link: link,
@@ -17,6 +18,8 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
 
         function controller($scope) {
             let vm = this;
+
+            let saveLock = false;
 
             vm.ages = [];
             vm.audience = {};
@@ -32,6 +35,7 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
             vm.education_majors = {};
             vm.work_employers = {};
             vm.work_positions = {};
+            vm.connections = {};
 
             vm.autocompleteLocation = autocompleteLocation;
             vm.autocompleteEducationSchool = autocompleteEducationSchool;
@@ -41,6 +45,7 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
             vm.hasData = hasData;
             vm.removeLocation = removeLocation;
             vm.removeDemographic = removeDemographic;
+            vm.saveAudience = saveAudience;
 
             // Validate ages
             $scope.$watch(() => vm.audience.targeting.age_min + vm.audience.targeting.age_max, () => {
@@ -135,11 +140,19 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                 }
             });
 
+            // Connections change
+            $scope.$watch(() => vm.connections.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addConnection();
+                }
+            });
+
             _init();
 
             function _init() {
                 _setDefaults();
                 _setAges();
+                _setConnectionOptions();
                 _getLocales();
                 _getDemographics();
                 _getCategories();
@@ -147,11 +160,6 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                 _getInterests();
                 _getEducationStatuses();
                 _getCollegeYears();
-
-                //education_schools
-                //education_majors
-                //work_employers
-                //work_positions
             }
 
             function _setAges() {
@@ -226,6 +234,24 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                     all: [],
                     selected: {}
                 };
+            }
+
+            function _setConnectionOptions() {
+                vm.connections.all = [
+                    {id: "include", name: "Connections", desc: "People who are a fan of your Page, a member of your group, RSVP’d to your event or have authorized your app. "},
+                    {id: "exclude", name: "Excluded connections", desc: "People who have not become fans of your page, members of your group, RSVP'd to your event or authorized your app."},
+                    {id: "friends", name: "Friends of connections", desc: "Friends of the people who are connected to your object."}
+                ];
+            }
+
+            function _addConnection() {
+                vm.audience.targeting.connections = false;
+                vm.audience.targeting.excluded_connections = false;
+                vm.audience.targeting.friends_of_connections = false;
+
+                if(vm.connections.selected.id === "include") vm.audience.targeting.connections = true;
+                if(vm.connections.selected.id === "exclude") vm.audience.targeting.excluded_connections = true;
+                if(vm.connections.selected.id === "friends") vm.audience.targeting.friends_of_connections = true;
             }
 
             function _addLocation() {
@@ -463,6 +489,22 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
 
             function removeDemographic(index, demographic) {
                 vm.audience.targeting[demographic].splice(index, 1);
+            }
+
+            function saveAudience() {
+                if(!saveLock) {
+                    saveLock = true;
+                    vm.audience.id = 123;
+                    Audiences.remove().then(deleted => {
+                        Audiences.create([vm.audience]).then(response => {
+                            saveLock = false;
+
+                            if(vm.onSave) {
+                                vm.onSave("Testing!");
+                            }
+                        });
+                    });
+                }
             }
         }
 

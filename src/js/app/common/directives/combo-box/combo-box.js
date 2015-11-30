@@ -69,6 +69,14 @@ modCommon.directive('comboBox', [function () {
                             <li ng-if="vm.comboBox.length === 0">No data found.</li>
                         </ul>
                     </div>
+                    <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="connections">
+                        <ul>
+                            <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.selectObject(c)">
+                                {{c.name}}<br /><small>{{c.desc}}</small>
+                            </li>
+                            <li ng-if="vm.comboBox.length === 0">No data found.</li>
+                        </ul>
+                    </div>
                     <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="education">
                         <ul>
                             <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.selectObject(c)">
