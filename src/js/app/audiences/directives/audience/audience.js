@@ -21,8 +21,12 @@ modAudiences.directive('audience', ['Facebook',
             vm.ages = [];
             vm.audience = {};
             vm.locations = {};
+            vm.locales = {};
 
             vm.autocompleteLocation = autocompleteLocation;
+            vm.hasData = hasData;
+            vm.removeLocation = removeLocation;
+            vm.removeLocale = removeLocale;
 
             // Validate ages
             $scope.$watch(() => vm.audience.targeting.age_min + vm.audience.targeting.age_max, () => {
@@ -36,14 +40,21 @@ modAudiences.directive('audience', ['Facebook',
             // Location change
             $scope.$watch(() => vm.locations.selected, newVal => {
                 if(newVal && JSON.stringify(newVal) !== "{}")
-                _addLocation();
+                    _addLocation();
+            });
+
+            // Language/locale change
+            $scope.$watch(() => vm.locales.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}")
+                    _addLocale();
             });
 
             _init();
 
             function _init() {
-                _setAges();
                 _setDefaults();
+                _setAges();
+                _getLocales();
             }
 
             function _setAges() {
@@ -58,15 +69,22 @@ modAudiences.directive('audience', ['Facebook',
                 vm.audience.targeting = {
                     age_min: 13,
                     age_max: 65,
-                    geo_locations: {},
+                    geo_locations: {
+                        country: [{key: 'US'}]
+                    },
                     excluded_geo_locations: {},
-                    genders: "[1,2]"
+                    genders: "",
+                    locales: [6]
                 };
                 vm.locations = {
                     type: "geo_locations",
                     all: [],
                     selected: {}
                 };
+                vm.locales = {
+                    all: [],
+                    selected: {}
+                }
             }
 
             function _addLocation() {
@@ -94,6 +112,26 @@ modAudiences.directive('audience', ['Facebook',
                 vm.audience.targeting[vm.locations.type][type].push(item);
             }
 
+            function _addLocale() {
+                if(vm.audience.targeting.locales.indexOf(vm.locales.selected) === -1) {
+                    vm.audience.targeting.locales.push(vm.locales.selected);
+                }
+                vm.locales.selected = {};
+            }
+
+            function _getLocales() {
+                Facebook.get('/search', {
+                    q: "",
+                    type: 'adlocale',
+                    limit: 1000
+                }).then(results => {
+                    for(let i=0; i<results.data.length; i++) {
+                        results.data[i].id = results.data[i].key;
+                    }
+                    vm.locales.all = results.data;
+                });
+            }
+
             function autocompleteLocation(searchString) {
                 Facebook.get('/search', {
                     q: searchString,
@@ -105,6 +143,34 @@ modAudiences.directive('audience', ['Facebook',
                     }
                     vm.locations.all = results.data;
                 });
+            }
+
+            function hasData(item) {
+                if(Object.keys(item).length === 1 && Object.keys(item)[0] === "location_types") {
+                    return false;
+                }
+
+                return Object.keys(item).length > 0;
+            }
+
+            function removeLocale(l) {
+                let index = vm.audience.targeting.locales.indexOf(l);
+
+                if(index > -1) {
+                    vm.audience.targeting.locales.splice(index, 1);
+                }
+            }
+
+            function removeLocation(l, inclusionType, type) {
+                let index = vm.audience.targeting[inclusionType][type].indexOf(l);
+
+                if(index > -1) {
+                    vm.audience.targeting[inclusionType][type].splice(index, 1);
+                }
+
+                if(vm.audience.targeting[inclusionType][type].length === 0) {
+                    delete vm.audience.targeting[inclusionType][type];
+                }
             }
         }
 

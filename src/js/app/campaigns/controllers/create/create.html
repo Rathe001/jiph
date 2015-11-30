@@ -105,7 +105,7 @@
         </div>
     </div>
     <div class="row" ng-if="vm.campaign.audiences.length > 0">
-        <table class="listing">
+        <table class="listing highlight">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -126,7 +126,7 @@
     <div class="row" style="padding:15px 0;">
         <div class="checkbox" ng-click="vm.ui.createAudience = !vm.ui.createAudience"><i class="fa" ng-class="{'fa-square': !vm.ui.createAudience, 'fa-check-square': vm.ui.createAudience}"></i> Create new audience</div>
     </div>
-    <div ng-if="vm.ui.createAudience">
+    <div ng-if="vm.ui.createAudience" class="create-audience">
         <div class="row">
             <div class="col half">
                 <label>Audence name</label>

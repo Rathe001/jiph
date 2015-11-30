@@ -1,18 +1,32 @@
 <div>
-    <div class="row locations">
+    <div class="row">
         <label>Locations</label>
-        <div>
-            Include:
-            <span ng-repeat="(k, v) in vm.audience.targeting.geo_locations" ng-if="vm.audience.targeting.geo_locations[k].length > 0">
-                {{k}}: <span ng-repeat="l in vm.audience.targeting.geo_locations[k]">{{l.key}}&nbsp;</span>
+        <div class="col half" ng-if="vm.hasData(vm.audience.targeting.geo_locations)">
+            <div class="row">
+                <select ng-model="vm.audience.targeting.geo_locations.location_types">
+                    <option value="">Include everyone in these locations...</option>
+                    <option value="home">Include people who live in these locations...</option>
+                    <option value="recent">Include people recently in these locations...</option>
+                    <option value="travel_in">Include people traveling in these locations...</option>
+                </select>
+            </div>
+            <span ng-repeat="(k, v) in vm.audience.targeting.geo_locations" ng-if="k !== 'location_types'">
+                <span ng-repeat="l in vm.audience.targeting.geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'geo_locations', k)"></i></span>
             </span>
         </div>
-        <div>
-            Exclude:
-            <span ng-repeat="(k, v) in vm.audience.targeting.excluded_geo_locations" ng-if="vm.audience.targeting.excluded_geo_locations[k].length > 0">
-                {{k}}: <span ng-repeat="l in vm.audience.targeting.excluded_geo_locations[k]">{{l.key}}&nbsp;</span>
+        <div class="col half" ng-if="vm.hasData(vm.audience.targeting.excluded_geo_locations)">
+            <div class="row">
+                <select ng-model="vm.audience.targeting.excluded_geo_locations.location_types">
+                    <option value="">Exclude everyone in these locations...</option>
+                    <option value="home">Exclude people who live in these locations...</option>
+                </select>
+            </div>
+            <span ng-repeat="(k, v) in vm.audience.targeting.excluded_geo_locations" ng-if="k !== 'location_types'">
+                <span ng-repeat="l in vm.audience.targeting.excluded_geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'excluded_geo_locations', k)"></i></span>
             </span>
         </div>
+    </div>
+    <div class="row locations">
         <select ng-model="vm.locations.type">
             <option value="geo_locations">Include</option>
             <option value="excluded_geo_locations">Exclude</option>
@@ -28,13 +42,15 @@
     <div class="row">
         <label>Gender</label>
         <select class="width-auto" ng-model="vm.audience.targeting.genders">
-            <option value="[1]">Male</option>
-            <option value="[2]">Female</option>
-            <option value="[1,2]">Both</option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+            <option value="">Both</option>
         </select>
     </div>
     <div class="row">
         <label>Language</label>
+        <span ng-repeat="l in vm.audience.targeting.locales" class="added-item">{{l}}<i class="fa fa-times" ng-click="vm.removeLocale(l)"></i></span>
+        <div combo-box="vm.locales.all" bind="vm.locales.selected" placeholder="Select a language/locale"></div>
     </div>
     <div class="row">
         <label>More demographics</label>

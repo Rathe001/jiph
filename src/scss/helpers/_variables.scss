@@ -3,6 +3,7 @@ $color-secondary: rgba(255, 255, 255, 1.0);
 $color-dark-highlight: rgba(0, 0, 0, 0.2);
 
 $border-normal: 1px solid #cfcfcf;
+$border-highlight: 1px solid $color-primary;
 
 $s-mobile: "(min-width: 768px)";
 $s-tablet: "(min-width: 992px)";

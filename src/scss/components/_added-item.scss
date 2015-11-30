@@ -1,0 +1,28 @@
+.added-item {
+  position: relative;
+  float:left;
+  background:$color-primary;
+  color: $color-secondary;
+  border-radius: 3px;
+  padding: 7px 10px 7px 10px;
+  margin: 0 5px 5px 0;
+  font-size: 12px;
+  line-height: 12px;
+
+  i {
+    display:none;
+    position:absolute;
+    right: -1px;
+    border: 1px solid #fff;
+    padding: 2px;
+    top: -1px;
+    background: red;
+    cursor:pointer;
+  }
+
+  &:hover {
+    i {
+      display:block;
+    }
+  }
+}

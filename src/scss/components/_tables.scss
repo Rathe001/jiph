@@ -54,5 +54,31 @@ table {
         }
       }
     }
+
+    &.highlight {
+      border-top: $border-highlight;
+      border-left: $border-highlight;
+
+      thead {
+        tr {
+          th {
+            color: $color-secondary;
+            background: $color-primary;
+            border-right: $border-highlight;
+            border-bottom: $border-highlight;
+          }
+        }
+      }
+
+      tfoot {
+        tr {
+          td {
+            background: $color-primary;
+            border-right: $border-highlight;
+            border-bottom: $border-highlight;
+          }
+        }
+      }
+    }
   }
 }
