@@ -26,8 +26,18 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
             vm.demographics = {};
             vm.behaviors = {};
             vm.interests = {};
+            vm.education_schools = {};
+            vm.education_statuses = {};
+            vm.college_years = {};
+            vm.education_majors = {};
+            vm.work_employers = {};
+            vm.work_positions = {};
 
             vm.autocompleteLocation = autocompleteLocation;
+            vm.autocompleteEducationSchool = autocompleteEducationSchool;
+            vm.autocompleteEducationMajor = autocompleteEducationMajor;
+            vm.autocompleteWorkEmployer = autocompleteWorkEmployer;
+            vm.autocompleteWorkPosition = autocompleteWorkPosition;
             vm.hasData = hasData;
             vm.removeLocation = removeLocation;
             vm.removeDemographic = removeDemographic;
@@ -76,6 +86,48 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                 }
             });
 
+            // Education schools change
+            $scope.$watch(() => vm.education_schools.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addDemographic('education_schools');
+                }
+            });
+
+            // Education status change
+            $scope.$watch(() => vm.education_statuses.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addDemographic('education_statuses');
+                }
+            });
+
+            // Education status change
+            $scope.$watch(() => vm.college_years.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addDemographic('college_years');
+                }
+            });
+
+            // Education major change
+            $scope.$watch(() => vm.education_majors.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addDemographic('education_majors');
+                }
+            });
+
+            // Work employer change
+            $scope.$watch(() => vm.work_employers.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addDemographic('work_employers');
+                }
+            });
+
+            // Work employer change
+            $scope.$watch(() => vm.work_positions.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addDemographic('work_positions');
+                }
+            });
+
             // BCT change
             $scope.$watch(() => vm.categories.selected, newVal => {
                 if(newVal && JSON.stringify(newVal) !== "{}") {
@@ -93,6 +145,13 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                 _getCategories();
                 _getBehaviors();
                 _getInterests();
+                _getEducationStatuses();
+                _getCollegeYears();
+
+                //education_schools
+                //education_majors
+                //work_employers
+                //work_positions
             }
 
             function _setAges() {
@@ -143,6 +202,30 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                     all: [],
                     selected: {}
                 };
+                vm.education_schools = {
+                    all: [],
+                    selected: {}
+                };
+                vm.education_statuses = {
+                    all: [],
+                    selected: {}
+                };
+                vm.college_years = {
+                    all: [],
+                    selected: {}
+                };
+                vm.education_majors = {
+                    all: [],
+                    selected: {}
+                };
+                vm.work_employers = {
+                    all: [],
+                    selected: {}
+                };
+                vm.work_positions = {
+                    all: [],
+                    selected: {}
+                };
             }
 
             function _addLocation() {
@@ -176,16 +259,26 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                 }
             }
 
-            function _addDemographic() {
-                let type = vm.demographics.selected.type;
+            function _addDemographic(type) {
+                if(!type) {
+                    type = vm.demographics.selected.type;
+                    if(!vm.audience.targeting[type]) vm.audience.targeting[type] = [];
 
-                if(!vm.audience.targeting[type]) vm.audience.targeting[type] = [];
+                    if(!vm.audience.targeting[type].find(item => item.id === vm.demographics.selected.id)) {
+                        vm.audience.targeting[type].push({
+                            id: vm.demographics.selected.id,
+                            name: vm.demographics.selected.name
+                        });
+                    }
+                } else {
+                    if(!vm.audience.targeting[type]) vm.audience.targeting[type] = [];
 
-                if(!vm.audience.targeting[type].find(item => item.id === vm.demographics.selected.id)) {
-                    vm.audience.targeting[type].push({
-                        id: vm.demographics.selected.id,
-                        name: vm.demographics.selected.name
-                    });
+                    if(!vm.audience.targeting[type].find(item => item.id === vm[type].selected.id)) {
+                        vm.audience.targeting[type].push({
+                            id: vm[type].selected.id,
+                            name: vm[type].selected.name
+                        });
+                    }
                 }
             }
 
@@ -266,6 +359,30 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                 });
             }
 
+            function _getCollegeYears() {
+                for(let i=1980; i<2019; i++) {
+                    vm.college_years.all.push({name:i, id:i});
+                }
+            }
+
+            function _getEducationStatuses() {
+                vm.education_statuses.all = [
+                    {id: 1, name: "High school"},
+                    {id: 2, name: "Undergrad"},
+                    {id: 3, name: "Alum"},
+                    {id: 4, name: "High school grad"},
+                    {id: 5, name: "Some college"},
+                    {id: 6, name: "Associate degree"},
+                    {id: 7, name: "In grad school"},
+                    {id: 8, name: "Some grad school"},
+                    {id: 9, name: "Master degree"},
+                    {id: 10, name: "Professional degree"},
+                    {id: 11, name: "Doctorate degree"},
+                    {id: 12, name: "Unspecified"},
+                    {id: 13, name: "Some high school"}
+                ]
+            }
+
             function _generateTree(data) {
                 // TODO: generate data trees
                 return data;
@@ -281,6 +398,46 @@ modAudiences.directive('audience', ['Facebook', 'Accounts',
                         results.data[i].id = results.data[i].key;
                     }
                     vm.locations.all = results.data;
+                });
+            }
+
+            function autocompleteEducationSchool(searchString) {
+                Facebook.get('/search', {
+                    q: searchString,
+                    type: 'adeducationschool',
+                    limit: 10
+                }).then(results => {
+                    vm.education_schools.all = results.data;
+                });
+            }
+
+            function autocompleteEducationMajor(searchString) {
+                Facebook.get('/search', {
+                    q: searchString,
+                    type: 'adeducationmajor',
+                    limit: 10
+                }).then(results => {
+                    vm.education_majors.all = results.data;
+                });
+            }
+
+            function autocompleteWorkEmployer(searchString) {
+                Facebook.get('/search', {
+                    q: searchString,
+                    type: 'adworkemployer',
+                    limit: 10
+                }).then(results => {
+                    vm.work_employers.all = results.data;
+                });
+            }
+
+            function autocompleteWorkPosition(searchString) {
+                Facebook.get('/search', {
+                    q: searchString,
+                    type: 'adworkposition',
+                    limit: 10
+                }).then(results => {
+                    vm.work_positions.all = results.data;
                 });
             }
 

@@ -83,6 +83,60 @@
         <span ng-repeat="d in vm.audience.targeting.family_statuses" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'family_statuses')"></i></span>
         <span ng-repeat="d in vm.audience.targeting.office_type" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'office_type')"></i></span>
     </div>
+<!-- Education schools -->
+    <div class="row">
+        <label>Education schools</label>
+        <div class="search" clear-on-select="true" combo-box="vm.education_schools.all" bind="vm.education_schools.selected" placeholder="Select schools" autocomplete="vm.autocompleteEducationSchool" type="education"></div>
+    </div>
+    <div class="row" ng-if="vm.audience.targeting.education_schools.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.education_schools" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'education_schools')"></i></span>
+    </div>
+
+<!-- Education status -->
+    <div class="row">
+        <label>Education status</label>
+        <div combo-box="vm.education_statuses.all" clear-on-select="true" bind="vm.education_statuses.selected" placeholder="Select education statuses" type="object"></div>
+    </div>
+    <div class="row" ng-if="vm.audience.targeting.education_statuses.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.education_statuses" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'education_statuses')"></i></span>
+    </div>
+
+<!-- College years -->
+    <div class="row">
+        <label>College years</label>
+        <div combo-box="vm.college_years.all" clear-on-select="true" bind="vm.college_years.selected" placeholder="Select college years" type="object"></div>
+    </div>
+    <div class="row" ng-if="vm.audience.targeting.college_years.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.college_years" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'college_years')"></i></span>
+    </div>
+
+<!-- Education majors -->
+    <div class="row">
+        <label>Education majors</label>
+        <div class="search" clear-on-select="true" combo-box="vm.education_majors.all" bind="vm.education_majors.selected" placeholder="Select majors" autocomplete="vm.autocompleteEducationMajor" type="employers"></div>
+    </div>
+    <div class="row" ng-if="vm.audience.targeting.education_majors.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.education_majors" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'education_majors')"></i></span>
+    </div>
+
+<!-- Work employers -->
+    <div class="row">
+        <label>Work employers</label>
+        <div class="search" clear-on-select="true" combo-box="vm.work_employers.all" bind="vm.work_employers.selected" placeholder="Select employers" autocomplete="vm.autocompleteWorkEmployer" type="employers"></div>
+    </div>
+    <div class="row" ng-if="vm.audience.targeting.work_employers.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.work_employers" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'work_employers')"></i></span>
+    </div>
+
+<!-- Work positions -->
+    <div class="row">
+        <label>Work positions</label>
+        <div class="search" clear-on-select="true" combo-box="vm.work_positions.all" bind="vm.work_positions.selected" placeholder="Select positions" autocomplete="vm.autocompleteWorkPosition" type="employers"></div>
+    </div>
+    <div class="row" ng-if="vm.audience.targeting.work_positions.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.work_positions" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'work_positions')"></i></span>
+    </div>
+
 <!-- Interests -->
     <div class="row">
         <label>Interests</label>

@@ -53,10 +53,34 @@ modCommon.directive('comboBox', [function () {
                             <li ng-if="vm.comboBox.length === 0">No data found.</li>
                         </ul>
                     </div>
+                    <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="object">
+                        <ul>
+                            <li ng-repeat="c in vm.comboBox" ng-click="vm.selectObject(c)">
+                                {{c.name}}
+                            </li>
+                            <li ng-if="vm.comboBox.length === 0">No data found.</li>
+                        </ul>
+                    </div>
                     <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="targeting">
                         <ul>
                             <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.selectObject(c)">
-                                {{c.name}} <small>{{c.type}}</small>
+                                {{c.name}}<br /><small>Audience size: {{c.audience_size || c.size | number}}</small>
+                            </li>
+                            <li ng-if="vm.comboBox.length === 0">No data found.</li>
+                        </ul>
+                    </div>
+                    <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="education">
+                        <ul>
+                            <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.selectObject(c)">
+                                {{c.name}} <small>{{c.subtext}}</small><br /><small>Audience size: {{c.coverage | number}}</small>
+                            </li>
+                            <li ng-if="vm.comboBox.length === 0">No data found.</li>
+                        </ul>
+                    </div>
+                    <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="employers">
+                        <ul>
+                            <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.selectObject(c)">
+                                {{c.name}}<br /><small>Audience size: {{c.coverage | number}}</small>
                             </li>
                             <li ng-if="vm.comboBox.length === 0">No data found.</li>
                         </ul>
