@@ -1,7 +1,7 @@
 var modAudiences = angular.module('modAudiences');
 
-modAudiences.directive('audience', ['Facebook',
-    function (Facebook) {
+modAudiences.directive('audience', ['Facebook', 'Accounts',
+    function (Facebook, Accounts) {
         return {
             restrict: 'EA',
             scope: {},
@@ -22,11 +22,15 @@ modAudiences.directive('audience', ['Facebook',
             vm.audience = {};
             vm.locations = {};
             vm.locales = {};
+            vm.categories = {};
+            vm.demographics = {};
+            vm.behaviors = {};
+            vm.interests = {};
 
             vm.autocompleteLocation = autocompleteLocation;
             vm.hasData = hasData;
             vm.removeLocation = removeLocation;
-            vm.removeLocale = removeLocale;
+            vm.removeDemographic = removeDemographic;
 
             // Validate ages
             $scope.$watch(() => vm.audience.targeting.age_min + vm.audience.targeting.age_max, () => {
@@ -39,14 +43,44 @@ modAudiences.directive('audience', ['Facebook',
 
             // Location change
             $scope.$watch(() => vm.locations.selected, newVal => {
-                if(newVal && JSON.stringify(newVal) !== "{}")
+                if(newVal && JSON.stringify(newVal) !== "{}") {
                     _addLocation();
+                }
             });
 
             // Language/locale change
             $scope.$watch(() => vm.locales.selected, newVal => {
-                if(newVal && JSON.stringify(newVal) !== "{}")
+                if(newVal && JSON.stringify(newVal) !== "{}") {
                     _addLocale();
+                }
+            });
+
+            // Behaviors change
+            $scope.$watch(() => vm.behaviors.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addBehavior();
+                }
+            });
+
+            // Interests change
+            $scope.$watch(() => vm.interests.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addInterest();
+                }
+            });
+
+            // Demographics change
+            $scope.$watch(() => vm.demographics.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addDemographic();
+                }
+            });
+
+            // BCT change
+            $scope.$watch(() => vm.categories.selected, newVal => {
+                if(newVal && JSON.stringify(newVal) !== "{}") {
+                    _addBCT();
+                }
             });
 
             _init();
@@ -55,6 +89,10 @@ modAudiences.directive('audience', ['Facebook',
                 _setDefaults();
                 _setAges();
                 _getLocales();
+                _getDemographics();
+                _getCategories();
+                _getBehaviors();
+                _getInterests();
             }
 
             function _setAges() {
@@ -74,7 +112,11 @@ modAudiences.directive('audience', ['Facebook',
                     },
                     excluded_geo_locations: {},
                     genders: "",
-                    locales: [6]
+                    locales: [6],
+                    behaviors: [],
+                    interests: [],
+                    user_adclusters: []
+
                 };
                 vm.locations = {
                     type: "geo_locations",
@@ -84,7 +126,23 @@ modAudiences.directive('audience', ['Facebook',
                 vm.locales = {
                     all: [],
                     selected: {}
-                }
+                };
+                vm.categories = {
+                    all: [],
+                    selected: {}
+                };
+                vm.demographics = {
+                    all: [],
+                    selected: {}
+                };
+                vm.behaviors = {
+                    all: [],
+                    selected: {}
+                };
+                vm.interests = {
+                    all: [],
+                    selected: {}
+                };
             }
 
             function _addLocation() {
@@ -116,20 +174,101 @@ modAudiences.directive('audience', ['Facebook',
                 if(vm.audience.targeting.locales.indexOf(vm.locales.selected) === -1) {
                     vm.audience.targeting.locales.push(vm.locales.selected);
                 }
-                vm.locales.selected = {};
+            }
+
+            function _addDemographic() {
+                let type = vm.demographics.selected.type;
+
+                if(!vm.audience.targeting[type]) vm.audience.targeting[type] = [];
+
+                if(!vm.audience.targeting[type].find(item => item.id === vm.demographics.selected.id)) {
+                    vm.audience.targeting[type].push({
+                        id: vm.demographics.selected.id,
+                        name: vm.demographics.selected.name
+                    });
+                }
+            }
+
+            function _addBehavior() {
+                if(!vm.audience.targeting.behaviors.find(item => item.id === vm.behaviors.selected.id)) {
+                    vm.audience.targeting.behaviors.push({
+                        id: vm.behaviors.selected.id,
+                        name: vm.behaviors.selected.name
+                    });
+                }
+            }
+
+            function _addInterest() {
+                if(!vm.audience.targeting.interests.find(item => item.id === vm.interests.selected.id)) {
+                    vm.audience.targeting.interests.push({
+                        id: vm.interests.selected.id,
+                        name: vm.interests.selected.name
+                    });
+                }
+            }
+
+            function _addBCT() {
+                if(!vm.audience.targeting.user_adclusters.find(item => item.id === vm.categories.selected.id)) {
+                    vm.audience.targeting.user_adclusters.push({
+                        id: vm.categories.selected.id,
+                        name: vm.categories.selected.name
+                    });
+                }
+            }
+
+            function _getCategories() {
+                Facebook.get('/' + Accounts.active + '/broadtargetingcategories').then(results => {
+                    vm.categories.all = results.data;
+                });
             }
 
             function _getLocales() {
                 Facebook.get('/search', {
                     q: "",
-                    type: 'adlocale',
-                    limit: 1000
+                    limit: "500",
+                    locale: "en_US",
+                    type: "adlocale"
                 }).then(results => {
                     for(let i=0; i<results.data.length; i++) {
                         results.data[i].id = results.data[i].key;
                     }
                     vm.locales.all = results.data;
                 });
+            }
+
+            function _getDemographics() {
+                Facebook.get('/search', {
+                    class: "demographics",
+                    limit: "500",
+                    locale: "en_US",
+                    type: "adTargetingCategory"
+                }).then(results => {
+                    vm.demographics.all = _generateTree(results.data);
+                });
+            }
+
+            function _getBehaviors() {
+                Facebook.get('/search', {
+                    class: "behaviors",
+                    locale: "en_US",
+                    type: "adTargetingCategory"
+                }).then(results => {
+                    vm.behaviors.all = _generateTree(results.data);
+                });
+            }
+
+            function _getInterests() {
+                Facebook.get('/search', {
+                    locale: "en_US",
+                    type: "adInterestCategory"
+                }).then(results => {
+                    vm.interests.all = _generateTree(results.data);
+                });
+            }
+
+            function _generateTree(data) {
+                // TODO: generate data trees
+                return data;
             }
 
             function autocompleteLocation(searchString) {
@@ -153,14 +292,6 @@ modAudiences.directive('audience', ['Facebook',
                 return Object.keys(item).length > 0;
             }
 
-            function removeLocale(l) {
-                let index = vm.audience.targeting.locales.indexOf(l);
-
-                if(index > -1) {
-                    vm.audience.targeting.locales.splice(index, 1);
-                }
-            }
-
             function removeLocation(l, inclusionType, type) {
                 let index = vm.audience.targeting[inclusionType][type].indexOf(l);
 
@@ -171,6 +302,10 @@ modAudiences.directive('audience', ['Facebook',
                 if(vm.audience.targeting[inclusionType][type].length === 0) {
                     delete vm.audience.targeting[inclusionType][type];
                 }
+            }
+
+            function removeDemographic(index, demographic) {
+                vm.audience.targeting[demographic].splice(index, 1);
             }
         }
 

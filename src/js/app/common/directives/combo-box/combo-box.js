@@ -9,7 +9,8 @@ modCommon.directive('comboBox', [function () {
             bind: '=',
             autocomplete: '=',
             type: '@',
-            placeholder: '@'
+            placeholder: '@',
+            clearOnSelect: '='
         },
         controller: controller,
         link: link,
@@ -52,6 +53,14 @@ modCommon.directive('comboBox', [function () {
                             <li ng-if="vm.comboBox.length === 0">No data found.</li>
                         </ul>
                     </div>
+                    <div class="drop-menu" ng-if="vm.showMenu" ng-switch-when="targeting">
+                        <ul>
+                            <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.selectObject(c)">
+                                {{c.name}} <small>{{c.type}}</small>
+                            </li>
+                            <li ng-if="vm.comboBox.length === 0">No data found.</li>
+                        </ul>
+                    </div>
                     <div class="drop-menu" ng-if="vm.showMenu" ng-switch-default>
                         <ul>
                             <li ng-repeat="c in vm.comboBox | filter:vm.filter" ng-click="vm.select(c)">{{c.name}}</li>
@@ -80,14 +89,22 @@ modCommon.directive('comboBox', [function () {
 
         function select(c) {
             vm.bind = c.id;
-            vm.bindName = c.name;
+            if(vm.clearOnSelect) {
+                vm.bindName = "";
+            } else {
+                vm.bindName = c.name;
+            }
             vm.filter = vm.bindName;
             toggleMenu();
         }
 
         function selectObject(c) {
             vm.bind = c;
-            vm.bindName = c.name;
+            if(vm.clearOnSelect) {
+                vm.bindName = "";
+            } else {
+                vm.bindName = c.name;
+            }
             vm.filter = vm.bindName;
             toggleMenu();
         }

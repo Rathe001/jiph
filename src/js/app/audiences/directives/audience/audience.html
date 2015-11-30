@@ -1,6 +1,14 @@
 <div>
+<!-- Locations -->
     <div class="row">
         <label>Locations</label>
+        <div class="row locations">
+            <select ng-model="vm.locations.type">
+                <option value="geo_locations">Include</option>
+                <option value="excluded_geo_locations">Exclude</option>
+            </select>
+            <div class="search" clear-on-select="true" combo-box="vm.locations.all" bind="vm.locations.selected" placeholder="Add a country, state/province, city, ZIP, DMA or address" autocomplete="vm.autocompleteLocation" type="locations"></div>
+        </div>
         <div class="col half" ng-if="vm.hasData(vm.audience.targeting.geo_locations)">
             <div class="row">
                 <select ng-model="vm.audience.targeting.geo_locations.location_types">
@@ -10,9 +18,11 @@
                     <option value="travel_in">Include people traveling in these locations...</option>
                 </select>
             </div>
-            <span ng-repeat="(k, v) in vm.audience.targeting.geo_locations" ng-if="k !== 'location_types'">
-                <span ng-repeat="l in vm.audience.targeting.geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'geo_locations', k)"></i></span>
-            </span>
+            <div class="row">
+                <span ng-repeat="(k, v) in vm.audience.targeting.geo_locations" ng-if="k !== 'location_types'">
+                    <span ng-repeat="l in vm.audience.targeting.geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'geo_locations', k)"></i></span>
+                </span>
+            </div>
         </div>
         <div class="col half" ng-if="vm.hasData(vm.audience.targeting.excluded_geo_locations)">
             <div class="row">
@@ -21,24 +31,21 @@
                     <option value="home">Exclude people who live in these locations...</option>
                 </select>
             </div>
-            <span ng-repeat="(k, v) in vm.audience.targeting.excluded_geo_locations" ng-if="k !== 'location_types'">
-                <span ng-repeat="l in vm.audience.targeting.excluded_geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'excluded_geo_locations', k)"></i></span>
-            </span>
+            <div class="row">
+                <span ng-repeat="(k, v) in vm.audience.targeting.excluded_geo_locations" ng-if="k !== 'location_types'">
+                    <span ng-repeat="l in vm.audience.targeting.excluded_geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'excluded_geo_locations', k)"></i></span>
+                </span>
+            </div>
         </div>
     </div>
-    <div class="row locations">
-        <select ng-model="vm.locations.type">
-            <option value="geo_locations">Include</option>
-            <option value="excluded_geo_locations">Exclude</option>
-        </select>
-        <div class="search" combo-box="vm.locations.all" bind="vm.locations.selected" placeholder="Add a country, state/province, city, ZIP, DMA or address" autocomplete="vm.autocompleteLocation" type="locations"></div>
-    </div>
+<!-- Age -->
     <div class="row">
         <label>Age</label>
         <select class="width-auto" ng-model="vm.audience.targeting.age_min" ng-options="a.id as a.name for a in vm.ages"></select>
         <span class="pull-left pad-5"> to </span>
         <select class="width-auto" ng-model="vm.audience.targeting.age_max" ng-options="a.id as a.name for a in vm.ages"></select>
     </div>
+<!-- Gender -->
     <div class="row">
         <label>Gender</label>
         <select class="width-auto" ng-model="vm.audience.targeting.genders">
@@ -47,27 +54,61 @@
             <option value="">Both</option>
         </select>
     </div>
+<!-- Language -->
     <div class="row">
         <label>Language</label>
-        <span ng-repeat="l in vm.audience.targeting.locales" class="added-item">{{l}}<i class="fa fa-times" ng-click="vm.removeLocale(l)"></i></span>
-        <div combo-box="vm.locales.all" bind="vm.locales.selected" placeholder="Select a language/locale"></div>
+        <div combo-box="vm.locales.all" clear-on-select="true" bind="vm.locales.selected" placeholder="Select a language/locale"></div>
     </div>
+    <div class="row" ng-if="vm.audience.targeting.locales.length > 0">
+        <span ng-repeat="l in vm.audience.targeting.locales" class="added-item">{{l}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'locales')"></i></span>
+    </div>
+<!-- More Demographics -->
     <div class="row">
         <label>More demographics</label>
+        <div combo-box="vm.demographics.all" clear-on-select="true" bind="vm.demographics.selected" placeholder="Select additional demographics" type="targeting"></div>
     </div>
+    <div class="row">
+        <span ng-repeat="d in vm.audience.targeting.life_events" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'life_events')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.politics" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'politics')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.markets" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'markets')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.industries" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'industries')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.income" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'income')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.net_worth" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'net_worth')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.home_type" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'home_type')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.home_ownership" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'home_ownership')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.ethnic_affinity" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'ethnic_affinity')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.generation" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'generation')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.household_composition" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'household_composition')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.moms" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'moms')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.family_statuses" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'family_statuses')"></i></span>
+        <span ng-repeat="d in vm.audience.targeting.office_type" class="added-item">{{d.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'office_type')"></i></span>
+    </div>
+<!-- Interests -->
     <div class="row">
         <label>Interests</label>
+        <div combo-box="vm.interests.all" clear-on-select="true" bind="vm.interests.selected" placeholder="Select interests" type="targeting"></div>
     </div>
+    <div class="row" ng-if="vm.audience.targeting.interests.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.interests" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'interests')"></i></span>
+    </div>
+<!-- Behaviors -->
     <div class="row">
         <label>Behaviors</label>
+        <div combo-box="vm.behaviors.all" clear-on-select="true" bind="vm.behaviors.selected" placeholder="Select behaviors" type="targeting"></div>
     </div>
+    <div class="row" ng-if="vm.audience.targeting.behaviors.length > 0">
+        <span ng-repeat="b in vm.audience.targeting.behaviors" class="added-item">{{b.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'behaviors')"></i></span>
+    </div>
+<!-- Custom broad category targeting -->
     <div class="row">
         <label>More categories</label>
+        <div combo-box="vm.categories.all" clear-on-select="true" bind="vm.categories.selected" placeholder="Select categories" type="targeting"></div>
     </div>
+    <div class="row" ng-if="vm.audience.targeting.user_adclusters.length > 0">
+        <span ng-repeat="u in vm.audience.targeting.user_adclusters" class="added-item">{{u.name}}<i class="fa fa-times" ng-click="vm.removeDemographic($index, 'user_adclusters')"></i></span>
+    </div>
+<!-- Connections -->
     <div class="row">
         <label>Connections</label>
-    </div>
-    <div class="row">
-        <label>Locations</label>
     </div>
 </div>
