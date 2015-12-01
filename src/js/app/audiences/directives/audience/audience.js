@@ -175,7 +175,7 @@ modAudiences.directive('audience', ['Facebook', 'Accounts', 'Audiences',
                     age_min: 13,
                     age_max: 65,
                     geo_locations: {
-                        country: [{key: 'US'}]
+                        countries: ['US']
                     },
                     excluded_geo_locations: {},
                     genders: "",
@@ -258,7 +258,14 @@ modAudiences.directive('audience', ['Facebook', 'Accounts', 'Audiences',
                 let type = vm.locations.selected.type;
                 let item = {};
 
-                switch(vm.locations.selected.type) {
+                if(type === "country") type = "countries";
+                if(type === "region") type = "regions";
+                if(type === "city") type = "cities";
+                if(type === "zip") type = "zips";
+                if(type === "custom_location") type = "custom_locations";
+                if(type === "geo_market") type = "geo_markets";
+
+                switch(type) {
                     case "countries":
                         item = vm.locations.selected.key;
                         break;

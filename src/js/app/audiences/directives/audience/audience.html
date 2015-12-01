@@ -20,7 +20,7 @@
             </div>
             <div class="row">
                 <span ng-repeat="(k, v) in vm.audience.targeting.geo_locations" ng-if="k !== 'location_types'">
-                    <span ng-repeat="l in vm.audience.targeting.geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'geo_locations', k)"></i></span>
+                    <span ng-repeat="l in vm.audience.targeting.geo_locations[k]" class="added-item">{{k}}: {{l.key || l}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'geo_locations', k)"></i></span>
                 </span>
             </div>
         </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="row">
                 <span ng-repeat="(k, v) in vm.audience.targeting.excluded_geo_locations" ng-if="k !== 'location_types'">
-                    <span ng-repeat="l in vm.audience.targeting.excluded_geo_locations[k]" class="added-item">{{k}}: {{l.key}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'excluded_geo_locations', k)"></i></span>
+                    <span ng-repeat="l in vm.audience.targeting.excluded_geo_locations[k]" class="added-item">{{k}}: {{l.key || l}} <i class="fa fa-times" ng-click="vm.removeLocation(l, 'excluded_geo_locations', k)"></i></span>
                 </span>
             </div>
         </div>

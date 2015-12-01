@@ -47,6 +47,13 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
             }
         });
 
+        // Watch targeting (deep)
+        $scope.$watch(() => vm.audience, newVal => {
+            if(newVal && JSON.stringify(newVal) !== "{}") {
+                _getReachEstimate(vm.audience);
+            }
+        }, true);
+
         function _init(){
             vm.objectives = Objectives.all;
             vm.dictionary = Dictionary;
@@ -119,6 +126,54 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
             Facebook.get('/' + vm.campaign.promoted_object.page_id + '/promotable_posts', {fields:["full_picture","icon","is_published","link","message","name","object_id","picture","story","type"]}).then(posts => {
                 vm.posts = posts.data;
             });
+        }
+
+        function _getReachEstimate(audience) {
+            let targetingSpec = _generateReachEstimatePayload(audience.targeting);
+
+            Facebook.get('/' + Accounts.active + '/reachestimate', targetingSpec)
+                .then(response => {
+                    console.log(response);
+                }, error => {
+                    console.log(error);
+                    vm.error = error.data;
+                });
+        }
+
+        function _generateReachEstimatePayload(input) {
+            let output = {
+                currency: "USD",
+                targeting_spec: {},
+                optimize_for: "NONE"
+            };
+
+            // Clean out empty values
+            for(let i in input) {
+                if(_isObject(input[i])) {
+                    if(Object.keys(input[i]).length > 0) {
+                        output.targeting_spec[i] = input[i];
+                    }
+                } else {
+                    if(String(input[i])) {
+                        output.targeting_spec[i] = input[i];
+                    }
+                }
+            }
+
+            for(let i in output.targeting_spec) {
+                for(let j in output.targeting_spec[i]) {
+                    if(j === "location_types") {
+                        output.targeting_spec[i][j] = [output.targeting_spec[i][j]];
+                    }
+                }
+            }
+
+            // Strip Angular internals, and convert back to JSON object
+            return JSON.parse(angular.toJson(output));
+
+            function _isObject(obj) {
+                return obj === Object(obj);
+            }
         }
 
         function showDetails() {
