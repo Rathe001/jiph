@@ -131,12 +131,14 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
         function _getReachEstimate(audience) {
             let targetingSpec = _generateReachEstimatePayload(audience.targeting);
 
+            vm.reachEstimate = "";
+            vm.reachError = "";
+
             Facebook.get('/' + Accounts.active + '/reachestimate', targetingSpec)
                 .then(response => {
-                    console.log(response);
+                    vm.reachEstimate = response.data.users;
                 }, error => {
-                    console.log(error);
-                    vm.error = error.data;
+                    vm.reachError = error.error_user_msg;
                 });
         }
 
@@ -151,20 +153,38 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
             for(let i in input) {
                 if(_isObject(input[i])) {
                     if(Object.keys(input[i]).length > 0) {
-                        output.targeting_spec[i] = input[i];
+                        output.targeting_spec[i] = angular.copy(input[i]);
                     }
                 } else {
                     if(String(input[i])) {
-                        output.targeting_spec[i] = input[i];
+                        output.targeting_spec[i] = angular.copy(input[i]);
                     }
                 }
             }
 
             for(let i in output.targeting_spec) {
-                for(let j in output.targeting_spec[i]) {
-                    if(j === "location_types") {
-                        output.targeting_spec[i][j] = [output.targeting_spec[i][j]];
-                    }
+                switch(i) {
+                    case "genders":
+                        output.targeting_spec[i] = [output.targeting_spec[i]];
+                        break;
+                    case "geo_locations":
+                    case "excluded_geo_locations":
+                        for(let j in output.targeting_spec[i]) {
+                            if(j === "location_types") {
+                                output.targeting_spec[i][j] = [output.targeting_spec[i][j]];
+                            }
+                        }
+                        break;
+                    case "connections":
+                    case "excluded_connections":
+                    case "friends_of_connections":
+                        if(output.targeting_spec[i]) {
+                            let obj = vm.campaign.promoted_object[Object.keys(vm.campaign.promoted_object)[0]];
+                            console.log(obj);
+                            output.targeting_spec[i] = [obj];
+                        } else {
+                            output.targeting_spec[i] = undefined;
+                        }
                 }
             }
 

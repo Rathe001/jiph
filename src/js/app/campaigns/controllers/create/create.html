@@ -133,9 +133,13 @@
                 <input type="text" ng-model="vm.audience.name" />
             </div>
         </div>
-
-        <div audience="vm.audience" on-save="vm.saveAudience"></div>
-
+        <div class="col-left">
+            <div audience="vm.audience" on-save="vm.saveAudience"></div>
+        </div>
+        <div class="col-right">
+            <span ng-if="vm.reachError">{{vm.reachError}}</span>
+            <span ng-if="vm.reachEstimate">Reach: {{vm.reachEstimate | number}} users</span>
+        </div>
     </div>
 </div>
 
