@@ -141,9 +141,9 @@
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
     <h2>Budget &amp; pricing</h2>
-    <div class="stats-box">
-        Estimated Daily Reach
-    </div>
+    <p>How much do you want to spend? Your budget will be divided between all selected audiences.</p>
+
+    <div budget-schedule="vm.campaign.budget"></div>
 </div>
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">

@@ -81,6 +81,7 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
                 audiences: [],
                 objective: "",
                 buying_type: "AUCTION",
+                budget: {},
                 promoted_object: {
                     page_id: undefined,
                     application_id: undefined,
