@@ -42,6 +42,9 @@ th {
 a {
   color:#44619d;
 }
+strong {
+  font-weight: 800;
+}
 input, select {
   float: left;
   width:100%;
@@ -63,11 +66,12 @@ label {
   float: left;
   width: 100%;
   font-weight: 800;
+  color: $color-primary;
 }
 .row {
   float:left;
   width:100%;
-  margin:0 0 5px 0;
+  margin:0 0 15px 0;
 }
 .col {
   float:left;

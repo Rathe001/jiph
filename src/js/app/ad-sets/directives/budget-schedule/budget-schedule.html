@@ -14,27 +14,40 @@
     </div>
     <div class="row" ng-if="vm.ui.budgetType === 'lifetime' ||  vm.ui.schedule === 'finite'">
         <label>Start date</label>
-        <input type="date" placeholder="Date" />
-        <input type="time" placeholder="Time" />
+        <input type="datetime-local" ng-model="vm.budgetSchedule.start_time" />
     </div>
     <div class="row" ng-if="vm.ui.budgetType === 'lifetime' ||  vm.ui.schedule === 'finite'">
         <label>End date</label>
-        <input type="date" placeholder="Date" />
-        <input type="time" placeholder="Time" />
+        <input type="datetime-local" ng-model="vm.budgetSchedule.end_time" />
     </div>
     <div class="row">
         <label>Optimization for Ad Delivery</label>
+        <select ng-model="vm.budgetSchedule.optimization_goal" ng-options="g.id as g.name for g in vm.optimizationGoals"></select>
     </div>
     <div class="row">
         <label>Bid Amount</label>
+        <div ng-click="vm.budgetSchedule.is_autobid = true"><i class="fa" ng-class="{'fa-dot-circle-o': vm.budgetSchedule.is_autobid, 'fa-circle-o': !vm.budgetSchedule.is_autobid}"></i> <strong>Automatic</strong> - Let Facebook set the bid that helps you get the most Page likes at the best price.</div>
+        <div ng-click="vm.budgetSchedule.is_autobid = false"><i class="fa" ng-class="{'fa-dot-circle-o': !vm.budgetSchedule.is_autobid, 'fa-circle-o': vm.budgetSchedule.is_autobid}"></i> <strong>Manual</strong> - Enter a bid based on what Page likes are worth to you.</div>
+        <input type="text" ng-if="!vm.budgetSchedule.is_autobid" ng-model="vm.budgetSchedule.bid_amount" />
+        <span ng-if="!vm.budgetSchedule.is_autobid">Suggested bid: $1.02 USD($0.47–$1.49)</span>
     </div>
-    <div class="row">
+    <div class="row" ng-if="vm.budgetSchedule.optimization_goal">
         <label>When You Get Charged</label>
+        <select ng-model="vm.budgetSchedule.billing_event" ng-options="b.id as b.name for b in vm.billingEvents"></select>
     </div>
     <div class="row">
         <label>Ad Scheduling</label>
+        <p>Ad scheduling only works with lifetime budgets.</p>
+        <div ng-click="vm.ui.dailySchedule = false"><i class="fa" ng-class="{'fa-dot-circle-o': !vm.ui.dailySchedule, 'fa-circle-o': vm.ui.dailySchedule}"></i> Run ads all the time</div>
+        <div ng-click="vm.ui.dailySchedule = true" ng-if="vm.ui.budgetType === 'lifetime'"><i class="fa" ng-class="{'fa-dot-circle-o': vm.ui.dailySchedule, 'fa-circle-o': !vm.ui.dailySchedule}"></i> Run ads on a schedule</div>
+    </div>
+    <div class="row" ng-if="vm.ui.dailySchedule">
+        <p>Your ads will be served in your audience's time zone. For example, if you select 8am - 10am, your ad will be served to people from 8am to 10am in their local time.</p>
     </div>
     <div class="row">
         <label>Delivery Type</label>
+        <p>Accelerated delivery requires a manual bid amount.</p>
+        <div ng-click="vm.budgetSchedule.pacing_type = 'standard'"><i class="fa" ng-class="{'fa-dot-circle-o': vm.budgetSchedule.pacing_type === 'standard', 'fa-circle-o': vm.budgetSchedule.pacing_type !== 'standard'}"></i> <strong>Standard</strong> - Show your ads throughout the day <small>- Recommended</small></div>
+        <div ng-click="vm.budgetSchedule.pacing_type = 'no_pacing'" ng-if="!vm.budgetSchedule.is_autobid"><i class="fa" ng-class="{'fa-dot-circle-o': vm.budgetSchedule.pacing_type === 'no_pacing', 'fa-circle-o': vm.budgetSchedule.pacing_type !== 'no_pacing'}"></i> <strong>Accelerated</strong> - Show your ads as quickly as possible</div>
     </div>
 </div>

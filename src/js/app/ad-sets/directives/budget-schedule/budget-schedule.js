@@ -1,12 +1,13 @@
 var modAdSets = angular.module('modAdSets');
 
-modAdSets.directive('budgetSchedule', ['Currency',
-    function (Currency) {
+modAdSets.directive('budgetSchedule', ['Currency', 'OptimizationGoals', 'BillingEvents',
+    function (Currency, OptimizationGoals, BillingEvents) {
         return {
             restrict: 'EA',
             scope: {},
             bindToController: {
-                budgetSchedule: '='
+                budgetSchedule: '=',
+                objective: '@'
             },
             controller: controller,
             link: link,
@@ -19,13 +20,32 @@ modAdSets.directive('budgetSchedule', ['Currency',
             let vm = this;
 
             vm.ui = {};
+            vm.optimizationGoals = [];
 
+            // Budget type change
             $scope.$watch(() => vm.ui.budgetType, newVal => {
-                if(newVal === "daily") {
-                    vm.budgetSchedule.daily_budget = undefined;
+                vm.budgetSchedule.daily_budget = 0;
+                vm.budgetSchedule.lifetime_budget = 0;
+                vm.ui.dailySchedule = false;
+            });
+
+            // Campaign objective change
+            $scope.$watch(() => vm.objective, newVal => {
+                if(newVal) {
+                    _setDefaults();
                 }
-                if(newVal === "lifetime") {
-                    vm.budgetSchedule.lifetime_budget = undefined;
+            });
+
+            // Autobid change
+            $scope.$watch(() => vm.budgetSchedule.is_autobid, newVal => {
+                vm.budgetSchedule.bid_amount = 0;
+                vm.budgetSchedule.pacing_type = "standard";
+            });
+
+            // Optimization goal change
+            $scope.$watch(() => vm.budgetSchedule.optimization_goal, newVal => {
+                if(newVal) {
+                    _setBillingEvents();
                 }
             });
 
@@ -36,8 +56,28 @@ modAdSets.directive('budgetSchedule', ['Currency',
             }
 
             function _setDefaults() {
-                vm.ui.budgetType = "daily";
-                vm.ui.schedule = "infinite";
+                vm.ui = {
+                    budgetType: "daily",
+                    schedule: "infinite",
+                    dailySchedule: false
+                };
+
+                vm.optimizationGoals = OptimizationGoals.getAllValid(vm.objective);
+
+                vm.budgetSchedule = {
+                    lifetime_budget: 0,
+                    daily_budget: 0,
+                    is_autobid: true,
+                    bid_amount: 0,
+                    pacing_type: "standard",
+                    optimization_goal: OptimizationGoals.getDefault(vm.objective).id,
+                    billing_event: ""
+                }
+            }
+
+            function _setBillingEvents() {
+                vm.billingEvents = BillingEvents.getAllValid(vm.budgetSchedule.optimization_goal);
+                vm.budgetSchedule.billing_event = BillingEvents.getDefault(vm.budgetSchedule.optimization_goal).id;
             }
         }
 

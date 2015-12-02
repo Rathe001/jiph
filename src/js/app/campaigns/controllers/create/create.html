@@ -138,7 +138,7 @@
         </div>
         <div class="col-right">
             <span ng-if="vm.reachError">{{vm.reachError}}</span>
-            <span ng-if="vm.reachEstimate">Reach: {{vm.reachEstimate | number}} users</span>
+            <span ng-if="vm.reachEstimate">Potential reach: {{vm.reachEstimate | number}} users</span>
         </div>
     </div>
 </div>
@@ -146,8 +146,13 @@
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
     <h2>Budget &amp; pricing</h2>
     <p>How much do you want to spend? Your budget will be divided between all selected audiences.</p>
-
-    <div budget-schedule="vm.campaign.budget"></div>
+    <div class="col-left">
+        <div budget-schedule="vm.campaign.budget" objective="{{vm.campaign.objective}}"></div>
+    </div>
+    <div class="col-right">
+        <span ng-if="vm.dailyReachError">{{vm.dailyReachError}}</span>
+        <span ng-if="vm.dailyReachEstimate">Potential reach: {{vm.dailyReachEstimate | number}} users</span>
+    </div>
 </div>
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
