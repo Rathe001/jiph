@@ -27,6 +27,11 @@ modAdSets.directive('budgetSchedule', ['Currency', 'OptimizationGoals', 'Billing
                 vm.budgetSchedule.daily_budget = 0;
                 vm.budgetSchedule.lifetime_budget = 0;
                 vm.ui.dailySchedule = false;
+                if(newVal === "lifetime") {
+                    vm.ui.schedule = "finite"
+                } else {
+                    vm.ui.schedule = 'infinite'
+                }
             });
 
             // Campaign objective change

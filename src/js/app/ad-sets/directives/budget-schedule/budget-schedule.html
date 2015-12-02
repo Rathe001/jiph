@@ -9,6 +9,7 @@
         <input type="text" ng-model="vm.budgetSchedule.lifetime_budget" ng-if="vm.ui.budgetType === 'lifetime'" />
     </div>
     <div class="row" ng-if="vm.ui.budgetType === 'daily'">
+        <label>Schedule</label>
         <div ng-click="vm.ui.schedule = 'infinite'"><i class="fa" ng-class="{'fa-dot-circle-o': vm.ui.schedule === 'infinite', 'fa-circle-o': vm.ui.schedule !== 'infinite'}"></i> Run my ad sets continuously starting today</div>
         <div ng-click="vm.ui.schedule = 'finite'"><i class="fa" ng-class="{'fa-dot-circle-o': vm.ui.schedule === 'finite', 'fa-circle-o': vm.ui.schedule !== 'finite'}"></i> Set a start and end date</div>
     </div>
