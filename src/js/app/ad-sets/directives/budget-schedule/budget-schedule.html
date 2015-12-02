@@ -1,9 +1,26 @@
 <div>
     <div class="row">
         <label>Budget</label>
+        <select ng-model="vm.ui.budgetType">
+            <option value="daily">Daily budget</option>
+            <option value="lifetime">Lifetime budget</option>
+        </select>
+        <input type="text" ng-model="vm.budgetSchedule.daily_budget" ng-if="vm.ui.budgetType === 'daily'" />
+        <input type="text" ng-model="vm.budgetSchedule.lifetime_budget" ng-if="vm.ui.budgetType === 'lifetime'" />
     </div>
-    <div class="row">
-        <label>Schedule</label>
+    <div class="row" ng-if="vm.ui.budgetType === 'daily'">
+        <div ng-click="vm.ui.schedule = 'infinite'"><i class="fa" ng-class="{'fa-dot-circle-o': vm.ui.schedule === 'infinite', 'fa-circle-o': vm.ui.schedule !== 'infinite'}"></i> Run my ad sets continuously starting today</div>
+        <div ng-click="vm.ui.schedule = 'finite'"><i class="fa" ng-class="{'fa-dot-circle-o': vm.ui.schedule === 'finite', 'fa-circle-o': vm.ui.schedule !== 'finite'}"></i> Set a start and end date</div>
+    </div>
+    <div class="row" ng-if="vm.ui.budgetType === 'lifetime' ||  vm.ui.schedule === 'finite'">
+        <label>Start date</label>
+        <input type="date" placeholder="Date" />
+        <input type="time" placeholder="Time" />
+    </div>
+    <div class="row" ng-if="vm.ui.budgetType === 'lifetime' ||  vm.ui.schedule === 'finite'">
+        <label>End date</label>
+        <input type="date" placeholder="Date" />
+        <input type="time" placeholder="Time" />
     </div>
     <div class="row">
         <label>Optimization for Ad Delivery</label>
