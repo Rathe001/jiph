@@ -78,8 +78,16 @@ modCampaigns.controller('ctrlCampaignsCreate', ['$scope', 'Accounts', 'Campaigns
 
         function _addAudience(id) {
             let add = vm.audiences.find(audience => audience.id === id);
-            vm.campaign.audiences.push(add);
-            vm.selectedAudience = {};
+
+            // Get reach
+            let targetingSpec = _generateReachEstimatePayload(add.targeting);
+
+            Facebook.get('/' + Accounts.active + '/reachestimate', targetingSpec)
+                .then(response => {
+                    add.reach = response.data;
+                    vm.campaign.audiences.push(add);
+                    vm.selectedAudience = {};
+                });
         }
 
         function _setDefaultCampaign() {

@@ -109,16 +109,18 @@
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Reach</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <td></td>
+                    <td colspan="2"></td>
                 </tr>
             </tfoot>
             <tbody>
                 <tr ng-repeat="a in vm.campaign.audiences track by $index">
                     <td>{{a.name}}</td>
+                    <td>{{a.reach.users | number}}</td>
                 </tr>
             </tbody>
         </table>
@@ -145,7 +147,7 @@
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
     <h2>Budget &amp; pricing</h2>
-    <p>How much do you want to spend? Your budget will be divided between all selected audiences.</p>
+    <p>How much do you want to spend? Your budget will be divided evenly between all selected audiences.</p>
     <div class="col-left">
         <div budget-schedule="vm.campaign.budget" objective="{{vm.campaign.objective}}"></div>
     </div>
@@ -163,10 +165,10 @@
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
     <h2>Ad groups</h2>
     <p>Ads will be created for each added ad group, within each ad set, up to a maximum of 50.</p>
-    <div class="add-box">
-        <label>Select an ad group</label>
-        <div combo-box="vm.adGroups" bind="vm.selectedAdGroup" placeholder="Select an ad group..."></div>
-    </div>
+    <label>Select an ad group</label>
+    <div combo-box="vm.adGroups" bind="vm.selectedAdGroup" placeholder="Select an ad group..."></div>
+
+    <div ad-group="vm.adGroup" objective="{{vm.campaign.objective}}"></div>
 </div>
 
 <div class="module campaign-create margin" ng-if="vm.showDetails()">
