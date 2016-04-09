@@ -10,6 +10,7 @@ modAdGroups.controller('ctrlAdGroups', ['$scope', 'Accounts', 'Dictionary', 'AdG
         vm.error = "";
 
         vm.toggleOrderBy = toggleOrderBy;
+        vm.getColumnCount = getColumnCount;
 
         $scope.$watch(() => Accounts.active, newVal => {
             if(newVal){
@@ -52,6 +53,14 @@ modAdGroups.controller('ctrlAdGroups', ['$scope', 'Accounts', 'Dictionary', 'AdG
             } else {
                 vm.orderBy = col;
             }
+        }
+
+        function getColumnCount() {
+            let count = 1;
+            for(let i in vm.columns) {
+                if(vm.columns[i]) count++;
+            }
+            return count;
         }
     }
 ]);

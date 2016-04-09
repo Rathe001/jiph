@@ -18,6 +18,7 @@ modAdSets.controller('ctrlAdSets', ['$scope', '$routeParams', 'AdSets', 'Account
         vm.toggleColumn = toggleColumn;
         vm.toggleOrderBy = toggleOrderBy;
         vm.selectInterval = selectInterval;
+        vm.getColumnCount = getColumnCount;
 
         $scope.$watch(() => Accounts.active + vm.selectedInterval, newVal => {
             if(newVal){
@@ -111,6 +112,14 @@ modAdSets.controller('ctrlAdSets', ['$scope', '$routeParams', 'AdSets', 'Account
         function selectInterval(interval) {
             vm.selectedInterval = interval;
             DateIntervals.setSelected(interval);
+        }
+
+        function getColumnCount() {
+            let count = 1;
+            for(let i in vm.columns) {
+                if(vm.columns[i]) count++;
+            }
+            return count;
         }
     }
 ]);
