@@ -6,7 +6,7 @@
             <i class="fa fa-caret-up"></i>
             <h2>Select columns:</h2>
             <ul>
-                <li ng-repeat="(k, v) in vm.columns" ng-click="vm.toggleColumn(k);"><i class="fa" ng-class="{'fa-square': !v, 'fa-check-square': v}"></i> {{vm.dictionary.terms[k]}}</li>
+                <li ng-repeat="(k, v) in vm.columns" ng-click="vm.toggleColumn(k);"><i class="fa" ng-class="{'fa-fw': !v, 'fa-check': v}"></i> {{vm.dictionary.terms[k]}}</li>
             </ul>
         </div>
     </div>
