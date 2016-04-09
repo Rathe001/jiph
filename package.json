@@ -29,6 +29,7 @@
     "gulp-cached": "^1.1.0",
     "gulp-chokidar": "0.0.5",
     "gulp-concat": "^2.6.0",
+    "gulp-eslint": "^2.0.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
     "gulp-plumber": "^1.0.1",
