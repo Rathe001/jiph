@@ -7,6 +7,10 @@
   border-radius: 5px;
   text-decoration: none;
 
+  &.btn-icon {
+    padding:9px 15px 9px 9px;
+  }
+
   &.btn-default {
     border: 1px solid #797979;
     background: #fff;

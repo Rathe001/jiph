@@ -8,7 +8,7 @@ html {
 
 body {
   background:#E9EAED;
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
   font-size: 14px;
   line-height: 1em;
   color: #333;
@@ -25,12 +25,14 @@ h1 {
   line-height: 1em;
 
   span {
+    position: relative;
+    top: -2px;
     font-size:18px;
-    color:#AFAFAF;
+    color:#afafaf;
   }
 }
 h2 {
-  font-weight: 800;
+  font-weight: 700;
   white-space: nowrap;
   font-size: 18px;
   color:gray;
@@ -44,12 +46,11 @@ a {
   color:#44619d;
 }
 strong {
-  font-weight: 800;
+  font-weight: 700;
 }
 input, select {
   float: left;
   width:100%;
-  line-height: 16px;
   font-size: 14px;
   padding: 5px;
   background:#fff;
@@ -66,7 +67,7 @@ label {
   text-align: left;
   float: left;
   width: 100%;
-  font-weight: 800;
+  font-weight: 700;
   color: $color-primary;
 }
 .row {

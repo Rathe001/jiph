@@ -81,46 +81,47 @@
             </tfoot>
             <tbody>
                 <tr ng-repeat="a in vm.adSets | orderBy: vm.orderBy">
-                    <td ng-if="vm.columns.name" title="{{a.name}}"><a ng-href="/campaigns/{{a.campaign.id}}/ad-sets/{{a.id}}/ads">{{a.name}}</a></td>
-                    <td ng-if="vm.columns.id" title="{{a.id}}">{{a.id}}</td>
-                    <td ng-if="vm.columns.adlabels" title="{{a.adlabels}}">{{a.adlabels}}</td>
-                    <td ng-if="vm.columns.adset_schedule" title="{{a.adset_schedule}}">{{a.adset_schedule}}</td>
-                    <td ng-if="vm.columns.account_id" title="{{a.account_id}}">{{a.account_id}}</td>
-                    <td class="text-right" ng-if="vm.columns.bid_amount" title="{{a.bid_amount}}">{{vm.currency.to(a.bid_amount) | currency}}</td>
+                    <td ng-if="vm.columns.name" title="{{a.name}}"><a ng-href="/campaigns/{{a.campaign.id}}/ad-sets/{{a.id}}/ads">{{a.name | emptyPlaceholder}}</a></td>
+                    <td ng-if="vm.columns.id" title="{{a.id}}">{{a.id | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.adlabels" title="{{a.adlabels}}">{{a.adlabels | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.adset_schedule" title="{{a.adset_schedule}}">{{a.adset_schedule | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.account_id" title="{{a.account_id}}">{{a.account_id | emptyPlaceholder}}</td>
+                    <td class="text-right" ng-if="vm.columns.bid_amount" title="{{a.bid_amount}}">{{vm.currency.to(a.bid_amount) | currency | emptyPlaceholder}}</td>
                     <td ng-if="vm.columns.bid_info" title="{{a.bid_info}}">
                         <span ng-repeat="(k, v) in a.bid_info">
-                            {{vm.dictionary.bidInfoActions[k]}}: {{v}}
+                            {{vm.dictionary.bidInfoActions[k] | emptyPlaceholder}}: {{v | emptyPlaceholder}}
                         </span>
+                        <span ng-if="!a.bid_info">--</span>
                     </td>
-                    <td ng-if="vm.columns.billing_event" title="{{a.billing_event}}">{{vm.dictionary.billingEvents[a.billing_event]}}</td>
-                    <td ng-if="vm.columns.campaign" title="{{a.campaign}}">{{a.campaign}}</td>
-                    <td ng-if="vm.columns.campaign_id" title="{{a.campaign_id}}">{{a.campaign_id}}</td>
-                    <td ng-if="vm.columns.configured_status" title="{{a.configured_status}}">{{vm.dictionary.statuses[a.configured_status]}}</td>
-                    <td ng-if="vm.columns.created_time" title="{{a.created_time}}">{{a.created_time | date:'short'}}</td>
-                    <td ng-if="vm.columns.creative_sequence" title="{{a.creative_sequence}}">{{a.creative_sequence}}</td>
-                    <td ng-if="vm.columns.effective_status" title="{{a.effective_status}}">{{vm.dictionary.statuses[a.effective_status]}}</td>
-                    <td ng-if="vm.columns.start_time" title="{{a.start_time}}">{{a.start_time | date:'short'}}</td>
-                    <td ng-if="vm.columns.end_time" title="{{a.end_time}}">
-                        <span ng-if="a.end_time">{{a.end_time | date:'short'}}</span>
+                    <td ng-if="vm.columns.billing_event" title="{{a.billing_event}}">{{vm.dictionary.billingEvents[a.billing_event] | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.campaign" title="{{a.campaign}}">{{a.campaign | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.campaign_id" title="{{a.campaign_id}}">{{a.campaign_id | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.configured_status" title="{{a.configured_status}}">{{vm.dictionary.statuses[a.configured_status] | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.created_time" title="{{a.created_time}}">{{a.created_time | date:'short' | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.creative_sequence" title="{{a.creative_sequence}}">{{a.creative_sequence | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.effective_status" title="{{a.effective_status}}">{{vm.dictionary.statuses[a.effective_status] | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.start_time" title="{{a.start_time}}">{{a.start_time | date:'short' | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.end_time" title="{{a.end_time | emptyPlaceholder}}">
+                        <span ng-if="a.end_time">{{a.end_time | date:'short' | emptyPlaceholder}}</span>
                         <span ng-if="!a.end_time">Ongoing</span>
                     </td>
-                    <td ng-if="vm.columns.frequency_cap" title="{{a.frequency_cap}}">{{a.frequency_cap}}</td>
-                    <td ng-if="vm.columns.frequency_cap_reset_period" title="{{a.frequency_cap_reset_period}}">{{a.frequency_cap_reset_period}}</td>
-                    <td ng-if="vm.columns.is_autobid" title="{{a.is_autobid}}">{{a.is_autobid}}</td>
-                    <td ng-if="vm.columns.lifetime_frequency_cap" title="{{a.lifetime_frequency_cap}}">{{a.lifetime_frequency_cap}}</td>
-                    <td ng-if="vm.columns.lifetime_imps" title="{{a.lifetime_imps}}">{{a.lifetime_imps}}</td>
-                    <td ng-if="vm.columns.optimization_goal" title="{{a.optimization_goal}}">{{vm.dictionary.optimizationGoals[a.optimization_goal]}}</td>
-                    <td ng-if="vm.columns.product_ad_behavior">{{vm.dictionary.productAdBehaviors[a.product_ad_behavior]}}</td>
-                    <td ng-if="vm.columns.promoted_object" title="{{a.promoted_object}}">{{a.promoted_object}}</td>
-                    <td ng-if="vm.columns.rf_prediction_id" title="{{a.rf_prediction_id}}">{{a.rf_prediction_id}}</td>
-                    <td ng-if="vm.columns.rtb_flag" title="{{a.rtb_flag}}">{{a.rtb_flag}}</td>
-                    <td ng-if="vm.columns.targeting" title="{{a.targeting}}">{{a.targeting}}</td>
-                    <td ng-if="vm.columns.updated_time" title="{{a.updated_time}}">{{a.updated_time | date:'short'}}</td>
-                    <td ng-if="vm.columns.use_new_app_click" title="{{a.use_new_app_click}}">{{a.use_new_app_click}}</td>
-                    <td ng-if="vm.columns.pacing_type" title="{{a.pacing_type}}">{{a.pacing_type}}</td>
-                    <td class="text-right" ng-if="vm.columns.budget_remaining" title="{{a.budget_remaining}}">{{vm.currency.to(a.budget_remaining) | currency}}</td>
-                    <td class="text-right" ng-if="vm.columns.daily_budget" title="{{a.daily_budget}}">{{vm.currency.to(a.daily_budget) | currency}}</td>
-                    <td class="text-right" ng-if="vm.columns.lifetime_budget" title="{{a.lifetime_budget}}">{{vm.currency.to(a.lifetime_budget) | currency}}</td>
+                    <td ng-if="vm.columns.frequency_cap" title="{{a.frequency_cap}}">{{a.frequency_cap | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.frequency_cap_reset_period" title="{{a.frequency_cap_reset_period}}">{{a.frequency_cap_reset_period | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.is_autobid" title="{{a.is_autobid}}">{{a.is_autobid | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.lifetime_frequency_cap" title="{{a.lifetime_frequency_cap}}">{{a.lifetime_frequency_cap | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.lifetime_imps" title="{{a.lifetime_imps}}">{{a.lifetime_imps | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.optimization_goal" title="{{a.optimization_goal}}">{{vm.dictionary.optimizationGoals[a.optimization_goal] | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.product_ad_behavior">{{vm.dictionary.productAdBehaviors[a.product_ad_behavior] | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.promoted_object" title="{{a.promoted_object}}">{{a.promoted_object | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.rf_prediction_id" title="{{a.rf_prediction_id}}">{{a.rf_prediction_id | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.rtb_flag" title="{{a.rtb_flag}}">{{a.rtb_flag | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.targeting" title="{{a.targeting}}">{{a.targeting | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.updated_time" title="{{a.updated_time}}">{{a.updated_time | date:'short' | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.use_new_app_click" title="{{a.use_new_app_click}}">{{a.use_new_app_click | emptyPlaceholder}}</td>
+                    <td ng-if="vm.columns.pacing_type" title="{{a.pacing_type}}">{{a.pacing_type | emptyPlaceholder}}</td>
+                    <td class="text-right" ng-if="vm.columns.budget_remaining" title="{{a.budget_remaining}}">{{vm.currency.to(a.budget_remaining) | currency | emptyPlaceholder}}</td>
+                    <td class="text-right" ng-if="vm.columns.daily_budget" title="{{a.daily_budget}}">{{vm.currency.to(a.daily_budget) | currency | emptyPlaceholder}}</td>
+                    <td class="text-right" ng-if="vm.columns.lifetime_budget" title="{{a.lifetime_budget}}">{{vm.currency.to(a.lifetime_budget) | currency | emptyPlaceholder}}</td>
                 </tr>
             </tbody>
         </table>
