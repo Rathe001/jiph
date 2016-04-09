@@ -4,7 +4,7 @@ angular.module('modCommon').factory('Navigation', [
         service.active = "";
 
         service.all = [
-            { name: "Dashboard", icon: "fa-area-chart", url: "", children: [] },
+            { name: "Accounts", icon: "fa-area-chart", url: "", children: [] },
             { name: "Campaigns", icon: "fa-bullhorn", url: "campaigns", children: [
                 { name: "Ad Sets", icon: "fa-folder-open-o", url: "ad-sets", children: [
                     { name: "Ads", icon: "fa-image", url: "ads" }
