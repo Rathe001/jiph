@@ -16,7 +16,7 @@
             <i class="fa fa-caret-up"></i>
             <h2>Select a date interval:</h2>
             <ul>
-                <li ng-repeat="d in vm.dateIntervals" ng-click="vm.selectInterval(d);">{{vm.dictionary.dateIntervals[d]}}</li>
+                <li ng-repeat="d in vm.dateIntervals" ng-click="vm.selectInterval(d);"><i class="fa" ng-class="{'fa-check': d === vm.selectedInterval, 'fa-fw': d !== vm.selectedInterval}"></i> {{vm.dictionary.dateIntervals[d]}}</li>
             </ul>
         </div>
     </div>

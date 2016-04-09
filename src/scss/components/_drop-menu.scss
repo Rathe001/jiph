@@ -22,7 +22,8 @@
 
       li {
         float:left;
-        width: 33%;
+        width: 33.33%;
+        padding: 5px 10px 5px 5px;
         cursor: pointer;
       }
     }
@@ -45,8 +46,8 @@
       font-weight: normal;
       color: $color-primary;
       background: #F5F5F5;
-      padding:0 0 0 5px;
-      margin: 0 0 5px 0;
+      padding: 7px 10px;
+      margin: 0;
     }
 
     ul {
