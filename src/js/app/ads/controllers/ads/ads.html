@@ -24,10 +24,38 @@
     <hr />
     <div class="loaded-content">
         <ul id="breadcrumb">
-            <li><span class="heading">Campaign:</span>{{vm.campaign.name}}</li>
-            <li ng-if="vm.adSet.name"><span class="heading">Ad set:</span>{{vm.adSet.name}}</li>
-            <li ng-if="!vm.adSet.name"><span class="heading">Ad set:</span>All ad sets</li>
-            <li><span class="heading">Ad:</span>All ads</li>
+            <li>
+                <span class="heading">
+                    <i class="fa fa-bullhorn"></i> Campaign:
+                </span>
+                <span class="selected">
+                    <i class="fa fa-fw"></i> <a ng-href="/campaigns/{{vm.campaign.id}}/ad-sets">{{vm.campaign.name}}</a>
+                </span>
+            </li>
+            <li ng-if="vm.adSet.name">
+                <span class="heading">
+                    <i class="fa fa-tasks"></i> Ad set:
+                </span>
+                <span class="selected">
+                    <i class="fa fa-fw"></i> <a ng-href="/campaigns/{{vm.campaign.id}}/ad-sets/{{vm.adSet.id}}/ads">{{vm.adSet.name}}</a>
+                </span>
+            </li>
+            <li ng-if="!vm.adSet.name">
+                <span class="heading">
+                    <i class="fa fa-tasks"></i> Ad set:
+                </span>
+                <span class="selected">
+                    <i class="fa fa-fw"></i> All
+                </span>
+            </li>
+            <li>
+                <span class="heading">
+                    <i class="fa fa-picture-o"></i> Ad:
+                </span>
+                <span class="selected">
+                    <i class="fa fa-fw"></i> All
+                </span>
+            </li>
         </ul>
         <div ng-if="vm.error">
             {{vm.error}}

@@ -24,7 +24,14 @@
     <hr />
     <div class="loaded-content">
         <ul id="breadcrumb">
-            <li><span class="heading">Campaign:</span>All campaigns</li>
+            <li>
+                <span class="heading">
+                    <i class="fa fa-bullhorn"></i> Campaign:
+                </span>
+                <span class="selected">
+                    <i class="fa fa-fw"></i> All
+                </span>
+            </li>
         </ul>
         <div ng-if="vm.error">
             {{vm.error}}
