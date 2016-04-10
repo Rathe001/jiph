@@ -1,17 +1,22 @@
-var modCommon = angular.module('modCommon');
+let modCommon = angular.module('modCommon');
 
 modCommon.directive('dropMenu', ['$timeout', function ($timeout) {
     return {
         restrict: 'A',
+        scope: {
+            dropMenu: '@'
+        },
         link: function(scope, el, attr) {
-            var _timerId = null;
-            var isOpen = false;
+            let _timerId = null;
+            let isOpen = false;
 
-            var onClick = function () {
+            let onClick = function () {
                 clearTimer();
                 if(isOpen) {
-                    isOpen = false;
-                    el.removeClass("open");
+                    if(scope.dropMenu.indexOf('disable-click-close') === -1) {
+                        isOpen = false;
+                        el.removeClass("open");
+                    }
                 } else {
                     isOpen = true;
                     el.addClass("open");
@@ -19,7 +24,7 @@ modCommon.directive('dropMenu', ['$timeout', function ($timeout) {
 
             };
 
-            var onMouseEnter = function () {
+            let onMouseEnter = function () {
                 if (isOpen) {
                     clearTimer();
                     cancelAllHover();
@@ -27,11 +32,11 @@ modCommon.directive('dropMenu', ['$timeout', function ($timeout) {
                 }
             };
 
-            var onMouseLeave = function () {
+            let onMouseLeave = function () {
                 startTimer();
             };
 
-            var startTimer = function(){
+            let startTimer = function(){
                 clearTimer();
                 _timerId = $timeout(function(){
                     isOpen = false;
@@ -39,14 +44,14 @@ modCommon.directive('dropMenu', ['$timeout', function ($timeout) {
                 }, 500);
             };
 
-            var clearTimer = function(){
+            let clearTimer = function(){
                 if (_timerId !== null) {
                     $timeout.cancel(_timerId);
                     _timerId = null;
                 }
             };
 
-            var cancelAllHover = function() {
+            let cancelAllHover = function() {
                 $('[drop-menu]').removeClass("open");
             };
 
