@@ -3,70 +3,48 @@
   top: 0;
   left:0;
   width:190px;
-  background: #222;
+  padding:25px 0 0 0;
 
   ul {
 
     li {
       float:left;
       width: 100%;
-      border-bottom: 1px solid #393939;
 
       a {
         position:relative;
         float:left;
         width:100%;
-        padding:15px 10px;
-        color:#E9EAED;
+        padding:10px;
+        color:#141823;
         text-decoration: none;
 
         .fa-caret-left {
           position: absolute;
-          top: 7px;
-          right: -1px;
-          font-size: 26px;
+          top: 10px;
+          right: 5px;
+          font-size: 14px;
         }
 
         &.active {
-          background: $color-primary;
-
-          &:hover {
-            background: $color-primary;
-          }
+          font-weight: 700;
+          color: $color-primary;
         }
 
         &:hover {
-          background: #393939;
+          background: #dcdee3;
         }
       }
 
       ul {
 
         li {
-          border-bottom: none;
-          border-top: 1px solid #393939;
-
           a {
             font-size: 12px;
             padding: 5px 5px 5px 35px;
 
             .fa-caret-left {
-              position: absolute;
-              top: 7px;
-              right: -1px;
-              font-size: 16px;
-            }
-
-            &.active {
-              background: #575757;
-
-              &:hover {
-                background: #575757;
-              }
-            }
-
-            &:hover {
-              background: #393939;
+              top: 5px;
             }
           }
         }

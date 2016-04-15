@@ -23,6 +23,7 @@ small {
 h1 {
   font-size:32px;
   line-height: 1em;
+  margin: 0 0 10px 0;
 
   span {
     position: relative;
@@ -68,6 +69,7 @@ label {
   float: left;
   width: 100%;
   font-weight: 700;
+  margin: 0 0 3px 0;
   color: $color-primary;
 }
 .row {
