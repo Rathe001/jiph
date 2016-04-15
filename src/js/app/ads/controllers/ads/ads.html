@@ -1,4 +1,38 @@
 <div class="module">
+    <ul id="breadcrumb">
+        <li>
+            <span class="heading">
+                <i class="fa fa-bullhorn"></i> Campaign:
+            </span>
+            <span class="selected">
+                <i class="fa fa-fw"></i> <a ng-href="/campaigns/{{vm.campaign.id}}/ad-sets">{{vm.campaign.name}}</a>
+            </span>
+        </li>
+        <li ng-if="vm.adSet.name">
+            <span class="heading">
+                <i class="fa fa-tasks"></i> Ad set:
+            </span>
+            <span class="selected">
+                <i class="fa fa-fw"></i> <a ng-href="/campaigns/{{vm.campaign.id}}/ad-sets/{{vm.adSet.id}}/ads">{{vm.adSet.name}}</a>
+            </span>
+        </li>
+        <li ng-if="!vm.adSet.name">
+            <span class="heading">
+                <i class="fa fa-tasks"></i> Ad set:
+            </span>
+            <span class="selected">
+                <i class="fa fa-fw"></i> All
+            </span>
+        </li>
+        <li>
+            <span class="heading">
+                <i class="fa fa-picture-o"></i> Ad:
+            </span>
+            <span class="selected">
+                <i class="fa fa-fw"></i> All
+            </span>
+        </li>
+    </ul>
     <div class="btn btn-primary pull-right">{{vm.dictionary.terms['create_ad']}}</div>
     <div drop-menu="disable-click-close" class="customize-columns pull-right">
         <div class="btn btn-default"><i class="fa fa-th"></i> {{vm.dictionary.terms['customize_columns']}}</div>
@@ -23,40 +57,6 @@
     <h1>{{vm.dictionary.terms['ads']}} <span ng-if="vm.ads.length > 0">({{vm.ads.length}})</span></h1>
     <hr />
     <div class="loaded-content">
-        <ul id="breadcrumb">
-            <li>
-                <span class="heading">
-                    <i class="fa fa-bullhorn"></i> Campaign:
-                </span>
-                <span class="selected">
-                    <i class="fa fa-fw"></i> <a ng-href="/campaigns/{{vm.campaign.id}}/ad-sets">{{vm.campaign.name}}</a>
-                </span>
-            </li>
-            <li ng-if="vm.adSet.name">
-                <span class="heading">
-                    <i class="fa fa-tasks"></i> Ad set:
-                </span>
-                <span class="selected">
-                    <i class="fa fa-fw"></i> <a ng-href="/campaigns/{{vm.campaign.id}}/ad-sets/{{vm.adSet.id}}/ads">{{vm.adSet.name}}</a>
-                </span>
-            </li>
-            <li ng-if="!vm.adSet.name">
-                <span class="heading">
-                    <i class="fa fa-tasks"></i> Ad set:
-                </span>
-                <span class="selected">
-                    <i class="fa fa-fw"></i> All
-                </span>
-            </li>
-            <li>
-                <span class="heading">
-                    <i class="fa fa-picture-o"></i> Ad:
-                </span>
-                <span class="selected">
-                    <i class="fa fa-fw"></i> All
-                </span>
-            </li>
-        </ul>
         <div ng-if="vm.error">
             {{vm.error}}
         </div>

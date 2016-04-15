@@ -1,4 +1,14 @@
 <div class="module">
+    <ul id="breadcrumb">
+        <li>
+            <span class="heading">
+                <i class="fa fa-bullhorn"></i> Campaign:
+            </span>
+            <span class="selected">
+                <i class="fa fa-fw"></i> All
+            </span>
+        </li>
+    </ul>
     <a href="/campaigns/create" class="btn btn-primary btn-icon pull-right"><i class="fa fa-plus"></i> {{vm.dictionary.terms['create_campaign']}}</a>
     <div drop-menu="disable-click-close" class="customize-columns pull-right">
         <div class="btn btn-default"><i class="fa fa-th"></i> {{vm.dictionary.terms['customize_columns']}}</div>
@@ -23,16 +33,7 @@
     <h1>{{vm.dictionary.terms['campaigns']}} <span ng-if="vm.campaigns.length > 0">({{vm.campaigns.length}})</span></h1>
     <hr />
     <div class="loaded-content">
-        <ul id="breadcrumb">
-            <li>
-                <span class="heading">
-                    <i class="fa fa-bullhorn"></i> Campaign:
-                </span>
-                <span class="selected">
-                    <i class="fa fa-fw"></i> All
-                </span>
-            </li>
-        </ul>
+
         <div ng-if="vm.error">
             {{vm.error}}
         </div>
